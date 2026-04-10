@@ -31,7 +31,7 @@ const StarryBackground = () => {
     };
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 3000);
+      const count = Math.floor((canvas.width * canvas.height) / 800);
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
