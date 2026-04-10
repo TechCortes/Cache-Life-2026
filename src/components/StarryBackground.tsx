@@ -7,6 +7,8 @@ interface Star {
   opacity: number;
   speed: number;
   phase: number;
+  driftX: number;
+  driftY: number;
 }
 
 const StarryBackground = () => {
