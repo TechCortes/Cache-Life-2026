@@ -39,6 +39,8 @@ const StarryBackground = () => {
         opacity: Math.random() * 0.7 + 0.3,
         speed: Math.random() * 0.005 + 0.002,
         phase: Math.random() * Math.PI * 2,
+        driftX: (Math.random() - 0.5) * 0.15,
+        driftY: (Math.random() - 0.5) * 0.1 - 0.05,
       }));
     };
 
@@ -48,6 +50,14 @@ const StarryBackground = () => {
       time += 0.016;
 
       for (const star of stars) {
+        star.x += star.driftX;
+        star.y += star.driftY;
+
+        // Wrap around edges
+        if (star.x < 0) star.x = canvas.width;
+        if (star.x > canvas.width) star.x = 0;
+        if (star.y < 0) star.y = canvas.height;
+        if (star.y > canvas.height) star.y = 0;
         const twinkle = Math.sin(time * star.speed * 60 + star.phase) * 0.3 + 0.7;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
