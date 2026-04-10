@@ -31,17 +31,20 @@ const StarryBackground = () => {
     };
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 300);
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2.2 + 0.3,
-        opacity: Math.random() * 0.8 + 0.2,
-        speed: Math.random() * 0.008 + 0.003,
-        phase: Math.random() * Math.PI * 2,
-        driftX: (Math.random() - 0.5) * 0.15,
-        driftY: (Math.random() - 0.5) * 0.1 - 0.05,
-      }));
+      const count = Math.floor((canvas.width * canvas.height) / 200);
+      stars = Array.from({ length: count }, () => {
+        const isBright = Math.random() < 0.08;
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: isBright ? Math.random() * 2.5 + 1.5 : Math.random() * 1.8 + 0.2,
+          opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.15,
+          speed: isBright ? Math.random() * 0.015 + 0.008 : Math.random() * 0.006 + 0.002,
+          phase: Math.random() * Math.PI * 2,
+          driftX: (Math.random() - 0.5) * 0.12,
+          driftY: (Math.random() - 0.5) * 0.08 - 0.03,
+        };
+      });
     };
 
     let time = 0;
