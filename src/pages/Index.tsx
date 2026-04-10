@@ -69,9 +69,6 @@ const Index = () => {
         <h1 className="font-script text-5xl md:text-7xl lg:text-8xl text-foreground mb-4">
           What We Do
         </h1>
-        <p className="text-xs tracking-[0.4em] uppercase text-muted-foreground">
-          New York City
-        </p>
       </section>
 
       {/* About */}
