@@ -16,9 +16,9 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Left links (desktop) */}
-        <div className="hidden md:flex items-center gap-8">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
+        {/* Left links (desktop) / spacer on mobile */}
+        <div className="hidden md:flex items-center gap-8 flex-1">
           {navLinks.slice(0, 2).map((l) => (
             <Link
               key={l.to}
@@ -32,13 +32,16 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
+        {/* Spacer for mobile left side */}
+        <div className="w-8 md:hidden" />
+
+        {/* Logo — always centered */}
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center">
           <img src={logoImg} alt="Caché Life" className="h-10 md:h-14 w-auto" />
         </Link>
 
         {/* Right links (desktop) */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
             <Link
               key={l.to}
