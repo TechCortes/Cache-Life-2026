@@ -65,20 +65,20 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "disco-spin": {
+          from: { transform: "rotateY(0deg)" },
+          to: { transform: "rotateY(360deg)" },
+        },
+        "disco-sway": {
+          "0%, 100%": { transform: "translateX(0) rotate(-2deg)" },
+          "50%": { transform: "translateX(12px) rotate(2deg)" },
         },
       },
       animation: {
