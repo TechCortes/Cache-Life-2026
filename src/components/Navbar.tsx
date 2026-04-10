@@ -33,8 +33,8 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <Link to="/" className="text-2xl md:text-3xl tracking-[0.3em] uppercase font-serif font-light text-foreground">
-          Caché Life
+        <Link to="/" className="flex items-center">
+          <img src={logoImg} alt="Caché Life" className="h-10 md:h-14 w-auto" />
         </Link>
 
         {/* Right links (desktop) */}
