@@ -49,13 +49,13 @@ const FadeIn = ({ children, className = "" }: { children: React.ReactNode; class
 };
 
 const DiscoBall = () => (
-  <div className="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8">
+  <div className="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8 animate-[disco-sway_6s_ease-in-out_infinite]">
     <img
       src={discoBallImg}
       alt="Disco ball"
       width={512}
       height={512}
-      className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-[pulse_4s_ease-in-out_infinite]"
+      className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-[disco-spin_8s_linear_infinite]"
     />
   </div>
 );
