@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logoImg from "@/assets/cache-life-logo.png";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
