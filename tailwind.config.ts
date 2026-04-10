@@ -73,8 +73,8 @@ export default {
           to: { height: "0" },
         },
         "disco-spin": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
         },
         "disco-sway": {
           "0%, 100%": { transform: "translateY(0px) scale(1)" },
