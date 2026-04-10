@@ -31,13 +31,13 @@ const StarryBackground = () => {
     };
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 800);
+      const count = Math.floor((canvas.width * canvas.height) / 300);
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.8 + 0.2,
-        opacity: Math.random() * 0.7 + 0.3,
-        speed: Math.random() * 0.005 + 0.002,
+        size: Math.random() * 2.2 + 0.3,
+        opacity: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.008 + 0.003,
         phase: Math.random() * Math.PI * 2,
         driftX: (Math.random() - 0.5) * 0.15,
         driftY: (Math.random() - 0.5) * 0.1 - 0.05,
