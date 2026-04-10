@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
+import discoBallImg from "@/assets/disco-ball.png";
 
 const services = [
   {
