@@ -58,10 +58,22 @@ const StarryBackground = () => {
         if (star.x > canvas.width) star.x = 0;
         if (star.y < 0) star.y = canvas.height;
         if (star.y > canvas.height) star.y = 0;
-        const twinkle = Math.sin(time * star.speed * 60 + star.phase) * 0.3 + 0.7;
+        const twinkle = Math.sin(time * star.speed * 80 + star.phase) * 0.5 + 0.5;
+        const shine = Math.pow(twinkle, 3);
+        const currentOpacity = star.opacity * (0.3 + 0.7 * shine);
+        const currentSize = star.size * (0.8 + 0.4 * shine);
+
+        // Glow effect for brighter stars
+        if (currentSize > 1.2) {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, currentSize * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200, 220, 255, ${currentOpacity * 0.08})`;
+          ctx.fill();
+        }
+
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * twinkle})`;
+        ctx.arc(star.x, star.y, currentSize, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
         ctx.fill();
       }
 
