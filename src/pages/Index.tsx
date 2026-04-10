@@ -55,7 +55,7 @@ const DiscoBall = () => (
       alt="Disco ball"
       width={512}
       height={512}
-      className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-[disco-spin_8s_linear_infinite]"
+      className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-[disco-spin_4s_ease-in-out_infinite]"
     />
   </div>
 );
