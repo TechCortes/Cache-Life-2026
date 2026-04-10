@@ -49,33 +49,14 @@ const FadeIn = ({ children, className = "" }: { children: React.ReactNode; class
 };
 
 const DiscoBall = () => (
-  <div className="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-8">
-    <div className="w-full h-full rounded-full bg-gradient-to-br from-muted-foreground/40 via-foreground/20 to-muted-foreground/10 shadow-[0_0_60px_20px_rgba(255,255,255,0.08)] animate-[spin_20s_linear_infinite]">
-      {/* Facets */}
-      {Array.from({ length: 6 }).map((_, row) =>
-        Array.from({ length: 12 }).map((_, col) => {
-          const angle = (col / 12) * 360;
-          const vAngle = (row / 6) * 180 - 90;
-          const r = 50;
-          const x = 50 + r * Math.cos((vAngle * Math.PI) / 180) * Math.cos((angle * Math.PI) / 180);
-          const y = 50 + r * Math.cos((vAngle * Math.PI) / 180) * Math.sin((angle * Math.PI) / 180);
-          const opacity = 0.1 + Math.random() * 0.4;
-          return (
-            <div
-              key={`${row}-${col}`}
-              className="absolute w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-foreground"
-              style={{
-                left: `${x}%`,
-                top: `${y}%`,
-                opacity,
-              }}
-            />
-          );
-        })
-      )}
-    </div>
-    {/* Light rays */}
-    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent via-foreground/5 to-foreground/10 animate-pulse" />
+  <div className="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8">
+    <img
+      src={discoBallImg}
+      alt="Disco ball"
+      width={512}
+      height={512}
+      className="w-full h-full object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-[pulse_4s_ease-in-out_infinite]"
+    />
   </div>
 );
 
