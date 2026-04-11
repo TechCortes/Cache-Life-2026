@@ -48,8 +48,27 @@ const FadeIn = ({ children, className = "" }: { children: React.ReactNode; class
   );
 };
 
+const Sparkle = ({ style, delay, size }: { style: React.CSSProperties; delay: string; size: number }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="white"
+    className="absolute animate-[sparkle-shine_2s_ease-in-out_infinite]"
+    style={{ width: size, height: size, animationDelay: delay, ...style }}
+  >
+    <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41Z" />
+  </svg>
+);
+
 const DiscoBall = () => (
   <div className="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8 animate-[disco-sway_6s_ease-in-out_infinite]">
+    <Sparkle style={{ top: "-15%", left: "10%" }} delay="0s" size={14} />
+    <Sparkle style={{ top: "5%", right: "-10%" }} delay="0.4s" size={10} />
+    <Sparkle style={{ bottom: "10%", right: "-15%" }} delay="0.8s" size={16} />
+    <Sparkle style={{ bottom: "-10%", left: "20%" }} delay="1.2s" size={12} />
+    <Sparkle style={{ top: "30%", left: "-18%" }} delay="0.6s" size={11} />
+    <Sparkle style={{ top: "-8%", right: "15%" }} delay="1.5s" size={8} />
+    <Sparkle style={{ bottom: "25%", left: "-12%" }} delay="1.0s" size={9} />
+    <Sparkle style={{ top: "50%", right: "-20%" }} delay="0.2s" size={13} />
     <img
       src={discoBallImg}
       alt="Disco ball"
