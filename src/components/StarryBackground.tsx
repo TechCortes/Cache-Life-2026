@@ -31,17 +31,20 @@ const StarryBackground = () => {
     };
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 300);
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2.2 + 0.3,
-        opacity: Math.random() * 0.8 + 0.2,
-        speed: Math.random() * 0.008 + 0.003,
-        phase: Math.random() * Math.PI * 2,
-        driftX: (Math.random() - 0.5) * 0.15,
-        driftY: (Math.random() - 0.5) * 0.1 - 0.05,
-      }));
+      const count = Math.floor((canvas.width * canvas.height) / 200);
+      stars = Array.from({ length: count }, () => {
+        const isBright = Math.random() < 0.08;
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: isBright ? Math.random() * 2.5 + 1.5 : Math.random() * 1.8 + 0.2,
+          opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.15,
+          speed: isBright ? Math.random() * 0.015 + 0.008 : Math.random() * 0.006 + 0.002,
+          phase: Math.random() * Math.PI * 2,
+          driftX: (Math.random() - 0.5) * 0.12,
+          driftY: (Math.random() - 0.5) * 0.08 - 0.03,
+        };
+      });
     };
 
     let time = 0;
@@ -53,22 +56,38 @@ const StarryBackground = () => {
         star.x += star.driftX;
         star.y += star.driftY;
 
-        // Wrap around edges
         if (star.x < 0) star.x = canvas.width;
         if (star.x > canvas.width) star.x = 0;
         if (star.y < 0) star.y = canvas.height;
         if (star.y > canvas.height) star.y = 0;
-        const twinkle = Math.sin(time * star.speed * 80 + star.phase) * 0.5 + 0.5;
-        const shine = Math.pow(twinkle, 3);
-        const currentOpacity = star.opacity * (0.3 + 0.7 * shine);
-        const currentSize = star.size * (0.8 + 0.4 * shine);
 
-        // Glow effect for brighter stars
-        if (currentSize > 1.2) {
+        const twinkle = Math.sin(time * star.speed * 100 + star.phase) * 0.5 + 0.5;
+        const shine = Math.pow(twinkle, 2.5);
+        const currentOpacity = star.opacity * (0.15 + 0.85 * shine);
+        const currentSize = star.size * (0.7 + 0.5 * shine);
+
+        if (currentSize > 1.0) {
           ctx.beginPath();
-          ctx.arc(star.x, star.y, currentSize * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(200, 220, 255, ${currentOpacity * 0.08})`;
+          ctx.arc(star.x, star.y, currentSize * 4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(180, 210, 255, ${currentOpacity * 0.06})`;
           ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, currentSize * 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220, 235, 255, ${currentOpacity * 0.15})`;
+          ctx.fill();
+        }
+
+        if (shine > 0.85 && star.size > 1.5) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentOpacity * 0.3})`;
+          ctx.lineWidth = 0.5;
+          const spikeLen = currentSize * 5;
+          ctx.beginPath();
+          ctx.moveTo(star.x - spikeLen, star.y);
+          ctx.lineTo(star.x + spikeLen, star.y);
+          ctx.moveTo(star.x, star.y - spikeLen);
+          ctx.lineTo(star.x, star.y + spikeLen);
+          ctx.stroke();
         }
 
         ctx.beginPath();
