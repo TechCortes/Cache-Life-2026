@@ -23,8 +23,8 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-white ${
+                location.pathname === l.to ? "text-white" : "text-white/60"
               }`}
             >
               {l.label}
@@ -46,8 +46,8 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-white ${
+                location.pathname === l.to ? "text-white" : "text-white/60"
               }`}
             >
               {l.label}
@@ -58,7 +58,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-foreground"
+          className="md:hidden text-white"
           aria-label="Toggle menu"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -73,8 +73,8 @@ const Navbar = () => {
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className={`text-sm tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`text-sm tracking-[0.2em] uppercase transition-colors hover:text-white ${
+                location.pathname === l.to ? "text-white" : "text-white/60"
               }`}
             >
               {l.label}
