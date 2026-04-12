@@ -60,9 +60,10 @@ const SubscribeSection = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: fields.email.trim(),
+          email:        fields.email.trim(),
           phone_number: fields.phone.trim() || undefined,
-          name: fields.name.trim() || undefined,
+          name:         fields.name.trim() || undefined,
+          source:       "homepage",
         }),
       });
 
@@ -75,7 +76,7 @@ const SubscribeSection = () => {
       const data = await res.json().catch(() => ({}));
       if (res.status === 422 && data.fields) {
         const mapped: Record<string, string> = {};
-        if (data.fields.email) mapped.email = data.fields.email;
+        if (data.fields.email)        mapped.email = data.fields.email;
         if (data.fields.phone_number) mapped.phone = data.fields.phone_number;
         setErrors(mapped);
         setStatus("idle");
@@ -118,15 +119,19 @@ const SubscribeSection = () => {
           Stay in the Loop
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Get early access to events and exclusive invites — straight to your inbox and phone.
+          Get early access to events and exclusive invites &mdash; straight to your inbox and phone.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
         {/* Name */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="sub-name" className="text-xs tracking-widest uppercase text-muted-foreground">
-            Name <span className="normal-case tracking-normal opacity-50">(optional)</span>
+          <label
+            htmlFor="sub-name"
+            className="text-xs tracking-widest uppercase text-muted-foreground"
+          >
+            Name{" "}
+            <span className="normal-case tracking-normal opacity-50">(optional)</span>
           </label>
           <Input
             id="sub-name"
@@ -143,7 +148,10 @@ const SubscribeSection = () => {
 
         {/* Email */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="sub-email" className="text-xs tracking-widest uppercase text-muted-foreground">
+          <label
+            htmlFor="sub-email"
+            className="text-xs tracking-widest uppercase text-muted-foreground"
+          >
             Email <span className="text-primary">*</span>
           </label>
           <Input
@@ -170,7 +178,10 @@ const SubscribeSection = () => {
 
         {/* Phone */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="sub-phone" className="text-xs tracking-widest uppercase text-muted-foreground">
+          <label
+            htmlFor="sub-phone"
+            className="text-xs tracking-widest uppercase text-muted-foreground"
+          >
             Phone{" "}
             <span className="normal-case tracking-normal opacity-50">
               (optional &mdash; for SMS event alerts)
@@ -200,7 +211,10 @@ const SubscribeSection = () => {
 
         {/* Server error */}
         {status === "error" && serverError ? (
-          <p role="alert" className="text-xs text-destructive border border-destructive/30 bg-destructive/10 rounded px-3 py-2">
+          <p
+            role="alert"
+            className="text-xs text-destructive border border-destructive/30 bg-destructive/10 rounded px-3 py-2"
+          >
             {serverError}
           </p>
         ) : null}
@@ -210,7 +224,7 @@ const SubscribeSection = () => {
           disabled={status === "loading"}
           className="w-full tracking-widest uppercase text-xs mt-2"
         >
-          {status === "loading" ? "Sending…" : "Get Exclusive Access"}
+          {status === "loading" ? "Sending\u2026" : "Get Exclusive Access"}
         </Button>
       </form>
     </section>

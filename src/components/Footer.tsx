@@ -5,24 +5,33 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
+  const [fields, setFields] = useState({ email: "", phone: "" });
   const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFields((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!fields.email) return;
 
     setLoading(true);
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email:        fields.email.trim(),
+          phone_number: fields.phone.trim() || undefined,
+          source:       "footer",
+        }),
       });
 
       if (res.ok) {
         toast.success("You're in! We'll keep you posted on upcoming events.");
-        setEmail("");
+        setFields({ email: "", phone: "" });
         return;
       }
 
@@ -60,19 +69,29 @@ const Footer = () => {
         <p className="text-center text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
           Join Our Newsletter
         </p>
-        <form onSubmit={handleSubscribe} className="flex gap-2">
+        <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
           <Input
+            name="email"
             type="email"
             placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={fields.email}
+            onChange={handleChange}
             className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
             required
             disabled={loading}
           />
+          <Input
+            name="phone"
+            type="tel"
+            placeholder="Phone (optional — SMS event alerts)"
+            value={fields.phone}
+            onChange={handleChange}
+            className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
+            disabled={loading}
+          />
           <Button
             type="submit"
-            className="tracking-widest text-xs uppercase"
+            className="tracking-widest text-xs uppercase w-full"
             disabled={loading}
           >
             {loading ? "..." : "Join"}
@@ -83,7 +102,7 @@ const Footer = () => {
       {/* Bottom */}
       <div className="border-t border-border/20 px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl mx-auto">
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Caché Life NY. All rights reserved.
+          &copy; {new Date().getFullYear()} Cach\u00e9 Life NY. All rights reserved.
         </p>
         <div className="flex items-center gap-5">
           <a
