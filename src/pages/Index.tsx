@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SubscribeSection from "@/components/SubscribeSection";
 import { useEffect, useRef } from "react";
 import discoBallImg from "@/assets/disco-ball.png";
 
@@ -97,7 +98,7 @@ const Index = () => {
       <FadeIn>
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-6">
-            Arts & Entertainment
+            Arts &amp; Entertainment
           </p>
           <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-8 leading-tight">
             A Creative Agency for Culture
@@ -151,6 +152,13 @@ const Index = () => {
             </p>
           </div>
         </section>
+      </FadeIn>
+
+      {/* Subscribe */}
+      <FadeIn>
+        <div className="border-t border-border/20 mx-6">
+          <SubscribeSection />
+        </div>
       </FadeIn>
     </Layout>
   );
