@@ -6,12 +6,37 @@ import { toast } from "sonner";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success("Thanks for subscribing!");
-      setEmail("");
+    if (!email) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        toast.success("You're in! We'll keep you posted on upcoming events.");
+        setEmail("");
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.status === 422 && data.fields?.email) {
+        toast.error(data.fields.email);
+      } else {
+        toast.error(data.error ?? "Something went wrong. Please try again.");
+      }
+    } catch {
+      toast.error("Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,9 +68,14 @@ const Footer = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
             required
+            disabled={loading}
           />
-          <Button type="submit" className="tracking-widest text-xs uppercase">
-            Join
+          <Button
+            type="submit"
+            className="tracking-widest text-xs uppercase"
+            disabled={loading}
+          >
+            {loading ? "..." : "Join"}
           </Button>
         </form>
       </div>
