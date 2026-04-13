@@ -1,20 +1,7 @@
-import { useState } from "react";
 import { Instagram, Music } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import SignupForm from "@/components/SignupForm";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      toast.success("Thanks for subscribing!");
-      setEmail("");
-    }
-  };
-
   return (
     <footer className="relative z-10 border-t border-border/30 mt-20">
       {/* Instagram CTA */}
@@ -30,25 +17,8 @@ const Footer = () => {
         </a>
       </div>
 
-      {/* Newsletter */}
-      <div className="max-w-md mx-auto px-6 pb-12">
-        <p className="text-center text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
-          Join Our Newsletter
-        </p>
-        <form onSubmit={handleSubscribe} className="flex gap-2">
-          <Input
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
-            required
-          />
-          <Button type="submit" className="tracking-widest text-xs uppercase">
-            Join
-          </Button>
-        </form>
-      </div>
+      {/* Signup Form */}
+      <SignupForm />
 
       {/* Bottom */}
       <div className="border-t border-border/20 px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl mx-auto">
