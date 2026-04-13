@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Media from "./pages/Media.tsx";
 import WhatsHappening from "./pages/WhatsHappening.tsx";
 import Press from "./pages/Press.tsx";
+import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
