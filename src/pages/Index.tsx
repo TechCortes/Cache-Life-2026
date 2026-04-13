@@ -91,6 +91,20 @@ const Index = () => {
         </h1>
       </section>
 
+      {/* Featured Video */}
+      <FadeIn>
+        <section className="max-w-5xl mx-auto px-6 py-16">
+          <div className="aspect-video rounded-sm overflow-hidden border border-border/30">
+            <iframe
+              src="https://www.youtube.com/embed/bdneye4pzMw"
+              title="Caché Life"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </section>
+      </FadeIn>
       {/* About */}
       <FadeIn>
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
