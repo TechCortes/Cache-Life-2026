@@ -94,9 +94,9 @@ const Index = () => {
       {/* Featured Video */}
       <FadeIn>
         <section className="max-w-5xl mx-auto px-6 py-16">
-          <div className="aspect-video rounded-sm overflow-hidden border border-border/30">
+          <div className="aspect-video rounded-sm overflow-hidden border border-border/30 grayscale">
             <iframe
-              src="https://www.youtube.com/embed/bdneye4pzMw?mute=1"
+              src="https://www.youtube.com/embed/bdneye4pzMw?mute=1&autoplay=1&loop=1&playlist=bdneye4pzMw&controls=0&showinfo=0&rel=0&modestbranding=1"
               title="Caché Life"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
