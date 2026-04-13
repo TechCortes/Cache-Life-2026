@@ -23,6 +23,7 @@ const App = () => (
           <Route path="/media" element={<Media />} />
           <Route path="/whats-happening" element={<WhatsHappening />} />
           <Route path="/press" element={<Press />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
