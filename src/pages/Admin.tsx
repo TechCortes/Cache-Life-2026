@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import { Trash2, Download, LogIn, LogOut, Search } from "lucide-react";
+import { lovable } from "@/integrations/lovable/index";
 
 interface Signup {
   id: string;
