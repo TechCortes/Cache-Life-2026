@@ -84,7 +84,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="min-h-[40vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[25vh] flex flex-col items-center justify-center px-6 text-center">
         <DiscoBall />
         <h1 className="font-script text-5xl md:text-7xl lg:text-8xl text-foreground mb-4">
           What We Do
