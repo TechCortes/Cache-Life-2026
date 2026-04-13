@@ -80,6 +80,15 @@ const Admin = () => {
     }
   };
 
+  const handleAppleLogin = async () => {
+    const result = await lovable.auth.signInWithOAuth("apple", {
+      redirect_uri: window.location.origin,
+    });
+    if (result.error) {
+      toast.error(result.error instanceof Error ? result.error.message : "Apple sign-in failed");
+    }
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setSignups([]);
