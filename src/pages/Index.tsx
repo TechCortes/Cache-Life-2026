@@ -93,7 +93,7 @@ const Index = () => {
 
       {/* Featured Video */}
       <FadeIn>
-        <section className="max-w-5xl mx-auto px-6 py-16">
+        <section className="max-w-5xl mx-auto px-6 py-4">
           <div className="aspect-video rounded-sm overflow-hidden border border-border/30 grayscale">
             <iframe
               src="https://www.youtube.com/embed/G2HmoxJeWXM?mute=1&autoplay=1&loop=1&playlist=G2HmoxJeWXM&controls=0&showinfo=0&rel=0&modestbranding=1"
