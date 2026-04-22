@@ -62,6 +62,7 @@ export type Database = {
           is_active: boolean
           location: string | null
           posh_url: string
+          provider: string
           sort_order: number
           title: string
           updated_at: string
@@ -75,6 +76,7 @@ export type Database = {
           is_active?: boolean
           location?: string | null
           posh_url: string
+          provider?: string
           sort_order?: number
           title: string
           updated_at?: string
@@ -88,6 +90,7 @@ export type Database = {
           is_active?: boolean
           location?: string | null
           posh_url?: string
+          provider?: string
           sort_order?: number
           title?: string
           updated_at?: string

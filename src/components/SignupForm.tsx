@@ -17,6 +17,7 @@ interface PoshEventOption {
   title: string;
   posh_url: string;
   event_date: string | null;
+  provider: "posh" | "partiful";
 }
 
 const signupSchema = z.object({
@@ -37,7 +38,7 @@ const SignupForm = () => {
     const fetchEvents = async () => {
       const { data } = await supabase
         .from("posh_events")
-        .select("id, title, posh_url, event_date")
+        .select("id, title, posh_url, event_date, provider")
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
         .order("event_date", { ascending: true });
@@ -78,7 +79,8 @@ const SignupForm = () => {
     }
 
     if (selectedEvent?.posh_url) {
-      toast.success("You're on the list — opening Posh checkout...");
+      const providerName = selectedEvent.provider === "partiful" ? "Partiful" : "Posh";
+      toast.success(`You're on the list — opening ${providerName}...`);
       window.open(selectedEvent.posh_url, "_blank", "noopener,noreferrer");
     } else {
       toast.success("You're on the list! We'll be in touch.");
@@ -140,6 +142,7 @@ const SignupForm = () => {
                         year: "numeric",
                       })}`
                     : ""}
+                  {` · ${ev.provider === "partiful" ? "Partiful" : "Posh"}`}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -153,12 +156,14 @@ const SignupForm = () => {
           {loading
             ? "Submitting..."
             : selectedEventId !== "general"
-            ? "Register on Posh"
+            ? (events.find((e) => e.id === selectedEventId)?.provider === "partiful"
+                ? "Register on Partiful"
+                : "Register on Posh")
             : "Join"}
         </Button>
         {selectedEventId !== "general" && (
           <p className="text-[10px] text-center text-muted-foreground tracking-wider">
-            You'll be redirected to Posh.vip to complete checkout
+            You'll be redirected to {events.find((e) => e.id === selectedEventId)?.provider === "partiful" ? "Partiful" : "Posh.vip"} to complete checkout
           </p>
         )}
       </form>
