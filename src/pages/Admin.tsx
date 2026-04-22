@@ -61,6 +61,7 @@ interface PoshEvent {
   posh_url: string;
   is_active: boolean;
   sort_order: number;
+  provider: "posh" | "partiful";
 }
 
 const emptyEvent: Omit<PoshEvent, "id"> = {
@@ -72,6 +73,7 @@ const emptyEvent: Omit<PoshEvent, "id"> = {
   posh_url: "",
   is_active: true,
   sort_order: 0,
+  provider: "posh",
 };
 
 const Admin = () => {
@@ -225,6 +227,7 @@ const Admin = () => {
       posh_url: ev.posh_url,
       is_active: ev.is_active,
       sort_order: ev.sort_order,
+      provider: ev.provider ?? "posh",
     });
     setDialogOpen(true);
   };
@@ -232,7 +235,7 @@ const Admin = () => {
   const handleSaveEvent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!eventForm.title.trim() || !eventForm.posh_url.trim()) {
-      toast.error("Title and Posh URL are required");
+      toast.error("Title and event URL are required");
       return;
     }
 
@@ -249,6 +252,7 @@ const Admin = () => {
       posh_url: eventForm.posh_url.trim(),
       is_active: eventForm.is_active,
       sort_order: Number(eventForm.sort_order) || 0,
+      provider: eventForm.provider,
     };
 
     const { error } = editingEventId
@@ -452,7 +456,7 @@ const Admin = () => {
           <TabsContent value="events">
             <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
               <p className="text-sm text-muted-foreground">
-                Manage events shown on the site and linked to Posh.vip
+                Manage events shown on the site, linked to Posh.vip or Partiful
               </p>
               <div className="flex items-center gap-2">
                 <Button
@@ -493,13 +497,36 @@ const Admin = () => {
                         />
                       </div>
                       <div>
+                        <Label htmlFor="ev-provider" className="text-xs uppercase tracking-wider">
+                          Provider *
+                        </Label>
+                        <Select
+                          value={eventForm.provider}
+                          onValueChange={(v) =>
+                            setEventForm({ ...eventForm, provider: v as "posh" | "partiful" })
+                          }
+                        >
+                          <SelectTrigger id="ev-provider">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="posh">Posh.vip</SelectItem>
+                            <SelectItem value="partiful">Partiful</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
                         <Label htmlFor="ev-posh" className="text-xs uppercase tracking-wider">
-                          Posh URL *
+                          {eventForm.provider === "partiful" ? "Partiful URL *" : "Posh URL *"}
                         </Label>
                         <Input
                           id="ev-posh"
                           type="url"
-                          placeholder="https://posh.vip/e/..."
+                          placeholder={
+                            eventForm.provider === "partiful"
+                              ? "https://partiful.com/e/..."
+                              : "https://posh.vip/e/..."
+                          }
                           value={eventForm.posh_url}
                           onChange={(e) => setEventForm({ ...eventForm, posh_url: e.target.value })}
                           required
@@ -613,7 +640,7 @@ const Admin = () => {
               <p className="text-muted-foreground text-center py-12">Loading events...</p>
             ) : events.length === 0 ? (
               <p className="text-muted-foreground text-center py-12">
-                No events yet — click "New Event" to add your first Posh.vip link.
+                No events yet — click "New Event" to add your first Posh or Partiful link.
               </p>
             ) : (
               <div className="border border-border/40 rounded-sm overflow-hidden">
@@ -621,10 +648,11 @@ const Admin = () => {
                   <TableHeader>
                     <TableRow className="border-border/40">
                       <TableHead className="text-foreground">Title</TableHead>
+                      <TableHead className="text-foreground">Provider</TableHead>
                       <TableHead className="text-foreground">Date</TableHead>
                       <TableHead className="text-foreground">Location</TableHead>
                       <TableHead className="text-foreground">Active</TableHead>
-                      <TableHead className="text-foreground">Posh</TableHead>
+                      <TableHead className="text-foreground">Link</TableHead>
                       <TableHead className="text-foreground w-24"></TableHead>
                     </TableRow>
                   </TableHeader>
@@ -632,6 +660,9 @@ const Admin = () => {
                     {events.map((ev) => (
                       <TableRow key={ev.id} className="border-border/30">
                         <TableCell className="text-foreground">{ev.title}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm capitalize">
+                          {ev.provider ?? "posh"}
+                        </TableCell>
                         <TableCell className="text-muted-foreground text-sm">
                           {ev.event_date
                             ? new Date(ev.event_date).toLocaleDateString()
