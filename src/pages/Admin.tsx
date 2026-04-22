@@ -3,6 +3,23 @@ import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -12,7 +29,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
-import { Trash2, Download, LogIn, LogOut, Search } from "lucide-react";
+import {
+  Trash2,
+  Download,
+  LogIn,
+  LogOut,
+  Search,
+  Plus,
+  Pencil,
+  ExternalLink,
+} from "lucide-react";
 import { lovable } from "@/integrations/lovable/index";
 
 interface Signup {
@@ -21,16 +47,49 @@ interface Signup {
   email: string;
   phone: string;
   created_at: string;
+  posh_event_id: string | null;
+  posh_url: string | null;
 }
+
+interface PoshEvent {
+  id: string;
+  title: string;
+  description: string | null;
+  event_date: string | null;
+  location: string | null;
+  image_url: string | null;
+  posh_url: string;
+  is_active: boolean;
+  sort_order: number;
+}
+
+const emptyEvent: Omit<PoshEvent, "id"> = {
+  title: "",
+  description: "",
+  event_date: "",
+  location: "",
+  image_url: "",
+  posh_url: "",
+  is_active: true,
+  sort_order: 0,
+};
 
 const Admin = () => {
   const [session, setSession] = useState<any>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signups, setSignups] = useState<Signup[]>([]);
+  const [events, setEvents] = useState<PoshEvent[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [eventsLoading, setEventsLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+
+  // Event dialog state
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingEventId, setEditingEventId] = useState<string | null>(null);
+  const [eventForm, setEventForm] = useState<Omit<PoshEvent, "id">>(emptyEvent);
+  const [savingEvent, setSavingEvent] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -47,7 +106,10 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    if (session) fetchSignups();
+    if (session) {
+      fetchSignups();
+      fetchEvents();
+    }
   }, [session]);
 
   const fetchSignups = async () => {
@@ -60,9 +122,25 @@ const Admin = () => {
     if (error) {
       toast.error("Failed to load signups");
     } else {
-      setSignups(data || []);
+      setSignups((data || []) as Signup[]);
     }
     setLoading(false);
+  };
+
+  const fetchEvents = async () => {
+    setEventsLoading(true);
+    const { data, error } = await supabase
+      .from("posh_events")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .order("event_date", { ascending: true });
+
+    if (error) {
+      toast.error("Failed to load events");
+    } else {
+      setEvents((data || []) as PoshEvent[]);
+    }
+    setEventsLoading(false);
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -92,6 +170,7 @@ const Admin = () => {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setSignups([]);
+    setEvents([]);
   };
 
   const handleDelete = async (id: string) => {
@@ -105,14 +184,21 @@ const Admin = () => {
   };
 
   const handleExport = () => {
-    const headers = ["Name", "Email", "Phone", "Signed Up"];
-    const rows = filtered.map((s) => [
-      s.name,
-      s.email,
-      s.phone,
-      new Date(s.created_at).toLocaleDateString(),
-    ]);
-    const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
+    const headers = ["Name", "Email", "Phone", "Event", "Posh URL", "Signed Up"];
+    const rows = filtered.map((s) => {
+      const ev = events.find((e) => e.id === s.posh_event_id);
+      return [
+        s.name,
+        s.email,
+        s.phone,
+        ev?.title ?? "",
+        s.posh_url ?? "",
+        new Date(s.created_at).toLocaleDateString(),
+      ];
+    });
+    const csv = [headers, ...rows]
+      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -120,6 +206,76 @@ const Admin = () => {
     a.download = `signups-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const openNewEvent = () => {
+    setEditingEventId(null);
+    setEventForm(emptyEvent);
+    setDialogOpen(true);
+  };
+
+  const openEditEvent = (ev: PoshEvent) => {
+    setEditingEventId(ev.id);
+    setEventForm({
+      title: ev.title,
+      description: ev.description ?? "",
+      event_date: ev.event_date ? ev.event_date.slice(0, 16) : "",
+      location: ev.location ?? "",
+      image_url: ev.image_url ?? "",
+      posh_url: ev.posh_url,
+      is_active: ev.is_active,
+      sort_order: ev.sort_order,
+    });
+    setDialogOpen(true);
+  };
+
+  const handleSaveEvent = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!eventForm.title.trim() || !eventForm.posh_url.trim()) {
+      toast.error("Title and Posh URL are required");
+      return;
+    }
+
+    setSavingEvent(true);
+
+    const payload = {
+      title: eventForm.title.trim(),
+      description: eventForm.description?.trim() || null,
+      event_date: eventForm.event_date
+        ? new Date(eventForm.event_date).toISOString()
+        : null,
+      location: eventForm.location?.trim() || null,
+      image_url: eventForm.image_url?.trim() || null,
+      posh_url: eventForm.posh_url.trim(),
+      is_active: eventForm.is_active,
+      sort_order: Number(eventForm.sort_order) || 0,
+    };
+
+    const { error } = editingEventId
+      ? await supabase.from("posh_events").update(payload).eq("id", editingEventId)
+      : await supabase.from("posh_events").insert(payload);
+
+    setSavingEvent(false);
+
+    if (error) {
+      toast.error("Failed to save event");
+      return;
+    }
+
+    toast.success(editingEventId ? "Event updated" : "Event created");
+    setDialogOpen(false);
+    fetchEvents();
+  };
+
+  const handleDeleteEvent = async (id: string) => {
+    if (!confirm("Delete this event? Signups linked to it will be kept.")) return;
+    const { error } = await supabase.from("posh_events").delete().eq("id", id);
+    if (error) {
+      toast.error("Failed to delete event");
+    } else {
+      setEvents((prev) => prev.filter((e) => e.id !== id));
+      toast.success("Event deleted");
+    }
   };
 
   const filtered = signups.filter(
@@ -189,93 +345,340 @@ const Admin = () => {
     <Layout>
       <section className="max-w-6xl mx-auto px-6 py-24">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-serif text-foreground">Event Signups</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {signups.length} total signup{signups.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              onClick={handleExport}
-              variant="outline"
-              size="sm"
-              className="text-xs uppercase tracking-wider"
-              disabled={filtered.length === 0}
-            >
-              <Download size={14} className="mr-1" /> Export CSV
-            </Button>
-            <Button
-              onClick={fetchSignups}
-              variant="outline"
-              size="sm"
-              className="text-xs uppercase tracking-wider"
-            >
-              Refresh
-            </Button>
-            <Button
-              onClick={handleLogout}
-              variant="ghost"
-              size="sm"
-              className="text-xs uppercase tracking-wider text-muted-foreground"
-            >
-              <LogOut size={14} className="mr-1" /> Logout
-            </Button>
-          </div>
+          <h1 className="text-3xl font-serif text-foreground">Dashboard</h1>
+          <Button
+            onClick={handleLogout}
+            variant="ghost"
+            size="sm"
+            className="text-xs uppercase tracking-wider text-muted-foreground"
+          >
+            <LogOut size={14} className="mr-1" /> Logout
+          </Button>
         </div>
 
-        <div className="relative mb-6">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search by name, email, or phone..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
-          />
-        </div>
+        <Tabs defaultValue="signups" className="w-full">
+          <TabsList className="mb-6">
+            <TabsTrigger value="signups">Signups ({signups.length})</TabsTrigger>
+            <TabsTrigger value="events">Events ({events.length})</TabsTrigger>
+          </TabsList>
 
-        {loading ? (
-          <p className="text-muted-foreground text-center py-12">Loading signups...</p>
-        ) : filtered.length === 0 ? (
-          <p className="text-muted-foreground text-center py-12">
-            {search ? "No results found" : "No signups yet"}
-          </p>
-        ) : (
-          <div className="border border-border/40 rounded-sm overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-border/40">
-                  <TableHead className="text-foreground">Name</TableHead>
-                  <TableHead className="text-foreground">Email</TableHead>
-                  <TableHead className="text-foreground">Phone</TableHead>
-                  <TableHead className="text-foreground">Date</TableHead>
-                  <TableHead className="text-foreground w-12"></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((s) => (
-                  <TableRow key={s.id} className="border-border/30">
-                    <TableCell className="text-foreground">{s.name}</TableCell>
-                    <TableCell className="text-foreground">{s.email}</TableCell>
-                    <TableCell className="text-foreground">{s.phone}</TableCell>
-                    <TableCell className="text-muted-foreground text-sm">
-                      {new Date(s.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>
-                      <button
-                        onClick={() => handleDelete(s.id)}
-                        className="text-muted-foreground hover:text-destructive transition-colors"
-                        aria-label="Delete signup"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
+          <TabsContent value="signups">
+            <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+              <p className="text-sm text-muted-foreground">
+                {signups.length} total signup{signups.length !== 1 ? "s" : ""}
+              </p>
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={handleExport}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs uppercase tracking-wider"
+                  disabled={filtered.length === 0}
+                >
+                  <Download size={14} className="mr-1" /> Export CSV
+                </Button>
+                <Button
+                  onClick={fetchSignups}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs uppercase tracking-wider"
+                >
+                  Refresh
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative mb-6">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Search by name, email, or phone..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-10 bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
+              />
+            </div>
+
+            {loading ? (
+              <p className="text-muted-foreground text-center py-12">Loading signups...</p>
+            ) : filtered.length === 0 ? (
+              <p className="text-muted-foreground text-center py-12">
+                {search ? "No results found" : "No signups yet"}
+              </p>
+            ) : (
+              <div className="border border-border/40 rounded-sm overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-border/40">
+                      <TableHead className="text-foreground">Name</TableHead>
+                      <TableHead className="text-foreground">Email</TableHead>
+                      <TableHead className="text-foreground">Phone</TableHead>
+                      <TableHead className="text-foreground">Event</TableHead>
+                      <TableHead className="text-foreground">Date</TableHead>
+                      <TableHead className="text-foreground w-12"></TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filtered.map((s) => {
+                      const ev = events.find((e) => e.id === s.posh_event_id);
+                      return (
+                        <TableRow key={s.id} className="border-border/30">
+                          <TableCell className="text-foreground">{s.name}</TableCell>
+                          <TableCell className="text-foreground">{s.email}</TableCell>
+                          <TableCell className="text-foreground">{s.phone}</TableCell>
+                          <TableCell className="text-muted-foreground text-sm">
+                            {ev?.title ?? (s.posh_url ? "—" : "General")}
+                          </TableCell>
+                          <TableCell className="text-muted-foreground text-sm">
+                            {new Date(s.created_at).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell>
+                            <button
+                              onClick={() => handleDelete(s.id)}
+                              className="text-muted-foreground hover:text-destructive transition-colors"
+                              aria-label="Delete signup"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="events">
+            <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+              <p className="text-sm text-muted-foreground">
+                Manage events shown on the site and linked to Posh.vip
+              </p>
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={fetchEvents}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs uppercase tracking-wider"
+                >
+                  Refresh
+                </Button>
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      onClick={openNewEvent}
+                      size="sm"
+                      className="text-xs uppercase tracking-wider"
+                    >
+                      <Plus size={14} className="mr-1" /> New Event
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                      <DialogTitle>
+                        {editingEventId ? "Edit Event" : "New Event"}
+                      </DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={handleSaveEvent} className="flex flex-col gap-3 py-2">
+                      <div>
+                        <Label htmlFor="ev-title" className="text-xs uppercase tracking-wider">
+                          Title *
+                        </Label>
+                        <Input
+                          id="ev-title"
+                          value={eventForm.title}
+                          onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })}
+                          required
+                          maxLength={200}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="ev-posh" className="text-xs uppercase tracking-wider">
+                          Posh URL *
+                        </Label>
+                        <Input
+                          id="ev-posh"
+                          type="url"
+                          placeholder="https://posh.vip/e/..."
+                          value={eventForm.posh_url}
+                          onChange={(e) => setEventForm({ ...eventForm, posh_url: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="ev-date" className="text-xs uppercase tracking-wider">
+                            Date & Time
+                          </Label>
+                          <Input
+                            id="ev-date"
+                            type="datetime-local"
+                            value={eventForm.event_date ?? ""}
+                            onChange={(e) =>
+                              setEventForm({ ...eventForm, event_date: e.target.value })
+                            }
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="ev-loc" className="text-xs uppercase tracking-wider">
+                            Location
+                          </Label>
+                          <Input
+                            id="ev-loc"
+                            value={eventForm.location ?? ""}
+                            onChange={(e) =>
+                              setEventForm({ ...eventForm, location: e.target.value })
+                            }
+                            maxLength={200}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="ev-img" className="text-xs uppercase tracking-wider">
+                          Image URL
+                        </Label>
+                        <Input
+                          id="ev-img"
+                          type="url"
+                          placeholder="https://..."
+                          value={eventForm.image_url ?? ""}
+                          onChange={(e) =>
+                            setEventForm({ ...eventForm, image_url: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="ev-desc" className="text-xs uppercase tracking-wider">
+                          Description
+                        </Label>
+                        <Textarea
+                          id="ev-desc"
+                          value={eventForm.description ?? ""}
+                          onChange={(e) =>
+                            setEventForm({ ...eventForm, description: e.target.value })
+                          }
+                          rows={3}
+                          maxLength={1000}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 items-end">
+                        <div>
+                          <Label htmlFor="ev-sort" className="text-xs uppercase tracking-wider">
+                            Sort Order
+                          </Label>
+                          <Input
+                            id="ev-sort"
+                            type="number"
+                            value={eventForm.sort_order}
+                            onChange={(e) =>
+                              setEventForm({
+                                ...eventForm,
+                                sort_order: Number(e.target.value),
+                              })
+                            }
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 pb-2">
+                          <Switch
+                            id="ev-active"
+                            checked={eventForm.is_active}
+                            onCheckedChange={(v) =>
+                              setEventForm({ ...eventForm, is_active: v })
+                            }
+                          />
+                          <Label htmlFor="ev-active" className="text-xs uppercase tracking-wider">
+                            Active
+                          </Label>
+                        </div>
+                      </div>
+                      <DialogFooter className="mt-2">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          onClick={() => setDialogOpen(false)}
+                        >
+                          Cancel
+                        </Button>
+                        <Button type="submit" disabled={savingEvent}>
+                          {savingEvent ? "Saving..." : "Save"}
+                        </Button>
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+
+            {eventsLoading ? (
+              <p className="text-muted-foreground text-center py-12">Loading events...</p>
+            ) : events.length === 0 ? (
+              <p className="text-muted-foreground text-center py-12">
+                No events yet — click "New Event" to add your first Posh.vip link.
+              </p>
+            ) : (
+              <div className="border border-border/40 rounded-sm overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-border/40">
+                      <TableHead className="text-foreground">Title</TableHead>
+                      <TableHead className="text-foreground">Date</TableHead>
+                      <TableHead className="text-foreground">Location</TableHead>
+                      <TableHead className="text-foreground">Active</TableHead>
+                      <TableHead className="text-foreground">Posh</TableHead>
+                      <TableHead className="text-foreground w-24"></TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {events.map((ev) => (
+                      <TableRow key={ev.id} className="border-border/30">
+                        <TableCell className="text-foreground">{ev.title}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">
+                          {ev.event_date
+                            ? new Date(ev.event_date).toLocaleDateString()
+                            : "—"}
+                        </TableCell>
+                        <TableCell className="text-muted-foreground text-sm">
+                          {ev.location ?? "—"}
+                        </TableCell>
+                        <TableCell className="text-muted-foreground text-sm">
+                          {ev.is_active ? "Yes" : "No"}
+                        </TableCell>
+                        <TableCell>
+                          <a
+                            href={ev.posh_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-sm"
+                          >
+                            Open <ExternalLink size={12} />
+                          </a>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => openEditEvent(ev)}
+                              className="text-muted-foreground hover:text-foreground transition-colors"
+                              aria-label="Edit event"
+                            >
+                              <Pencil size={16} />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteEvent(ev.id)}
+                              className="text-muted-foreground hover:text-destructive transition-colors"
+                              aria-label="Delete event"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )}
+          </TabsContent>
+        </Tabs>
       </section>
     </Layout>
   );

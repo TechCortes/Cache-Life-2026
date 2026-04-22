@@ -21,6 +21,8 @@ export type Database = {
           id: string
           name: string
           phone: string
+          posh_event_id: string | null
+          posh_url: string | null
         }
         Insert: {
           created_at?: string
@@ -28,6 +30,8 @@ export type Database = {
           id?: string
           name: string
           phone: string
+          posh_event_id?: string | null
+          posh_url?: string | null
         }
         Update: {
           created_at?: string
@@ -35,6 +39,58 @@ export type Database = {
           id?: string
           name?: string
           phone?: string
+          posh_event_id?: string | null
+          posh_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_signups_posh_event_id_fkey"
+            columns: ["posh_event_id"]
+            isOneToOne: false
+            referencedRelation: "posh_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posh_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          location: string | null
+          posh_url: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          location?: string | null
+          posh_url: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          location?: string | null
+          posh_url?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
