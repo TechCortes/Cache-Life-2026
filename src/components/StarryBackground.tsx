@@ -41,8 +41,8 @@ const StarryBackground = () => {
           opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.2,
           speed: isBright ? Math.random() * 0.04 + 0.025 : Math.random() * 0.025 + 0.01,
           phase: Math.random() * Math.PI * 2,
-          driftX: (Math.random() - 0.5) * 0.04,
-          driftY: isBright ? Math.random() * 0.12 + 0.08 : Math.random() * 0.08 + 0.04,
+          driftX: (Math.random() - 0.5) * 0.03,
+          driftY: isBright ? Math.random() * 0.35 + 0.25 : Math.random() * 0.25 + 0.15,
         };
       });
     };
