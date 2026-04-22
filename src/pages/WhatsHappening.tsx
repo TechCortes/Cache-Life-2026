@@ -69,7 +69,7 @@ const WhatsHappening = () => {
                 className="border border-border/40 rounded-sm overflow-hidden hover:border-primary/40 transition-colors bg-card/30 backdrop-blur-sm"
               >
                 {e.image_url && (
-                  <div className="aspect-[16/9] overflow-hidden grayscale">
+                  <div className="aspect-[16/9] overflow-hidden">
                     <img
                       src={e.image_url}
                       alt={e.title}
