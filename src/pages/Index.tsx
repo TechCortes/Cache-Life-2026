@@ -172,10 +172,14 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-light text-foreground mb-12">
             Check Out Our Client Projects
           </h2>
-          <div className="aspect-video bg-secondary/30 border border-border/30 rounded-sm overflow-hidden flex items-center justify-center">
-            <p className="text-muted-foreground text-sm tracking-widest uppercase">
-              Video Coming Soon
-            </p>
+          <div className="aspect-video bg-secondary/30 border border-border/30 rounded-sm overflow-hidden grayscale">
+            <iframe
+              src="https://player.vimeo.com/video/681646876?autoplay=1&loop=1&muted=1&background=1"
+              title="Caché Life Client Projects Showreel"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
           </div>
         </section>
       </FadeIn>
