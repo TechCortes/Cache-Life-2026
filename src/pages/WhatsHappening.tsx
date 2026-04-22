@@ -69,11 +69,11 @@ const WhatsHappening = () => {
                 className="border border-border/40 rounded-sm overflow-hidden hover:border-primary/40 transition-colors bg-card/30 backdrop-blur-sm"
               >
                 {e.image_url && (
-                  <div className="aspect-[16/9] overflow-hidden">
+                  <div className="overflow-hidden bg-black">
                     <img
                       src={e.image_url}
                       alt={e.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-contain"
                       loading="lazy"
                     />
                   </div>
