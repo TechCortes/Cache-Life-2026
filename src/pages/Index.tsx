@@ -115,12 +115,12 @@ const Index = () => {
           <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-8 leading-tight">
             A Creative Agency for Culture
           </h2>
-          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-6">
+          <p className="text-lg md:text-xl font-semibold text-foreground leading-relaxed max-w-2xl mx-auto mb-6">
             Caché Life is a New York-based arts and entertainment agency specializing in private event production,
             cultural programming, and digital content creation. We transform spaces, curate moments,
             and craft stories that move people.
           </p>
-          <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl font-semibold text-foreground leading-relaxed max-w-2xl mx-auto">
             Our work lives at the intersection of art, music, fashion, and community — bringing together
             visionary creators and discerning audiences in environments that inspire.
           </p>
