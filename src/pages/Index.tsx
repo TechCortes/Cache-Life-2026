@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
 import discoBallImg from "@/assets/disco-ball.png";
+import eventsCollage from "@/assets/events-collage.png";
 
 const services = [
   {
@@ -123,6 +124,20 @@ const Index = () => {
             Our work lives at the intersection of art, music, fashion, and community — bringing together
             visionary creators and discerning audiences in environments that inspire.
           </p>
+        </section>
+      </FadeIn>
+
+      {/* Events Collage */}
+      <FadeIn>
+        <section className="max-w-6xl mx-auto px-6 py-12">
+          <div className="rounded-sm overflow-hidden border border-border/30">
+            <img
+              src={eventsCollage}
+              alt="Caché Life events collage featuring nightlife, art, music, and culture in New York City"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
         </section>
       </FadeIn>
 
