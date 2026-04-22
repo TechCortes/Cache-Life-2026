@@ -109,7 +109,7 @@ const Index = () => {
       {/* About */}
       <FadeIn>
         <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-6">
+          <p className="text-base md:text-lg tracking-[0.4em] uppercase text-primary mb-6">
             Arts & Entertainment
           </p>
           <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-8 leading-tight">
