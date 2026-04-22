@@ -31,18 +31,18 @@ const StarryBackground = () => {
     };
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 200);
+      const count = Math.floor((canvas.width * canvas.height) / 180);
       stars = Array.from({ length: count }, () => {
-        const isBright = Math.random() < 0.08;
+        const isBright = Math.random() < 0.12;
         return {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: isBright ? Math.random() * 2.5 + 1.5 : Math.random() * 1.8 + 0.2,
-          opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.15,
-          speed: isBright ? Math.random() * 0.015 + 0.008 : Math.random() * 0.006 + 0.002,
+          size: isBright ? Math.random() * 2.8 + 1.6 : Math.random() * 1.8 + 0.2,
+          opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.2,
+          speed: isBright ? Math.random() * 0.04 + 0.025 : Math.random() * 0.025 + 0.01,
           phase: Math.random() * Math.PI * 2,
-          driftX: (Math.random() - 0.5) * 0.12,
-          driftY: (Math.random() - 0.5) * 0.08 - 0.03,
+          driftX: (Math.random() - 0.5) * 0.45,
+          driftY: (Math.random() - 0.5) * 0.35 - 0.08,
         };
       });
     };
@@ -62,9 +62,11 @@ const StarryBackground = () => {
         if (star.y < 0) star.y = canvas.height;
         if (star.y > canvas.height) star.y = 0;
         const twinkle = Math.sin(time * star.speed * 100 + star.phase) * 0.5 + 0.5;
-        const shine = Math.pow(twinkle, 2.5);
-        const currentOpacity = star.opacity * (0.15 + 0.85 * shine);
-        const currentSize = star.size * (0.7 + 0.5 * shine);
+        const flicker = Math.sin(time * star.speed * 230 + star.phase * 1.7) * 0.5 + 0.5;
+        const combined = twinkle * 0.7 + flicker * 0.3;
+        const shine = Math.pow(combined, 2);
+        const currentOpacity = star.opacity * (0.05 + 0.95 * shine);
+        const currentSize = star.size * (0.5 + 0.8 * shine);
 
         // Outer glow for bright stars
         if (currentSize > 1.0) {
@@ -80,10 +82,10 @@ const StarryBackground = () => {
         }
 
         // Cross/spike effect on brightest moments
-        if (shine > 0.85 && star.size > 1.5) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentOpacity * 0.3})`;
-          ctx.lineWidth = 0.5;
-          const spikeLen = currentSize * 5;
+        if (shine > 0.7 && star.size > 1.2) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentOpacity * 0.5})`;
+          ctx.lineWidth = 0.6;
+          const spikeLen = currentSize * 7;
           ctx.beginPath();
           ctx.moveTo(star.x - spikeLen, star.y);
           ctx.lineTo(star.x + spikeLen, star.y);
