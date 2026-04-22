@@ -129,7 +129,7 @@ const Index = () => {
 
       {/* Events Collage */}
       <FadeIn>
-        <section className="max-w-6xl mx-auto px-6 py-12">
+        <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-12">
           <div className="rounded-sm overflow-hidden border border-border/30">
             <img
               src={eventsCollage}
