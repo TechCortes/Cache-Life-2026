@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
 import discoBallImg from "@/assets/disco-ball.gif";
 import eventsCollage from "@/assets/events-collage.png";
+import whatWeDoTitle from "@/assets/what-we-do.png";
 
 const services = [
   {
@@ -85,8 +86,12 @@ const Index = () => {
       {/* Hero */}
       <section className="min-h-[25vh] flex flex-col items-center justify-center px-6 text-center">
         <DiscoBall />
-        <h1 className="font-script text-5xl md:text-7xl lg:text-8xl text-foreground mb-4">
-          What We Do
+        <h1 className="mb-4">
+          <img
+            src={whatWeDoTitle}
+            alt="What We Do"
+            className="w-auto h-16 md:h-24 lg:h-28 mx-auto"
+          />
         </h1>
       </section>
 
