@@ -156,7 +156,7 @@ const Index = () => {
             <FadeIn key={i}>
               <div className="border border-border/40 rounded-sm p-8 hover:border-primary/40 transition-colors bg-card/30 backdrop-blur-sm">
                 <h3 className="text-2xl md:text-3xl font-serif font-semibold text-foreground mb-4">{s.title}</h3>
-                <p className="text-lg md:text-xl font-semibold text-foreground leading-relaxed">{s.desc}</p>
+                <p className="text-lg md:text-xl font-normal text-foreground leading-relaxed">{s.desc}</p>
               </div>
             </FadeIn>
           ))}
