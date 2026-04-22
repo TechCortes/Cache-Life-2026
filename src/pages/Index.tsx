@@ -165,7 +165,7 @@ const Index = () => {
 
       {/* Showreel */}
       <FadeIn>
-        <section className="max-w-5xl mx-auto px-6 py-20 text-center">
+        <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-20 text-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">
             Showreel
           </p>
