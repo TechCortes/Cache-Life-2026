@@ -17,6 +17,7 @@ interface PoshEventOption {
   title: string;
   posh_url: string;
   event_date: string | null;
+  provider: "posh" | "partiful";
 }
 
 const signupSchema = z.object({
@@ -37,7 +38,7 @@ const SignupForm = () => {
     const fetchEvents = async () => {
       const { data } = await supabase
         .from("posh_events")
-        .select("id, title, posh_url, event_date")
+        .select("id, title, posh_url, event_date, provider")
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
         .order("event_date", { ascending: true });

@@ -12,6 +12,7 @@ interface PoshEvent {
   location: string | null;
   image_url: string | null;
   posh_url: string;
+  provider: "posh" | "partiful";
 }
 
 const formatDate = (iso: string | null) => {
@@ -23,6 +24,9 @@ const formatDate = (iso: string | null) => {
   });
 };
 
+const providerLabel = (p: PoshEvent["provider"]) =>
+  p === "partiful" ? "Register on Partiful" : "Register on Posh";
+
 const WhatsHappening = () => {
   const [events, setEvents] = useState<PoshEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +35,7 @@ const WhatsHappening = () => {
     const fetchEvents = async () => {
       const { data } = await supabase
         .from("posh_events")
-        .select("id, title, description, event_date, location, image_url, posh_url")
+        .select("id, title, description, event_date, location, image_url, posh_url, provider")
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
         .order("event_date", { ascending: true });
@@ -76,7 +80,12 @@ const WhatsHappening = () => {
                 )}
                 <div className="p-8">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                    <h2 className="text-2xl font-serif text-foreground">{e.title}</h2>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h2 className="text-2xl font-serif text-foreground">{e.title}</h2>
+                      <span className="text-[10px] tracking-[0.25em] uppercase border border-border/60 text-muted-foreground px-2 py-0.5 rounded-sm">
+                        {e.provider === "partiful" ? "Partiful" : "Posh"}
+                      </span>
+                    </div>
                     {e.event_date && (
                       <p className="text-xs tracking-[0.2em] uppercase text-primary">
                         {formatDate(e.event_date)}
@@ -98,7 +107,7 @@ const WhatsHappening = () => {
                     className="tracking-widest text-xs uppercase"
                   >
                     <a href={e.posh_url} target="_blank" rel="noopener noreferrer">
-                      Register on Posh <ExternalLink size={14} className="ml-2" />
+                      {providerLabel(e.provider)} <ExternalLink size={14} className="ml-2" />
                     </a>
                   </Button>
                 </div>
