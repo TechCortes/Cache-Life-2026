@@ -49,7 +49,7 @@ const WhatsHappening = () => {
     <Layout>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
-        <section className="lg:snap-start min-h-[30vh] flex-col px-6 pt-12 pb-4 flex items-center justify-center">
+        <section className="lg:snap-start min-h-0 lg:min-h-[30vh] flex-col px-6 pt-6 pb-2 lg:pt-12 lg:pb-4 flex items-center justify-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
           <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
             What's Happening
@@ -75,7 +75,7 @@ const WhatsHappening = () => {
           events.map((e) => (
             <section
               key={e.id}
-              className="lg:snap-start min-h-[100dvh] lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 pt-4 pb-12 lg:py-8"
+              className="lg:snap-start min-h-0 lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 pt-2 pb-12 lg:py-8"
             >
               <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Image */}
