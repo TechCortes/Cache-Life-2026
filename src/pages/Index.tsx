@@ -97,7 +97,7 @@ const Index = () => {
 
       {/* Featured Video */}
       <FadeIn>
-        <section className="max-w-[1800px] mx-auto px-2 md:px-4 py-4">
+        <section className="max-w-6xl mx-auto px-4 md:px-6 py-4">
           <div className="aspect-video rounded-sm overflow-hidden border border-border/30">
             <video
               src="https://cachelifeny.com/wp-content/uploads/2023/01/cache_homevid.mov"
