@@ -86,40 +86,72 @@ const StarryBackground = () => {
 
         // Sparkle cross for bright stars (always visible, intensity twinkles)
         if (star.hasSpike) {
-          const spikeIntensity = 0.25 + 0.75 * twinkle;
-          const spikeLen = star.size * 6;
+          const spikeIntensity = 0.4 + 0.6 * twinkle;
+          const spikeLen = star.size * 9;
 
-          // soft outer glow
-          const grad = ctx.createRadialGradient(
-            star.x,
-            star.y,
-            0,
-            star.x,
-            star.y,
-            star.size * 5
+          // wide soft halo
+          const haloGrad = ctx.createRadialGradient(
+            star.x, star.y, 0,
+            star.x, star.y, star.size * 8
           );
-          grad.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.35})`);
-          grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-          ctx.fillStyle = grad;
+          haloGrad.addColorStop(0, `rgba(200, 220, 255, ${opacity * 0.35})`);
+          haloGrad.addColorStop(0.4, `rgba(255, 255, 255, ${opacity * 0.15})`);
+          haloGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+          ctx.fillStyle = haloGrad;
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.size * 5, 0, Math.PI * 2);
+          ctx.arc(star.x, star.y, star.size * 8, 0, Math.PI * 2);
           ctx.fill();
 
-          // 4-point cross spike
-          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * spikeIntensity * 0.85})`;
-          ctx.lineWidth = 0.6;
+          // inner bright glow
+          const coreGrad = ctx.createRadialGradient(
+            star.x, star.y, 0,
+            star.x, star.y, star.size * 3
+          );
+          coreGrad.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.9})`);
+          coreGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+          ctx.fillStyle = coreGrad;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 4-point cross spike (long, bright)
+          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * spikeIntensity})`;
+          ctx.lineWidth = 0.8;
           ctx.beginPath();
           ctx.moveTo(star.x - spikeLen, star.y);
           ctx.lineTo(star.x + spikeLen, star.y);
           ctx.moveTo(star.x, star.y - spikeLen);
           ctx.lineTo(star.x, star.y + spikeLen);
           ctx.stroke();
+
+          // diagonal secondary spike (shorter) for extra sparkle
+          const diag = spikeLen * 0.55;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * spikeIntensity * 0.5})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(star.x - diag, star.y - diag);
+          ctx.lineTo(star.x + diag, star.y + diag);
+          ctx.moveTo(star.x - diag, star.y + diag);
+          ctx.lineTo(star.x + diag, star.y - diag);
+          ctx.stroke();
+        } else if (star.size > 0.9) {
+          // soft glow for medium stars too
+          const grad = ctx.createRadialGradient(
+            star.x, star.y, 0,
+            star.x, star.y, star.size * 3
+          );
+          grad.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.4})`);
+          grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+          ctx.fill();
         }
 
-        // Star core
+        // Star core (slightly boosted)
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, opacity * 1.2)})`;
         ctx.fill();
       }
 
