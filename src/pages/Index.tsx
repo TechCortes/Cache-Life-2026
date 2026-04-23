@@ -62,7 +62,7 @@ const Sparkle = ({ style, delay, size }: { style: React.CSSProperties; delay: st
 );
 
 const DiscoBall = () => (
-  <div className="relative w-40 h-40 md:w-56 md:h-56 mx-auto mb-8 animate-[disco-sway_6s_ease-in-out_infinite]">
+  <div className="relative w-48 h-48 md:w-[269px] md:h-[269px] mx-auto mb-8 animate-[disco-sway_6s_ease-in-out_infinite]">
     {/* Star sparkles */}
     <Sparkle style={{ top: '-15%', left: '10%' }} delay="0s" size={14} />
     <Sparkle style={{ top: '5%', right: '-10%' }} delay="0.4s" size={10} />
