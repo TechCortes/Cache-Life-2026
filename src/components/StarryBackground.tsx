@@ -78,6 +78,12 @@ const StarryBackground = () => {
       time += 0.025;
 
       for (const star of stars) {
+        // Slow cascade downward; speed scales subtly with star size for parallax
+        star.y += 0.15 + star.size * 0.08;
+        if (star.y > h + 4) {
+          star.y = -4;
+          star.x = Math.random() * w;
+        }
         // Twinkle: combine slow pulse + fast flicker for lively shimmer
         const slow = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
         const fast = Math.sin(time * star.twinkleSpeed * 3.1 + star.phase * 1.7) * 0.5 + 0.5;
