@@ -144,14 +144,13 @@ const Index = () => {
             Creative Agency for Culture
           </h2>
           <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto mb-8">
-            <span className="block lg:whitespace-nowrap">Caché Life is a New York-based arts and entertainment agency</span>
-            <span className="block lg:whitespace-nowrap">specializing in private event production, cultural programming, and digital content creation.</span>
-            <span className="block lg:whitespace-nowrap">We transform spaces, curate moments, and craft stories that move people.</span>
+            <span className="block lg:whitespace-nowrap">We are a creative marketing agency focused on the arts and entertainment sectors within the luxury hospitality industry.</span>
+            <span className="block lg:whitespace-nowrap">Our team specializes in upscale boutique hotels, high-end lounges and premium brands.</span>
           </p>
           <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto">
-            <span className="block lg:whitespace-nowrap">Our work lives at the intersection of art, music, fashion, and community —</span>
-            <span className="block lg:whitespace-nowrap">bringing together visionary creators and discerning audiences</span>
-            <span className="block lg:whitespace-nowrap">in environments that inspire.</span>
+            <span className="block lg:whitespace-nowrap">We produce top-tier events, establish brand partnerships, and offer unique marketing services tailored to our clients.</span>
+            <span className="block lg:whitespace-nowrap">Our long-standing relationships with exclusive venues set us apart from the average entertainment offerings,</span>
+            <span className="block lg:whitespace-nowrap">allowing us to create a distinctive cultural residency and experience and that you can truly call your own.</span>
           </p>
         </section>
       </FadeIn>
