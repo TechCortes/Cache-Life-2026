@@ -113,14 +113,14 @@ const Index = () => {
       </FadeIn>
       {/* About */}
       <FadeIn>
-        <section className="max-w-6xl mx-auto px-6 py-20 text-center">
+        <section className="max-w-[1600px] mx-auto px-6 py-20 text-center">
           <p className="text-base md:text-lg tracking-[0.4em] uppercase text-primary mb-6">
             Arts & Entertainment
           </p>
           <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-10 leading-tight">
             A Creative Agency for Culture
           </h2>
-          <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto mb-8 tracking-wide">
+          <p className="text-base md:text-lg lg:text-xl font-normal text-foreground leading-loose mx-auto mb-8 tracking-wide whitespace-nowrap">
             Caché Life is a New York-based arts and entertainment agency specializing in private event production, cultural programming, and digital content creation.
             <br />
             We transform spaces, curate moments, and craft stories that move people.
