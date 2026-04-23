@@ -4,11 +4,10 @@ interface Star {
   x: number;
   y: number;
   size: number;
-  opacity: number;
-  speed: number;
+  baseOpacity: number;
+  twinkleSpeed: number;
   phase: number;
-  driftX: number;
-  driftY: number;
+  hasSpike: boolean;
 }
 
 const StarryBackground = () => {
@@ -23,72 +22,90 @@ const StarryBackground = () => {
 
     let animationId: number;
     let stars: Star[] = [];
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = document.documentElement.scrollHeight;
-      initStars();
+      const w = window.innerWidth;
+      const h = document.documentElement.scrollHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initStars(w, h);
     };
 
-    const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 180);
+    const initStars = (w: number, h: number) => {
+      // Dense starfield like cachelifeny.com — ~1 star per 900 px²
+      const count = Math.floor((w * h) / 900);
       stars = Array.from({ length: count }, () => {
-        const isBright = Math.random() < 0.12;
+        const r = Math.random();
+        // tiered brightness: lots of tiny dust, fewer mediums, rare bright sparkles
+        let size: number;
+        let baseOpacity: number;
+        let hasSpike = false;
+        if (r < 0.7) {
+          // dust
+          size = Math.random() * 0.7 + 0.3;
+          baseOpacity = Math.random() * 0.4 + 0.25;
+        } else if (r < 0.93) {
+          // medium
+          size = Math.random() * 1.0 + 0.8;
+          baseOpacity = Math.random() * 0.3 + 0.55;
+        } else {
+          // bright sparkle with cross spike
+          size = Math.random() * 1.3 + 1.4;
+          baseOpacity = Math.random() * 0.2 + 0.8;
+          hasSpike = true;
+        }
         return {
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: isBright ? Math.random() * 2.8 + 1.6 : Math.random() * 1.8 + 0.2,
-          opacity: isBright ? Math.random() * 0.4 + 0.6 : Math.random() * 0.6 + 0.2,
-          speed: isBright ? Math.random() * 0.04 + 0.025 : Math.random() * 0.025 + 0.01,
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size,
+          baseOpacity,
+          twinkleSpeed: Math.random() * 0.6 + 0.3,
           phase: Math.random() * Math.PI * 2,
-          driftX: (Math.random() - 0.5) * 0.03,
-          driftY: isBright ? Math.random() * 0.35 + 0.25 : Math.random() * 0.25 + 0.15,
+          hasSpike,
         };
       });
     };
 
     let time = 0;
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      time += 0.016;
+      const w = canvas.width / dpr;
+      const h = canvas.height / dpr;
+      ctx.clearRect(0, 0, w, h);
+      time += 0.012;
 
       for (const star of stars) {
-        star.x += star.driftX;
-        star.y += star.driftY;
+        // Subtle twinkle only — no drift, no falling
+        const twinkle = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
+        const opacity = star.baseOpacity * (0.55 + 0.45 * twinkle);
 
-        // Wrap: falling stars reappear at top with new x
-        if (star.y > canvas.height) {
-          star.y = -2;
-          star.x = Math.random() * canvas.width;
-        }
-        if (star.x < 0) star.x = canvas.width;
-        if (star.x > canvas.width) star.x = 0;
+        // Sparkle cross for bright stars (always visible, intensity twinkles)
+        if (star.hasSpike) {
+          const spikeIntensity = 0.4 + 0.6 * twinkle;
+          const spikeLen = star.size * 6;
 
-        const twinkle = Math.sin(time * star.speed * 100 + star.phase) * 0.5 + 0.5;
-        const flicker = Math.sin(time * star.speed * 230 + star.phase * 1.7) * 0.5 + 0.5;
-        const combined = twinkle * 0.7 + flicker * 0.3;
-        const shine = Math.pow(combined, 2);
-        const currentOpacity = star.opacity * (0.05 + 0.95 * shine);
-        const currentSize = star.size * (0.5 + 0.8 * shine);
-
-        // Outer glow for bright stars
-        if (currentSize > 1.0) {
+          // soft outer glow
+          const grad = ctx.createRadialGradient(
+            star.x,
+            star.y,
+            0,
+            star.x,
+            star.y,
+            star.size * 5
+          );
+          grad.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.35})`);
+          grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+          ctx.fillStyle = grad;
           ctx.beginPath();
-          ctx.arc(star.x, star.y, currentSize * 4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(180, 210, 255, ${currentOpacity * 0.06})`;
+          ctx.arc(star.x, star.y, star.size * 5, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, currentSize * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(220, 235, 255, ${currentOpacity * 0.15})`;
-          ctx.fill();
-        }
-
-        // Cross/spike effect on brightest moments
-        if (shine > 0.7 && star.size > 1.2) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentOpacity * 0.5})`;
+          // 4-point cross spike
+          ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * spikeIntensity * 0.85})`;
           ctx.lineWidth = 0.6;
-          const spikeLen = currentSize * 7;
           ctx.beginPath();
           ctx.moveTo(star.x - spikeLen, star.y);
           ctx.lineTo(star.x + spikeLen, star.y);
@@ -97,9 +114,10 @@ const StarryBackground = () => {
           ctx.stroke();
         }
 
+        // Star core
         ctx.beginPath();
-        ctx.arc(star.x, star.y, currentSize, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.fill();
       }
 
@@ -110,7 +128,6 @@ const StarryBackground = () => {
     animate();
 
     window.addEventListener("resize", resize);
-
     const observer = new ResizeObserver(resize);
     observer.observe(document.documentElement);
 
