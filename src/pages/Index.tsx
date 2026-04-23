@@ -4,6 +4,29 @@ import discoBallImg from "@/assets/disco-ball.gif";
 import eventsCollage from "@/assets/events-collage.png";
 import whatWeDoTitle from "@/assets/what-we-do.png";
 
+const partners = [
+  { name: "1 Hotel", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/1hotel-2-300x300.png" },
+  { name: "50 Bowery", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/50bowery-300x300.png" },
+  { name: "74 Wythe", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/74wythe-300x300.png" },
+  { name: "Dior", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/dior-300x300.png" },
+  { name: "Lincoln Center", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/lincoln_center-300x300.png" },
+  { name: "The Ludlow", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/ludlow-300x300.png" },
+  { name: "Sagamore", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/sagamore-300x300.png" },
+  { name: "Selina", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/selina-300x300.png" },
+  { name: "Steinway", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/steinway-300x300.png" },
+  { name: "TAO", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/tao-300x300.png" },
+  { name: "The Ned", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/thened-300x300.png" },
+  { name: "Ritz-Carlton", logo: "https://cachelifeny.com/wp-content/uploads/2023/05/ritz-2-300x300.png" },
+  { name: "WAVA", logo: "https://cachelifeny.com/wp-content/uploads/2024/04/wava-300x300.png" },
+  { name: "EHP", logo: "https://cachelifeny.com/wp-content/uploads/2024/05/ehp-4-300x300.png" },
+  { name: "Faena", logo: "https://cachelifeny.com/wp-content/uploads/2024/05/faenalogo-300x300.png" },
+  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-01-300x300.png" },
+  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-02-300x300.png" },
+  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-04-300x300.png" },
+  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-06-300x300.png" },
+  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-07-300x300.png" },
+];
+
 const services = [
   {
     title: "Private Event Production",
