@@ -37,7 +37,7 @@ const StarryBackground = () => {
 
     const initStars = (w: number, h: number) => {
       // Very dense starfield — many tiny stars
-      const count = Math.floor((w * h) / 300);
+      const count = Math.floor((w * h) / 100);
       stars = Array.from({ length: count }, () => {
         const r = Math.random();
         let size: number;
