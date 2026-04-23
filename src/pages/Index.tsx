@@ -90,7 +90,7 @@ const Index = () => {
           <img
             src={whatWeDoTitle}
             alt="What We Do"
-            className="w-auto h-16 md:h-24 lg:h-28 mx-auto"
+            className="w-auto h-[77px] md:h-[115px] lg:h-[134px] mx-auto"
           />
         </h1>
       </section>
