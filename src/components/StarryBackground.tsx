@@ -36,25 +36,24 @@ const StarryBackground = () => {
     };
 
     const initStars = (w: number, h: number) => {
-      // Dense starfield like cachelifeny.com — ~1 star per 900 px²
-      const count = Math.floor((w * h) / 900);
+      // Very dense starfield — many tiny stars
+      const count = Math.floor((w * h) / 300);
       stars = Array.from({ length: count }, () => {
         const r = Math.random();
-        // tiered brightness: lots of tiny dust, fewer mediums, rare bright sparkles
         let size: number;
         let baseOpacity: number;
         let hasSpike = false;
-        if (r < 0.7) {
-          // dust
-          size = Math.random() * 0.7 + 0.3;
-          baseOpacity = Math.random() * 0.4 + 0.25;
-        } else if (r < 0.93) {
-          // medium
-          size = Math.random() * 1.0 + 0.8;
-          baseOpacity = Math.random() * 0.3 + 0.55;
+        if (r < 0.85) {
+          // tiny dust — abundant and thin
+          size = Math.random() * 0.4 + 0.2;
+          baseOpacity = Math.random() * 0.4 + 0.3;
+        } else if (r < 0.97) {
+          // small medium
+          size = Math.random() * 0.5 + 0.5;
+          baseOpacity = Math.random() * 0.3 + 0.5;
         } else {
-          // bright sparkle with cross spike
-          size = Math.random() * 1.3 + 1.4;
+          // rare bright sparkle with cross spike
+          size = Math.random() * 0.8 + 0.9;
           baseOpacity = Math.random() * 0.2 + 0.8;
           hasSpike = true;
         }
@@ -63,7 +62,8 @@ const StarryBackground = () => {
           y: Math.random() * h,
           size,
           baseOpacity,
-          twinkleSpeed: Math.random() * 0.6 + 0.3,
+          // faster, more varied twinkle for on/off shimmer
+          twinkleSpeed: Math.random() * 1.8 + 0.8,
           phase: Math.random() * Math.PI * 2,
           hasSpike,
         };
@@ -84,11 +84,12 @@ const StarryBackground = () => {
           star.y = -4;
           star.x = Math.random() * w;
         }
-        // Twinkle: combine slow pulse + fast flicker for lively shimmer
+        // Twinkle: sharp on/off shimmer using power curve
         const slow = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
         const fast = Math.sin(time * star.twinkleSpeed * 3.1 + star.phase * 1.7) * 0.5 + 0.5;
-        const twinkle = slow * 0.65 + fast * 0.35;
-        const opacity = star.baseOpacity * (0.2 + 0.8 * twinkle);
+        const raw = slow * 0.6 + fast * 0.4;
+        const twinkle = Math.pow(raw, 2.2);
+        const opacity = star.baseOpacity * (0.05 + 0.95 * twinkle);
 
         // Sparkle cross for bright stars (always visible, intensity twinkles)
         if (star.hasSpike) {
