@@ -84,11 +84,12 @@ const StarryBackground = () => {
           star.y = -4;
           star.x = Math.random() * w;
         }
-        // Twinkle: combine slow pulse + fast flicker for lively shimmer
+        // Twinkle: sharp on/off shimmer using power curve
         const slow = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
         const fast = Math.sin(time * star.twinkleSpeed * 3.1 + star.phase * 1.7) * 0.5 + 0.5;
-        const twinkle = slow * 0.65 + fast * 0.35;
-        const opacity = star.baseOpacity * (0.2 + 0.8 * twinkle);
+        const raw = slow * 0.6 + fast * 0.4;
+        const twinkle = Math.pow(raw, 2.2);
+        const opacity = star.baseOpacity * (0.05 + 0.95 * twinkle);
 
         // Sparkle cross for bright stars (always visible, intensity twinkles)
         if (star.hasSpike) {
