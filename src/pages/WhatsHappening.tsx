@@ -105,7 +105,7 @@ const WhatsHappening = () => {
                     )}
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-3">
+                  <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-3 whitespace-pre-line">
                     {e.title}
                   </h2>
 
