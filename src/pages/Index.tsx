@@ -137,21 +137,13 @@ const Index = () => {
       {/* About */}
       <FadeIn>
         <section className="max-w-[1800px] mx-auto px-6 py-20 text-center">
-          <p className="text-[11px] md:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase text-primary mb-6">
-            Arts & Entertainment
-          </p>
-          <h2 className="text-sm md:text-5xl font-sans md:font-serif font-normal md:font-light tracking-[0.2em] md:tracking-normal uppercase md:normal-case text-foreground/70 md:text-foreground mb-10 leading-tight">
-            Creative Agency for Culture
-          </h2>
-          <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto mb-8">
-            <span className="block lg:whitespace-nowrap">We are a creative marketing agency focused on the arts and entertainment sectors within the luxury hospitality industry.</span>
-            <span className="block lg:whitespace-nowrap">Our team specializes in upscale boutique hotels, high-end lounges and premium brands.</span>
-          </p>
-          <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto">
-            <span className="block lg:whitespace-nowrap">We produce top-tier events, establish brand partnerships, and offer unique marketing services tailored to our clients.</span>
-            <span className="block lg:whitespace-nowrap">Our long-standing relationships with exclusive venues set us apart from the average entertainment offerings,</span>
-            <span className="block lg:whitespace-nowrap">allowing us to create a distinctive cultural residency and experience and that you can truly call your own.</span>
-          </p>
+          <div className="text-center text-lg text-foreground/70 leading-relaxed max-w-5xl mx-auto whitespace-pre-line">
+            ARTS & ENTERTAINMENT
+            {"\n"}
+            We are a creative marketing agency focused on the arts and entertainment sectors within the luxury hospitality industry. Our team specializes in upscale boutique hotels, high-end lounges and premium brands.
+            {"\n\n"}
+            We produce top-tier events, establish brand partnerships, and offer unique marketing services tailored to our clients. Our long-standing relationships with exclusive venues set us apart from the average entertainment offerings, allowing us to create a distinctive cultural residency and experience and that you can truly call your own
+          </div>
         </section>
       </FadeIn>
 
