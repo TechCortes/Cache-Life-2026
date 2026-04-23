@@ -125,8 +125,10 @@ const Index = () => {
             <span className="block lg:whitespace-nowrap">specializing in private event production, cultural programming, and digital content creation.</span>
             <span className="block lg:whitespace-nowrap">We transform spaces, curate moments, and craft stories that move people.</span>
           </p>
-          <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto tracking-wide">
-            Our work lives at the intersection of art, music, fashion, and community — bringing together visionary creators and discerning audiences in environments that inspire.
+          <p className="text-xl md:text-2xl lg:text-[32px] font-normal text-foreground leading-loose mx-auto tracking-wide">
+            <span className="block lg:whitespace-nowrap">Our work lives at the intersection of art, music, fashion, and community —</span>
+            <span className="block lg:whitespace-nowrap">bringing together visionary creators and discerning audiences</span>
+            <span className="block lg:whitespace-nowrap">in environments that inspire.</span>
           </p>
         </section>
       </FadeIn>
