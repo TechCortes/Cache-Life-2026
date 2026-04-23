@@ -49,7 +49,7 @@ const WhatsHappening = () => {
     <Layout>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
-        <section className="lg:snap-start min-h-[40vh] flex flex-col items-center justify-center px-6 py-12">
+        <section className="lg:snap-start min-h-[40vh] flex-col px-6 py-12 flex items-center justify-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
           <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
             What's Happening
