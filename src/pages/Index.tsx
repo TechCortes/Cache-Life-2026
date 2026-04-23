@@ -137,18 +137,18 @@ const Index = () => {
       {/* About */}
       <FadeIn>
         <section className="max-w-[1800px] mx-auto px-6 py-20 text-center">
-          <p className="text-base md:text-lg tracking-[0.4em] uppercase text-primary mb-6">
+          <p className="text-[11px] md:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase text-primary mb-6">
             Arts & Entertainment
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-10 leading-tight">
+          <h2 className="text-sm md:text-5xl font-sans md:font-serif font-normal md:font-light tracking-[0.2em] md:tracking-normal uppercase md:normal-case text-foreground/70 md:text-foreground mb-10 leading-tight">
             Creative Agency for Culture
           </h2>
-          <p className="text-xl md:text-2xl lg:text-[32px] font-normal text-foreground leading-loose mx-auto mb-8 tracking-wide">
+          <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto mb-8">
             <span className="block lg:whitespace-nowrap">Caché Life is a New York-based arts and entertainment agency</span>
             <span className="block lg:whitespace-nowrap">specializing in private event production, cultural programming, and digital content creation.</span>
             <span className="block lg:whitespace-nowrap">We transform spaces, curate moments, and craft stories that move people.</span>
           </p>
-          <p className="text-xl md:text-2xl lg:text-[32px] font-normal text-foreground leading-loose mx-auto tracking-wide">
+          <p className="text-sm md:text-2xl lg:text-[32px] font-sans md:font-normal tracking-[0.2em] md:tracking-wide uppercase md:normal-case text-foreground/70 md:text-foreground leading-relaxed md:leading-loose mx-auto">
             <span className="block lg:whitespace-nowrap">Our work lives at the intersection of art, music, fashion, and community —</span>
             <span className="block lg:whitespace-nowrap">bringing together visionary creators and discerning audiences</span>
             <span className="block lg:whitespace-nowrap">in environments that inspire.</span>
