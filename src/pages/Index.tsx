@@ -118,7 +118,7 @@ const Index = () => {
             Arts & Entertainment
           </p>
           <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-10 leading-tight">
-            A Creative Agency for Culture
+            Creative Agency for Culture
           </h2>
           <p className="text-xl md:text-2xl lg:text-[32px] font-normal text-foreground leading-loose mx-auto mb-8 tracking-wide">
             <span className="block lg:whitespace-nowrap">Caché Life is a New York-based arts and entertainment agency</span>
