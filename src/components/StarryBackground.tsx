@@ -75,16 +75,18 @@ const StarryBackground = () => {
       const w = canvas.width / dpr;
       const h = canvas.height / dpr;
       ctx.clearRect(0, 0, w, h);
-      time += 0.012;
+      time += 0.025;
 
       for (const star of stars) {
-        // Subtle twinkle only — no drift, no falling
-        const twinkle = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
-        const opacity = star.baseOpacity * (0.55 + 0.45 * twinkle);
+        // Twinkle: combine slow pulse + fast flicker for lively shimmer
+        const slow = Math.sin(time * star.twinkleSpeed + star.phase) * 0.5 + 0.5;
+        const fast = Math.sin(time * star.twinkleSpeed * 3.1 + star.phase * 1.7) * 0.5 + 0.5;
+        const twinkle = slow * 0.65 + fast * 0.35;
+        const opacity = star.baseOpacity * (0.2 + 0.8 * twinkle);
 
         // Sparkle cross for bright stars (always visible, intensity twinkles)
         if (star.hasSpike) {
-          const spikeIntensity = 0.4 + 0.6 * twinkle;
+          const spikeIntensity = 0.25 + 0.75 * twinkle;
           const spikeLen = star.size * 6;
 
           // soft outer glow
