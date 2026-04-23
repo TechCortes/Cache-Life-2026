@@ -47,9 +47,9 @@ const WhatsHappening = () => {
 
   return (
     <Layout>
-      <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
+      <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
-        <section className="snap-start min-h-[40vh] flex flex-col items-center justify-center px-6 py-12">
+        <section className="lg:snap-start min-h-[40vh] flex flex-col items-center justify-center px-6 py-12">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
           <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
             What's Happening
@@ -62,11 +62,11 @@ const WhatsHappening = () => {
         </section>
 
         {loading ? (
-          <section className="snap-start min-h-screen flex items-center justify-center">
+          <section className="lg:snap-start min-h-[60vh] lg:min-h-screen flex items-center justify-center">
             <p className="text-center text-muted-foreground">Loading events...</p>
           </section>
         ) : events.length === 0 ? (
-          <section className="snap-start min-h-screen flex items-center justify-center">
+          <section className="lg:snap-start min-h-[60vh] lg:min-h-screen flex items-center justify-center">
             <p className="text-center text-muted-foreground">
               No upcoming events at the moment. Check back soon.
             </p>
@@ -75,9 +75,9 @@ const WhatsHappening = () => {
           events.map((e) => (
             <section
               key={e.id}
-              className="snap-start min-h-screen w-full flex items-center justify-center px-6 py-8"
+              className="lg:snap-start min-h-[100dvh] lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 py-8 pb-12"
             >
-              <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
                 {/* Image */}
                 {e.image_url ? (
                   <div className="flex justify-center items-center">
@@ -116,7 +116,7 @@ const WhatsHappening = () => {
                   )}
 
                   {e.description && (
-                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8 line-clamp-3 lg:line-clamp-none">
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8 line-clamp-none">
                       {e.description}
                     </p>
                   )}
