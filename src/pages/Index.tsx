@@ -113,21 +113,18 @@ const Index = () => {
       </FadeIn>
       {/* About */}
       <FadeIn>
-        <section className="max-w-4xl mx-auto px-6 py-20 text-center">
+        <section className="max-w-6xl mx-auto px-6 py-20 text-center">
           <p className="text-base md:text-lg tracking-[0.4em] uppercase text-primary mb-6">
             Arts & Entertainment
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-8 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-serif font-light text-foreground mb-10 leading-tight">
             A Creative Agency for Culture
           </h2>
-          <p className="text-lg md:text-xl font-normal text-foreground leading-relaxed max-w-2xl mx-auto mb-6">
-            Caché Life is a New York-based arts and entertainment agency specializing in private event production,
-            cultural programming, and digital content creation. We transform spaces, curate moments,
-            and craft stories that move people.
+          <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto mb-8 tracking-wide">
+            Caché Life is a New York-based arts and entertainment agency specializing in private event production, cultural programming, and digital content creation. We transform spaces, curate moments, and craft stories that move people.
           </p>
-          <p className="text-lg md:text-xl font-normal text-foreground leading-relaxed max-w-2xl mx-auto">
-            Our work lives at the intersection of art, music, fashion, and community — bringing together
-            visionary creators and discerning audiences in environments that inspire.
+          <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto tracking-wide">
+            Our work lives at the intersection of art, music, fashion, and community — bringing together visionary creators and discerning audiences in environments that inspire.
           </p>
         </section>
       </FadeIn>
