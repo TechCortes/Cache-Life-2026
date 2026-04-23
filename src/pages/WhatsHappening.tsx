@@ -47,75 +47,93 @@ const WhatsHappening = () => {
 
   return (
     <Layout>
-      <section className="max-w-4xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
+      <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
+        {/* Compact hero */}
+        <section className="snap-start min-h-[40vh] flex flex-col items-center justify-center px-6 py-12">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground">
+          <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
             What's Happening
           </h1>
-        </div>
+          {!loading && events.length > 0 && (
+            <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+              Scroll to explore
+            </p>
+          )}
+        </section>
 
         {loading ? (
-          <p className="text-center text-muted-foreground">Loading events...</p>
+          <section className="snap-start min-h-screen flex items-center justify-center">
+            <p className="text-center text-muted-foreground">Loading events...</p>
+          </section>
         ) : events.length === 0 ? (
-          <p className="text-center text-muted-foreground">
-            No upcoming events at the moment. Check back soon.
-          </p>
+          <section className="snap-start min-h-screen flex items-center justify-center">
+            <p className="text-center text-muted-foreground">
+              No upcoming events at the moment. Check back soon.
+            </p>
+          </section>
         ) : (
-          <div className="flex flex-col gap-6">
-            {events.map((e) => (
-              <div
-                key={e.id}
-                className="border border-border/40 rounded-sm overflow-hidden hover:border-primary/40 transition-colors bg-card/30 backdrop-blur-sm"
-              >
-                {e.image_url && (
-                  <div className="overflow-hidden bg-black">
+          events.map((e) => (
+            <section
+              key={e.id}
+              className="snap-start min-h-screen w-full flex items-center justify-center px-6 py-8"
+            >
+              <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Image */}
+                {e.image_url ? (
+                  <div className="flex justify-center items-center">
                     <img
                       src={e.image_url}
                       alt={e.title}
-                      className="w-full h-auto object-contain"
+                      className="w-auto max-w-full max-h-[55vh] lg:max-h-[80vh] object-contain rounded-sm border border-border/40"
                       loading="lazy"
                     />
                   </div>
+                ) : (
+                  <div className="hidden lg:block" />
                 )}
-                <div className="p-8">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <h2 className="text-2xl font-serif text-foreground">{e.title}</h2>
-                      <span className="text-[10px] tracking-[0.25em] uppercase border border-border/60 text-muted-foreground px-2 py-0.5 rounded-sm">
-                        {e.provider === "partiful" ? "Partiful" : "Posh"}
-                      </span>
-                    </div>
+
+                {/* Details */}
+                <div className="flex flex-col justify-center">
+                  <div className="flex items-center gap-3 flex-wrap mb-4">
+                    <span className="text-[10px] tracking-[0.25em] uppercase border border-border/60 text-muted-foreground px-2 py-0.5 rounded-sm">
+                      {e.provider === "partiful" ? "Partiful" : "Posh"}
+                    </span>
                     {e.event_date && (
                       <p className="text-xs tracking-[0.2em] uppercase text-primary">
                         {formatDate(e.event_date)}
                       </p>
                     )}
                   </div>
+
+                  <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-3">
+                    {e.title}
+                  </h2>
+
                   {e.location && (
-                    <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-3">
+                    <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4">
                       {e.location}
                     </p>
                   )}
+
                   {e.description && (
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8 line-clamp-3 lg:line-clamp-none">
                       {e.description}
                     </p>
                   )}
-                  <Button
-                    asChild
-                    className="tracking-widest text-xs uppercase"
-                  >
-                    <a href={e.posh_url} target="_blank" rel="noopener noreferrer">
-                      {providerLabel(e.provider)} <ExternalLink size={14} className="ml-2" />
-                    </a>
-                  </Button>
+
+                  <div>
+                    <Button asChild className="tracking-widest text-xs uppercase">
+                      <a href={e.posh_url} target="_blank" rel="noopener noreferrer">
+                        {providerLabel(e.provider)} <ExternalLink size={14} className="ml-2" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </section>
+          ))
         )}
-      </section>
+      </div>
     </Layout>
   );
 };
