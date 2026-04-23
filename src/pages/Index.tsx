@@ -121,7 +121,9 @@ const Index = () => {
             A Creative Agency for Culture
           </h2>
           <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto mb-8 tracking-wide">
-            Caché Life is a New York-based arts and entertainment agency specializing in private event production, cultural programming, and digital content creation. We transform spaces, curate moments, and craft stories that move people.
+            Caché Life is a New York-based arts and entertainment agency specializing in private event production, cultural programming, and digital content creation.
+            <br />
+            We transform spaces, curate moments, and craft stories that move people.
           </p>
           <p className="text-2xl md:text-3xl font-normal text-foreground leading-loose max-w-5xl mx-auto tracking-wide">
             Our work lives at the intersection of art, music, fashion, and community — bringing together visionary creators and discerning audiences in environments that inspire.
