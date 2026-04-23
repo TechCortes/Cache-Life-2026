@@ -49,7 +49,7 @@ const WhatsHappening = () => {
     <Layout>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
-        <section className="lg:snap-start min-h-0 lg:min-h-[30vh] flex-col px-6 pt-6 pb-0 lg:pt-12 lg:pb-4 flex items-center justify-center">
+        <section className="lg:snap-start min-h-0 lg:min-h-0 flex-col px-6 pt-6 pb-0 lg:pt-8 lg:pb-0 flex items-center justify-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
           <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
             What's Happening
@@ -72,10 +72,10 @@ const WhatsHappening = () => {
             </p>
           </section>
         ) : (
-          events.map((e) => (
+          events.map((e, idx) => (
             <section
               key={e.id}
-              className="lg:snap-start min-h-0 lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 pt-0 pb-12 lg:py-8"
+              className={`lg:snap-start min-h-0 ${idx === 0 ? "lg:min-h-0" : "lg:min-h-screen"} w-full flex items-start lg:items-center justify-center px-6 pt-0 pb-12 ${idx === 0 ? "lg:pt-2 lg:pb-8" : "lg:py-8"}`}
             >
               <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Image */}
