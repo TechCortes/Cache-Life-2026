@@ -75,7 +75,7 @@ const WhatsHappening = () => {
           events.map((e) => (
             <section
               key={e.id}
-              className="lg:snap-start min-h-0 lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 pt-2 pb-12 lg:py-8"
+              className="lg:snap-start min-h-0 lg:min-h-screen w-full flex items-start lg:items-center justify-center px-6 pt-0 pb-12 lg:py-8"
             >
               <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Image */}
