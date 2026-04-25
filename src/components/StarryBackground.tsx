@@ -79,7 +79,7 @@ const StarryBackground = () => {
 
       for (const star of stars) {
         // Constant gentle cascade downward; speed scales with star size for parallax depth
-        star.y += 1.2 + star.size * 0.8;
+        star.y += 2.8 + star.size * 1.8;
         if (star.y > h + 4) {
           star.y = -4;
           star.x = Math.random() * w;
