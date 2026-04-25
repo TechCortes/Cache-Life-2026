@@ -139,7 +139,7 @@ const Index = () => {
         <section className="max-w-[1800px] mx-auto px-6 py-20 text-center">
           <div className="text-center text-2xl md:text-3xl font-semibold text-foreground leading-relaxed max-w-5xl mx-auto whitespace-pre-line">
             ARTS & ENTERTAINMENT
-            {"\n"}
+            {"\n\n\n"}
             We are a creative marketing agency focused on the arts and entertainment sectors within the luxury hospitality industry. Our team specializes in upscale boutique hotels, high-end lounges and premium brands.
             {"\n\n"}
             We produce top-tier events, establish brand partnerships, and offer unique marketing services tailored to our clients. Our long-standing relationships with exclusive venues set us apart from the average entertainment offerings, allowing us to create a distinctive cultural residency and experience and that you can truly call your own
