@@ -1,138 +1,147 @@
 import Layout from "@/components/Layout";
-import { ArrowRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Play } from "lucide-react";
 
-interface FeaturedPress {
-  outletLogo: string;
-  outletName: string;
-  heading: string;
-  excerpt: string;
-  url: string;
+interface VideoItem {
+  id: string;
+  vimeoId: string;
+  title: string;
 }
 
-interface LogoPress {
-  outletLogo: string;
-  outletName: string;
-  url: string;
-}
+// Playlist sourced from Caché Signature Recaps
+const playlistTitle = "Caché Signature Recaps";
 
-// Featured press cards (large banner cards, like the original Press page)
-const featured: FeaturedPress[] = [
-  {
-    outletLogo: "https://cachelifeny.com/wp-content/uploads/2023/05/forbes-logo-300x78.png",
-    outletName: "Forbes",
-    heading: "Caché Featured in Forbes",
-    excerpt:
-      "Inside Caché Life: A Luxurious Brand And Event Series Taking Over Boutique New York City Hotels",
-    url: "https://www.forbes.com/sites/lisakocay/2023/05/11/inside-cach-life-a-luxurious-brand-and-event-series-taking-over-boutique-new-york-city-hotels/",
-  },
-  {
-    outletLogo:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Brooklyn_Magazine_logo.svg/512px-Brooklyn_Magazine_logo.svg.png",
-    outletName: "Brooklyn Magazine",
-    heading: "Caché in Brooklyn Magazine",
-    excerpt: "Inside Caché, an exclusive party for grown-ups",
-    url: "https://www.bkmag.com/2022/10/13/cache-an-exclusive-party-for-grown-ups/",
-  },
-  {
-    outletLogo:
-      "https://resident.com/_next/image?url=%2Flogo-resident.png&w=384&q=75",
-    outletName: "Resident",
-    heading: "Caché x Miami Music Week",
-    excerpt: "A celebration of Artistry at Zaytinya by José Andrés Group",
-    url: "https://resident.com/sports-and-entertainment/2025/03/25/where-to-keep-the-beat-going-luxe-hotspots-to-hit-during-miami-music-week-2025",
-  },
+const videos: VideoItem[] = [
+  { id: "a710a2c", vimeoId: "1096370342", title: "Caché x Park Lane Residency Launch" },
+  { id: "329761c", vimeoId: "1125586960", title: "Caché Life x Laissez Faire" },
+  { id: "deefb57", vimeoId: "1125588285", title: "Caché Life x Ruschmeyers [Art Party]" },
+  { id: "d30e723", vimeoId: "1125591065", title: "Fourth of July at EHP Resort" },
+  { id: "9188791", vimeoId: "1117487423", title: "NYFW at Darling Penthouse" },
+  { id: "98d51bf", vimeoId: "1096359491", title: "Caché x Westlight Residency Launch" },
+  { id: "824d364", vimeoId: "1082193591", title: "Art Basel 2025" },
+  { id: "75e81f1", vimeoId: "1010302371", title: "10th Anniversary Party" },
+  { id: "885f838", vimeoId: "787184644", title: "Caché x Sagamore Hotel South Beach" },
+  { id: "a123363", vimeoId: "1041998185", title: "Art Basel 2024" },
+  { id: "b09bb5d", vimeoId: "952080182", title: "CACHÉ X SISI EAST HAMPTON" },
+  { id: "f6c2067", vimeoId: "914781470", title: "NYFW at Paradise Club" },
+  { id: "2ea0fc5", vimeoId: "905749201", title: "NEW YEARS EVE at THE 1 HOTEL BK BRIDGE [2024]" },
+  { id: "c243536", vimeoId: "1012529371", title: "Arlo WB Sunset Party" },
+  { id: "deeef59", vimeoId: "624717210", title: "Caché Life 7th Year Anniversary" },
+  { id: "0c11dec", vimeoId: "584588501", title: "Caché Life Grand Disco Gala 2021" },
+  { id: "0244639", vimeoId: "340257402", title: "Caché Debuts at The William Vale" },
+  { id: "a1c2e22", vimeoId: "312769295", title: "NYFW Underground" },
+  { id: "bec3fe1", vimeoId: "369397147", title: "Caché Life Visual Arts Showreel feat. Juice" },
+  { id: "74127a9", vimeoId: "385028256", title: "Caché Life NYE at citizenM Bowery 2020" },
+  { id: "0631d6f", vimeoId: "1135437352", title: "PENTHOUSE NIGHTMARE [HALLOWEEN 2025]" },
 ];
 
-// Smaller logo-only mentions
-const mentions: LogoPress[] = [
-  {
-    outletLogo: "https://cachelifeny.com/wp-content/uploads/2023/01/vale.png",
-    outletName: "The William Vale",
-    url: "https://www.thewilliamvale.com/journal/september-19-2019-cache-life-finale/",
-  },
-  {
-    outletLogo: "https://cachelifeny.com/wp-content/uploads/2023/01/guest.png",
-    outletName: "Guest of a Guest",
-    url: "https://guestofaguest.com/new-york/nyc/actually-fun-things-to-do-this-september-in-nyc",
-  },
-  {
-    outletLogo: "https://cachelifeny.com/wp-content/uploads/2023/01/timeout.png",
-    outletName: "Time Out New York",
-    url: "https://www.timeout.com/newyork/things-to-do/cache-sunset-rooftop-party",
-  },
-];
+const Media = () => {
+  // Read ?video=ID from the URL to set initial selection
+  const initial = useMemo(() => {
+    if (typeof window === "undefined") return videos[0];
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("video");
+    return videos.find((v) => v.id === requested) ?? videos[0];
+  }, []);
 
-const Media = () => (
-  <Layout>
-    {/* Hero */}
-    <section className="min-h-[30vh] flex flex-col items-center justify-center px-6 text-center pt-12">
-      <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground">
-        Press
-      </h1>
-    </section>
+  const [active, setActive] = useState<VideoItem>(initial);
 
-    {/* Featured banner cards */}
-    <section className="max-w-6xl mx-auto px-6 py-12 flex flex-col gap-8">
-      {featured.map((item, i) => (
-        <article
-          key={i}
-          className="relative border border-border/30 rounded-sm overflow-hidden bg-card/40 backdrop-blur-sm hover:border-primary/40 transition-colors"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] items-center gap-6 p-8 md:p-10">
-            <div className="flex items-center justify-center md:justify-start">
-              <img
-                src={item.outletLogo}
-                alt={item.outletName}
-                className="max-h-20 md:max-h-24 w-auto object-contain brightness-0 invert opacity-90"
-                loading="lazy"
+  const handleSelect = (v: VideoItem) => {
+    setActive(v);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("playlist", "774cf55");
+      url.searchParams.set("video", v.id);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  return (
+    <Layout>
+      {/* Hero */}
+      <section className="min-h-[20vh] flex flex-col items-center justify-center px-6 text-center pt-12">
+        <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground">
+          Media
+        </h1>
+        <p className="mt-6 text-base md:text-xl tracking-[0.25em] uppercase text-muted-foreground">
+          Relive the night, the energy never ends.
+        </p>
+      </section>
+
+      {/* Video Playlist */}
+      <section className="max-w-[1600px] mx-auto px-2 md:px-6 py-12">
+        <div className="border border-border/30 rounded-sm overflow-hidden bg-card/30 backdrop-blur-sm">
+          {/* Playlist title bar */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-border/30">
+            <h2 className="text-xl md:text-2xl font-serif font-light text-foreground">
+              {playlistTitle}
+            </h2>
+            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+              {videos.length} Videos
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px]">
+            {/* Player */}
+            <div className="bg-black relative aspect-video lg:aspect-auto lg:min-h-[560px]">
+              <iframe
+                key={active.vimeoId}
+                src={`https://player.vimeo.com/video/${active.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
+                title={active.title}
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
               />
             </div>
-            <div className="flex flex-col gap-3 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-serif font-light text-foreground">
-                {item.heading}
-              </h2>
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                {item.excerpt}
-              </p>
-              <div className="mt-2">
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-border/60 hover:border-primary/60 hover:text-primary text-foreground rounded-full px-6 py-2 text-[10px] tracking-[0.3em] uppercase transition-colors"
-                >
-                  Read the Article <ArrowRight size={12} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </section>
 
-    {/* Smaller logo grid */}
-    <section className="max-w-6xl mx-auto px-6 pb-24">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {mentions.map((m, i) => (
-          <a
-            key={i}
-            href={m.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group border border-border/30 rounded-sm bg-card/30 backdrop-blur-sm hover:border-primary/40 transition-colors aspect-[3/2] flex items-center justify-center p-8"
-            aria-label={m.outletName}
-          >
-            <img
-              src={m.outletLogo}
-              alt={m.outletName}
-              className="max-h-16 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity brightness-0 invert"
-              loading="lazy"
-            />
-          </a>
-        ))}
-      </div>
-    </section>
-  </Layout>
-);
+            {/* Playlist sidebar */}
+            <aside className="border-t lg:border-t-0 lg:border-l border-border/30 max-h-[560px] overflow-y-auto">
+              <ul role="tablist">
+                {videos.map((v) => {
+                  const isActive = v.id === active.id;
+                  return (
+                    <li key={v.id}>
+                      <button
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => handleSelect(v)}
+                        className={`w-full flex items-start gap-3 text-left px-4 py-3 border-b border-border/20 transition-colors ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground/80 hover:bg-secondary/40 hover:text-foreground"
+                        }`}
+                      >
+                        <span
+                          className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full border flex items-center justify-center ${
+                            isActive
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border/60"
+                          }`}
+                        >
+                          <Play size={10} fill="currentColor" />
+                        </span>
+                        <span className="text-sm leading-snug">{v.title}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </aside>
+          </div>
+
+          {/* Now playing footer */}
+          <div className="px-6 py-4 border-t border-border/30">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-1">
+              Now Playing
+            </p>
+            <p className="text-base md:text-lg font-serif text-foreground">
+              {active.title}
+            </p>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
 
 export default Media;
