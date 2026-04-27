@@ -23,6 +23,7 @@ import logoSteinway from "@/assets/partners/steinway.png";
 import logoTao from "@/assets/partners/tao.png";
 import logoTheNed from "@/assets/partners/thened.png";
 import logoWava from "@/assets/partners/wava.png";
+import logoBitBasel from "@/assets/partners/bitbasel.png";
 
 const partners = [
   { name: "1 Hotel Brooklyn Bridge", logo: logo1Hotel },
@@ -44,6 +45,7 @@ const partners = [
   { name: "TAO", logo: logoTao },
   { name: "The Ned", logo: logoTheNed },
   { name: "WAVA Water", logo: logoWava },
+  { name: "BitBasel", logo: logoBitBasel },
 ];
 
 const services = [
