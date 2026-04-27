@@ -211,14 +211,14 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-light text-foreground text-center mb-16">
             Partnerships
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-10 gap-y-12 items-center">
             {partners.map((p, i) => (
-              <div key={i} className="flex items-center justify-center aspect-[3/2] p-4">
+              <div key={i} className="flex items-center justify-center aspect-[3/2] p-2">
                 <img
                   src={p.logo}
                   alt={`${p.name} logo`}
                   loading="lazy"
-                  className="max-h-16 md:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="max-h-28 md:max-h-32 lg:max-h-36 max-w-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             ))}
