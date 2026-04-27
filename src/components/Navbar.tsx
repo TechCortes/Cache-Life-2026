@@ -23,8 +23,8 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`silver-glitter text-xs tracking-[0.2em] uppercase transition-all ${
+                location.pathname === l.to ? "opacity-100" : "opacity-80 hover:opacity-100"
               }`}
             >
               {l.label}
@@ -46,8 +46,8 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-xs tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`silver-glitter text-xs tracking-[0.2em] uppercase transition-all ${
+                location.pathname === l.to ? "opacity-100" : "opacity-80 hover:opacity-100"
               }`}
             >
               {l.label}
@@ -73,8 +73,8 @@ const Navbar = () => {
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className={`text-sm tracking-[0.2em] uppercase transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/70"
+              className={`silver-glitter text-sm tracking-[0.2em] uppercase transition-all ${
+                location.pathname === l.to ? "opacity-100" : "opacity-80 hover:opacity-100"
               }`}
             >
               {l.label}
