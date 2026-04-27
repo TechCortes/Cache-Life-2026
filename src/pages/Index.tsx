@@ -4,27 +4,46 @@ import discoBallImg from "@/assets/disco-ball.gif";
 import eventsCollage from "@/assets/events-collage.png";
 import whatWeDoTitle from "@/assets/what-we-do.png";
 
+import logo1Hotel from "@/assets/partners/1hotel.png";
+import logo50Bowery from "@/assets/partners/50bowery.png";
+import logo74Wythe from "@/assets/partners/74wythe.png";
+import logoDior from "@/assets/partners/dior.png";
+import logoEhp from "@/assets/partners/ehp.png";
+import logoFaena from "@/assets/partners/faena.png";
+import logoLincoln from "@/assets/partners/lincoln.png";
+import logoLudlow from "@/assets/partners/ludlow.png";
+import logoSohoHouse from "@/assets/partners/p01.png";
+import logoScope from "@/assets/partners/p02.png";
+import logoSohoBeach from "@/assets/partners/p04.png";
+import logoPerrier from "@/assets/partners/p06.png";
+import logoRitz from "@/assets/partners/ritz.png";
+import logoSagamore from "@/assets/partners/sagamore.png";
+import logoSelina from "@/assets/partners/selina.png";
+import logoSteinway from "@/assets/partners/steinway.png";
+import logoTao from "@/assets/partners/tao.png";
+import logoTheNed from "@/assets/partners/thened.png";
+import logoWava from "@/assets/partners/wava.png";
+
 const partners = [
-  { name: "1 Hotel", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/1hotel-2-300x300.png" },
-  { name: "50 Bowery", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/50bowery-300x300.png" },
-  { name: "74 Wythe", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/74wythe-300x300.png" },
-  { name: "Dior", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/dior-300x300.png" },
-  { name: "Lincoln Center", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/lincoln_center-300x300.png" },
-  { name: "The Ludlow", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/ludlow-300x300.png" },
-  { name: "Sagamore", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/sagamore-300x300.png" },
-  { name: "Selina", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/selina-300x300.png" },
-  { name: "Steinway", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/steinway-300x300.png" },
-  { name: "TAO", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/tao-300x300.png" },
-  { name: "The Ned", logo: "https://cachelifeny.com/wp-content/uploads/2023/01/thened-300x300.png" },
-  { name: "Ritz-Carlton", logo: "https://cachelifeny.com/wp-content/uploads/2023/05/ritz-2-300x300.png" },
-  { name: "WAVA", logo: "https://cachelifeny.com/wp-content/uploads/2024/04/wava-300x300.png" },
-  { name: "EHP", logo: "https://cachelifeny.com/wp-content/uploads/2024/05/ehp-4-300x300.png" },
-  { name: "Faena", logo: "https://cachelifeny.com/wp-content/uploads/2024/05/faenalogo-300x300.png" },
-  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-01-300x300.png" },
-  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-02-300x300.png" },
-  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-04-300x300.png" },
-  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-06-300x300.png" },
-  { name: "Partner", logo: "https://cachelifeny.com/wp-content/uploads/2020/10/cache-life-partnership-07-300x300.png" },
+  { name: "1 Hotel Brooklyn Bridge", logo: logo1Hotel },
+  { name: "50 Bowery", logo: logo50Bowery },
+  { name: "74 Wythe", logo: logo74Wythe },
+  { name: "Dior", logo: logoDior },
+  { name: "EHP Resort & Marina", logo: logoEhp },
+  { name: "Faena", logo: logoFaena },
+  { name: "Lincoln Center", logo: logoLincoln },
+  { name: "Ludlow House", logo: logoLudlow },
+  { name: "Soho House", logo: logoSohoHouse },
+  { name: "Scope Art Show", logo: logoScope },
+  { name: "Soho Beach House", logo: logoSohoBeach },
+  { name: "Perrier", logo: logoPerrier },
+  { name: "The Ritz-Carlton", logo: logoRitz },
+  { name: "Sagamore", logo: logoSagamore },
+  { name: "Selina", logo: logoSelina },
+  { name: "Steinway & Sons", logo: logoSteinway },
+  { name: "TAO", logo: logoTao },
+  { name: "The Ned", logo: logoTheNed },
+  { name: "WAVA Water", logo: logoWava },
 ];
 
 const services = [
@@ -192,14 +211,14 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-light text-foreground text-center mb-16">
             Partnerships
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10 items-center">
             {partners.map((p, i) => (
               <div key={i} className="flex items-center justify-center aspect-[3/2] p-4">
                 <img
                   src={p.logo}
-                  alt={p.name}
+                  alt={`${p.name} logo`}
                   loading="lazy"
-                  className="max-h-16 md:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 brightness-0 invert transition-opacity duration-300"
+                  className="max-h-16 md:max-h-20 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             ))}
