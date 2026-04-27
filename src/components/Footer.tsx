@@ -1,5 +1,6 @@
 import { Instagram, Music } from "lucide-react";
 import SignupForm from "@/components/SignupForm";
+import instagramGrid from "@/assets/instagram-grid.jpg";
 
 const Footer = () => {
   return (
@@ -16,34 +17,34 @@ const Footer = () => {
           @CACHELIFE
         </a>
 
-        {/* Simple dark-themed Instagram card */}
+        {/* Instagram grid preview */}
         <div className="mt-10 max-w-md mx-auto">
           <a
             href="https://www.instagram.com/cachelife/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group block rounded-sm border border-border/40 bg-card/30 backdrop-blur-sm p-8 hover:border-primary/40 transition-colors"
+            className="group block rounded-sm border border-border/40 bg-card/30 backdrop-blur-sm p-4 md:p-6 hover:border-primary/40 transition-colors"
           >
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/40 bg-background/60 text-foreground group-hover:text-primary transition-colors">
-                <Instagram size={26} strokeWidth={1.25} />
-              </div>
-              <div className="text-left">
-                <p className="text-base font-serif tracking-wide text-foreground">@cachelife</p>
-                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">
-                  Follow on Instagram
-                </p>
-              </div>
+            <div className="overflow-hidden rounded-sm">
+              <img
+                src={instagramGrid}
+                alt="@cachelife Instagram preview"
+                width={1024}
+                height={1024}
+                loading="lazy"
+                className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+              />
             </div>
-            <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
-              Nightlife, art, music & culture from New York City.
-            </p>
-            <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70 group-hover:text-primary transition-colors">
-              View profile →
-            </p>
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <Instagram size={16} strokeWidth={1.5} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-colors">
+                @cachelife · View on Instagram →
+              </span>
+            </div>
           </a>
         </div>
       </div>
+
 
       {/* Signup Form */}
       <SignupForm />
