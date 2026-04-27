@@ -192,20 +192,6 @@ const Index = () => {
         </section>
       </FadeIn>
 
-      {/* Events Collage */}
-      <FadeIn>
-        <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-12">
-          <div className="rounded-sm overflow-hidden border border-border/30">
-            <img
-              src={eventsCollage}
-              alt="Caché Life events collage featuring nightlife, art, music, and culture in New York City"
-              className="w-full h-auto object-cover"
-              loading="lazy"
-            />
-          </div>
-        </section>
-      </FadeIn>
-
       {/* Services */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <FadeIn>
@@ -227,6 +213,20 @@ const Index = () => {
           ))}
         </div>
       </section>
+
+      {/* Events Collage */}
+      <FadeIn>
+        <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-12">
+          <div className="rounded-sm overflow-hidden border border-border/30">
+            <img
+              src={eventsCollage}
+              alt="Caché Life events collage featuring nightlife, art, music, and culture in New York City"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </section>
+      </FadeIn>
 
       {/* Showreel */}
       <FadeIn>
