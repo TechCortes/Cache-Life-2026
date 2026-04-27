@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { useMemo, useState } from "react";
 import { Play } from "lucide-react";
+import mediaTitle from "@/assets/media-title.png";
 
 import collage1 from "@/assets/media-collage/1.jpg";
 import collage2 from "@/assets/media-collage/2.jpg";
