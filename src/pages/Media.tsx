@@ -2,6 +2,26 @@ import Layout from "@/components/Layout";
 import { useMemo, useState } from "react";
 import { Play } from "lucide-react";
 
+import collage1 from "@/assets/media-collage/1.jpg";
+import collage2 from "@/assets/media-collage/2.jpg";
+import collage3 from "@/assets/media-collage/3.jpg";
+import collage4 from "@/assets/media-collage/4.jpg";
+import collage5 from "@/assets/media-collage/5.jpg";
+import collage6 from "@/assets/media-collage/6.jpg";
+import collage7 from "@/assets/media-collage/7.jpg";
+import collage8 from "@/assets/media-collage/8.jpg";
+import collage9 from "@/assets/media-collage/9.jpg";
+import collage10 from "@/assets/media-collage/10.jpg";
+import collage11 from "@/assets/media-collage/11.jpg";
+import collage12 from "@/assets/media-collage/12.jpg";
+import collage13 from "@/assets/media-collage/13.jpg";
+import collage14 from "@/assets/media-collage/14.jpg";
+
+const collageImages = [
+  collage1, collage2, collage3, collage4, collage5, collage6, collage7,
+  collage8, collage9, collage10, collage11, collage12, collage13, collage14,
+];
+
 interface VideoItem {
   id: string;
   vimeoId: string;
@@ -152,6 +172,22 @@ const Media = () => {
           >
             View Photo Gallery
           </a>
+        </div>
+      </section>
+
+      {/* Photo collage */}
+      <section className="max-w-[1600px] mx-auto px-2 md:px-6 pb-20">
+        <div className="columns-1 md:columns-2 gap-2 md:gap-3 [column-fill:_balance]">
+          {collageImages.map((src, i) => (
+            <div key={i} className="mb-2 md:mb-3 break-inside-avoid overflow-hidden rounded-sm border border-border/20">
+              <img
+                src={src}
+                alt={`Caché Life event recap ${i + 1}`}
+                loading="lazy"
+                className="w-full h-auto object-cover block"
+              />
+            </div>
+          ))}
         </div>
       </section>
     </Layout>
