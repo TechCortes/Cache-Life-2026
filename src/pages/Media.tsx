@@ -174,6 +174,22 @@ const Media = () => {
           </a>
         </div>
       </section>
+
+      {/* Photo collage */}
+      <section className="max-w-[1600px] mx-auto px-2 md:px-6 pb-20">
+        <div className="columns-1 md:columns-2 gap-2 md:gap-3 [column-fill:_balance]">
+          {collageImages.map((src, i) => (
+            <div key={i} className="mb-2 md:mb-3 break-inside-avoid overflow-hidden rounded-sm border border-border/20">
+              <img
+                src={src}
+                alt={`Caché Life event recap ${i + 1}`}
+                loading="lazy"
+                className="w-full h-auto object-cover block"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </Layout>
   );
 };
