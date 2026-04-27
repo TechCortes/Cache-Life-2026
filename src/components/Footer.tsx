@@ -1,24 +1,7 @@
 import { Instagram, Music } from "lucide-react";
-import { useEffect } from "react";
 import SignupForm from "@/components/SignupForm";
 
-// Replace with your real Behold feed ID from https://behold.so
-const BEHOLD_FEED_ID = "YOUR_BEHOLD_FEED_ID";
-
 const Footer = () => {
-  useEffect(() => {
-    const scriptId = "behold-widget-script";
-    if (document.getElementById(scriptId)) return;
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://w.behold.so/widget.js";
-    script.type = "module";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
-  const hasFeed = BEHOLD_FEED_ID && BEHOLD_FEED_ID !== "YOUR_BEHOLD_FEED_ID";
-
   return (
     <footer className="relative z-10 border-t border-border/30 mt-20">
       {/* Instagram CTA */}
@@ -33,31 +16,32 @@ const Footer = () => {
           @CACHELIFE
         </a>
 
-        {/* Instagram grid (Behold) — themed dark to match site */}
-        <div className="mt-10 max-w-2xl mx-auto">
-          <div className="rounded-sm border border-border/40 bg-card/30 backdrop-blur-sm p-6 md:p-8 text-center">
-            {hasFeed ? (
-              // @ts-expect-error - custom element from behold.so widget script
-              <behold-widget feed-id={BEHOLD_FEED_ID} />
-            ) : (
-              <div className="py-10">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-border/40 bg-background/60 text-foreground mb-4">
-                  <Instagram size={26} strokeWidth={1.25} />
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                  Instagram grid will appear here once the Behold feed ID is added in <code className="text-foreground/80">Footer.tsx</code>.
+        {/* Simple dark-themed Instagram card */}
+        <div className="mt-10 max-w-md mx-auto">
+          <a
+            href="https://www.instagram.com/cachelife/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block rounded-sm border border-border/40 bg-card/30 backdrop-blur-sm p-8 hover:border-primary/40 transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/40 bg-background/60 text-foreground group-hover:text-primary transition-colors">
+                <Instagram size={26} strokeWidth={1.25} />
+              </div>
+              <div className="text-left">
+                <p className="text-base font-serif tracking-wide text-foreground">@cachelife</p>
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">
+                  Follow on Instagram
                 </p>
               </div>
-            )}
-            <a
-              href="https://www.instagram.com/cachelife/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-primary transition-colors"
-            >
-              View full profile →
-            </a>
-          </div>
+            </div>
+            <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
+              Nightlife, art, music & culture from New York City.
+            </p>
+            <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70 group-hover:text-primary transition-colors">
+              View profile →
+            </p>
+          </a>
         </div>
       </div>
 
