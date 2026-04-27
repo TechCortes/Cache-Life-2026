@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
 import discoBallImg from "@/assets/disco-ball.gif";
+import pressTitle from "@/assets/press-title.png";
 
 import forbesLogo from "@/assets/press/forbes-logo.png";
 import forbesBg from "@/assets/press/forbes-bg.jpg";
