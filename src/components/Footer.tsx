@@ -1,6 +1,7 @@
 import { Instagram, Music } from "lucide-react";
 import SignupForm from "@/components/SignupForm";
 import instagramGrid from "@/assets/instagram-grid.jpg";
+import bitbaselLogo from "@/assets/bitbasel-logo.png";
 
 const Footer = () => {
   return (
