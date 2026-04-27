@@ -1,22 +1,7 @@
 import { Instagram, Music } from "lucide-react";
-import { useEffect } from "react";
 import SignupForm from "@/components/SignupForm";
 
 const Footer = () => {
-  useEffect(() => {
-    const scriptId = "instagram-embed-script";
-    if (document.getElementById(scriptId)) {
-      // @ts-expect-error - Instagram global injected by their SDK
-      window.instgrm?.Embeds?.process?.();
-      return;
-    }
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <footer className="relative z-10 border-t border-border/30 mt-20">
       {/* Instagram CTA */}
@@ -31,30 +16,32 @@ const Footer = () => {
           @CACHELIFE
         </a>
 
-        {/* Instagram profile embed */}
+        {/* Custom dark-themed Instagram card */}
         <div className="mt-10 max-w-md mx-auto">
-          <blockquote
-            className="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/cachelife/"
-            data-instgrm-version="14"
-            style={{
-              background: "#000",
-              border: 0,
-              margin: "0 auto",
-              maxWidth: "540px",
-              minWidth: "280px",
-              width: "100%",
-            }}
+          <a
+            href="https://www.instagram.com/cachelife/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block rounded-sm border border-border/40 bg-card/30 backdrop-blur-sm p-8 hover:border-primary/40 transition-colors"
           >
-            <a
-              href="https://www.instagram.com/cachelife/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground"
-            >
-              View @cachelife on Instagram
-            </a>
-          </blockquote>
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/40 bg-background/60 text-foreground group-hover:text-primary transition-colors">
+                <Instagram size={26} strokeWidth={1.25} />
+              </div>
+              <div className="text-left">
+                <p className="text-base font-serif tracking-wide text-foreground">@cachelife</p>
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">
+                  Follow on Instagram
+                </p>
+              </div>
+            </div>
+            <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
+              Nightlife, art, music & culture from New York City.
+            </p>
+            <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70 group-hover:text-primary transition-colors">
+              View profile →
+            </p>
+          </a>
         </div>
       </div>
 
