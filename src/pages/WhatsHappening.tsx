@@ -52,8 +52,12 @@ const WhatsHappening = () => {
         {/* Compact hero */}
         <section className="lg:snap-start min-h-0 lg:min-h-0 flex-col px-6 pt-6 pb-0 lg:pt-8 lg:pb-0 flex items-center justify-center">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4">Upcoming</p>
-          <h1 className="text-4xl md:text-5xl font-serif font-light text-foreground text-center">
-            What's Happening
+          <h1>
+            <img
+              src={whatsHappeningTitle}
+              alt="What's Happening"
+              className="w-auto h-[80px] md:h-[120px] lg:h-[150px] mx-auto"
+            />
           </h1>
           {!loading && events.length > 0 && (
             <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
