@@ -139,6 +139,10 @@ const Media = () => {
             </p>
           </div>
         </div>
+
+        <p className="font-abel mt-10 text-lg md:text-2xl tracking-wide text-foreground text-center max-w-4xl mx-auto leading-relaxed">
+          Our photo recaps showcase unforgettable moments across Manhattan, The Hamptons and exclusive hotel residences — including seasonal boutique festivals during Art Basel.
+        </p>
       </section>
     </Layout>
   );
