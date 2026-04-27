@@ -158,7 +158,7 @@ const Index = () => {
       {/* About */}
       <FadeIn>
         <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-20 text-center">
-          <div className="text-center text-lg md:text-xl lg:text-2xl font-semibold text-foreground leading-relaxed w-full whitespace-pre-line">
+          <div className="font-abel text-center text-lg md:text-xl lg:text-2xl font-normal text-foreground leading-relaxed w-full whitespace-pre-line tracking-wide">
             ARTS & ENTERTAINMENT
             {"\n\n\n"}
             We are a creative marketing agency focused on the arts and entertainment sectors within the luxury hospitality industry. Our team specializes in upscale boutique hotels, high-end lounges and premium brands.
