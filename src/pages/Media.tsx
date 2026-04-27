@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { useMemo, useState } from "react";
 import { Play } from "lucide-react";
+import mediaTitle from "@/assets/media-title.png";
 
 import collage1 from "@/assets/media-collage/1.jpg";
 import collage2 from "@/assets/media-collage/2.jpg";
@@ -80,8 +81,12 @@ const Media = () => {
     <Layout>
       {/* Hero */}
       <section className="min-h-[20vh] flex flex-col items-center justify-center px-6 text-center pt-12">
-        <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground">
-          Media
+        <h1>
+          <img
+            src={mediaTitle}
+            alt="Media"
+            className="w-auto h-[110px] md:h-[160px] lg:h-[190px] mx-auto"
+          />
         </h1>
         <p className="font-abel mt-6 text-lg md:text-2xl tracking-wide text-foreground">
           Relive the night, the energy never ends.
