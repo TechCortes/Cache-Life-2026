@@ -68,6 +68,10 @@
   .font-serif {
     font-family: 'Cormorant Garamond', serif;
   }
+
+  .font-abel {
+    font-family: 'Abel', sans-serif;
+  }
 }
 
 @layer utilities {
