@@ -74,6 +74,22 @@ const Footer = () => {
           >
             <Music size={18} />
           </a>
+          <a
+            href="https://bitbasel.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="opacity-70 hover:opacity-100 transition-opacity"
+            aria-label="BitBasel"
+          >
+            <img
+              src={bitbaselLogo}
+              alt="BitBasel"
+              width={96}
+              height={19}
+              loading="lazy"
+              className="h-4 w-auto"
+            />
+          </a>
         </div>
       </div>
     </footer>
