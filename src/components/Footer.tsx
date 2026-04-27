@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="relative z-10 border-t border-border/30 mt-20">
       {/* Get on the List + Follow Us */}
       <div className="py-16 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start justify-items-center">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center justify-items-center">
           {/* Signup Form */}
           <div className="w-full flex justify-center">
             <SignupForm />
