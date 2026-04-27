@@ -218,7 +218,7 @@ const Index = () => {
                   src={p.logo}
                   alt={`${p.name} logo`}
                   loading="lazy"
-                  className="max-h-28 md:max-h-32 lg:max-h-36 max-w-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="max-h-32 md:max-h-40 lg:max-h-44 max-w-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             ))}
