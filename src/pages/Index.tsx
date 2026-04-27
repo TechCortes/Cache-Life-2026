@@ -219,9 +219,9 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((s, i) => (
             <FadeIn key={i}>
-              <div className="border border-border/40 rounded-sm p-8 hover:border-primary/40 transition-colors bg-card/30 backdrop-blur-sm">
-                <h3 className="text-2xl md:text-3xl font-serif font-semibold text-foreground mb-4">{s.title}</h3>
-                <p className="text-lg md:text-xl font-normal text-foreground leading-relaxed">{s.desc}</p>
+              <div className="p-8">
+                <h3 className="font-abel text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-wide">{s.title}</h3>
+                <p className="font-abel text-lg md:text-xl font-normal text-foreground leading-relaxed tracking-wide">{s.desc}</p>
               </div>
             </FadeIn>
           ))}
