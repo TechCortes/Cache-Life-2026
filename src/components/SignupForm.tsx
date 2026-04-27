@@ -93,7 +93,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-6 pb-12">
+    <div className="w-full max-w-md mx-auto">
       <p className="text-center text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
         Get on the List
       </p>
