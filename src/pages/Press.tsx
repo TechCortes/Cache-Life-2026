@@ -173,8 +173,12 @@ const Press = () => (
     {/* Hero */}
     <section className="min-h-[40vh] flex flex-col items-center justify-center px-6 text-center pt-8 pb-16">
       <DiscoBall />
-      <h1 className="font-script font-light text-6xl md:text-8xl lg:text-9xl text-foreground leading-none">
-        Press
+      <h1>
+        <img
+          src={pressTitle}
+          alt="Press"
+          className="w-auto h-[110px] md:h-[170px] lg:h-[210px] mx-auto"
+        />
       </h1>
     </section>
 
