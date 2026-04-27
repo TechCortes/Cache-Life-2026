@@ -206,21 +206,21 @@ const Index = () => {
 
       {/* Partnerships */}
       <FadeIn>
-        <section className="max-w-6xl mx-auto px-6 py-20">
+        <section className="max-w-[1600px] mx-auto px-4 md:px-8 py-20">
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-4 text-center">
             Trusted By
           </p>
           <h2 className="text-3xl md:text-4xl font-serif font-light text-foreground text-center mb-16">
             Partnerships
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-10 gap-y-12 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-12 gap-y-16 items-center">
             {partners.map((p, i) => (
               <div key={i} className="flex items-center justify-center aspect-[3/2] p-2">
                 <img
                   src={p.logo}
                   alt={`${p.name} logo`}
                   loading="lazy"
-                  className="max-h-32 md:max-h-40 lg:max-h-44 max-w-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className="max-h-48 md:max-h-56 lg:max-h-64 max-w-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             ))}
