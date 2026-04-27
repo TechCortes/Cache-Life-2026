@@ -63,7 +63,7 @@ const Media = () => {
         <h1 className="font-script text-6xl md:text-8xl lg:text-9xl text-foreground">
           Media
         </h1>
-        <p className="font-abel mt-6 text-lg md:text-2xl tracking-wide text-muted-foreground">
+        <p className="font-abel mt-6 text-lg md:text-2xl tracking-wide text-foreground">
           Relive the night, the energy never ends.
         </p>
       </section>
