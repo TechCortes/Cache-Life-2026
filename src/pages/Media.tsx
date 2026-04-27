@@ -143,6 +143,16 @@ const Media = () => {
         <p className="font-abel mt-10 text-lg md:text-2xl tracking-wide text-foreground text-center max-w-4xl mx-auto leading-relaxed">
           Our photo recaps showcase unforgettable moments across Manhattan, The Hamptons and exclusive hotel residences — including seasonal boutique festivals during Art Basel.
         </p>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="https://cachelife.pixieset.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block border border-foreground/70 text-foreground text-xs tracking-[0.3em] uppercase px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+          >
+            View Photo Gallery
+          </a>
+        </div>
       </section>
     </Layout>
   );
