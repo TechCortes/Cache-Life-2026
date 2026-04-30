@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import discoBallImg from "@/assets/disco-ball.gif";
 import eventsCollage from "@/assets/events-collage.png";
 import whatWeDoTitle from "@/assets/what-we-do.png";
+import cacheHomeVideo from "@/assets/cache-home.mp4";
 
 import logo1Hotel from "@/assets/partners/1hotel.png";
 import logo50Bowery from "@/assets/partners/50bowery.png";
@@ -144,11 +145,12 @@ const Index = () => {
         <section className="max-w-[1600px] mx-auto px-2 md:px-4 py-4">
           <div className="aspect-video rounded-sm overflow-hidden border border-border/30">
             <video
-              src="https://cachelifeny.com/wp-content/uploads/2023/01/cache_homevid.mov"
+              src={cacheHomeVideo}
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
               controlsList="nodownload"
               className="w-full h-full object-cover"
             />
