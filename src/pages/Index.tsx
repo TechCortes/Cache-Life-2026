@@ -185,7 +185,7 @@ const Index = () => {
             Trusted By
           </p>
           <h2 className="text-3xl md:text-4xl font-serif font-light text-foreground text-center mb-16">
-            Partnerships
+            Selected Collaborations
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-12 gap-y-16 items-center">
             {partners.slice(0, -2).map((p, i) => (
