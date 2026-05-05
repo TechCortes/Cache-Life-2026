@@ -31,6 +31,7 @@ import logoTierra from "@/assets/partners/tierra.png";
 import logoEsme from "@/assets/partners/esme.png";
 import logoWilliamVale from "@/assets/partners/wvale.png";
 import logoMondrian from "@/assets/partners/mondrian.png";
+import logoEdition from "@/assets/partners/edition.png";
 
 const partners = [
   { name: "Soho House", logo: logoSohoHouse },
@@ -43,6 +44,7 @@ const partners = [
   { name: "Ludlow House", logo: logoLudlow },
   { name: "Soho Beach House", logo: logoSohoBeach },
   { name: "Selina", logo: logoSelina },
+  { name: "Edition Hotel", logo: logoEdition },
   { name: "Mondrian", logo: logoMondrian },
   { name: "Esmé Miami Beach", logo: logoEsme },
   { name: "50 Bowery", logo: logo50Bowery },
