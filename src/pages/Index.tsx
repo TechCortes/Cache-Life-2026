@@ -190,7 +190,7 @@ const Index = () => {
             Selected Collaborations
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-12 gap-y-16 items-center">
-            {partners.slice(0, -2).map((p, i) => (
+            {partners.slice(0, -3).map((p, i) => (
               <div key={i} className="flex items-center justify-center aspect-[3/2] p-2">
                 <img
                   src={p.logo}
@@ -202,7 +202,7 @@ const Index = () => {
             ))}
           </div>
           <div className="flex flex-wrap justify-center gap-x-12 gap-y-16 mt-16 items-center">
-            {partners.slice(-2).map((p, i) => (
+            {partners.slice(-3).map((p, i) => (
               <div key={i} className="flex items-center justify-center aspect-[3/2] p-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5">
                 <img
                   src={p.logo}
