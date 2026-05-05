@@ -25,6 +25,12 @@ import logoTao from "@/assets/partners/tao.png";
 import logoTheNed from "@/assets/partners/thened.png";
 import logoWava from "@/assets/partners/wava.png";
 import logoBitBasel from "@/assets/partners/bitbasel.png";
+import logoAspen from "@/assets/partners/aspen.png";
+import logoPublic from "@/assets/partners/public.png";
+import logoTierra from "@/assets/partners/tierra.png";
+import logoEsme from "@/assets/partners/esme.png";
+import logoWilliamVale from "@/assets/partners/wvale.png";
+import logoMondrian from "@/assets/partners/mondrian.png";
 
 const partners = [
   { name: "1 Hotel Brooklyn Bridge", logo: logo1Hotel },
@@ -47,6 +53,12 @@ const partners = [
   { name: "The Ned", logo: logoTheNed },
   { name: "WAVA Water", logo: logoWava },
   { name: "BitBasel", logo: logoBitBasel },
+  { name: "Aspen Vodka", logo: logoAspen },
+  { name: "PUBLIC Hotel", logo: logoPublic },
+  { name: "Tierra de Ensueño", logo: logoTierra },
+  { name: "Esmé Miami Beach", logo: logoEsme },
+  { name: "The William Vale", logo: logoWilliamVale },
+  { name: "Mondrian", logo: logoMondrian },
 ];
 
 const services = [
