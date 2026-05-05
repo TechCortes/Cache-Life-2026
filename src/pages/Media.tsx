@@ -107,20 +107,22 @@ const Media = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px]">
-            {/* Player */}
-            <div className="bg-black relative aspect-video lg:aspect-auto lg:min-h-[560px]">
-              <iframe
-                key={active.vimeoId}
-                src={`https://player.vimeo.com/video/${active.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
-                title={active.title}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
+            {/* Player — reel/portrait format on all devices */}
+            <div className="bg-black flex items-center justify-center py-4 lg:py-6">
+              <div className="relative w-full max-w-[360px] md:max-w-[400px] lg:max-w-[440px] aspect-[9/16] mx-auto">
+                <iframe
+                  key={active.vimeoId}
+                  src={`https://player.vimeo.com/video/${active.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
+                  title={active.title}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
             </div>
 
             {/* Playlist sidebar */}
-            <aside className="border-t lg:border-t-0 lg:border-l border-border/30 max-h-[560px] overflow-y-auto">
+            <aside className="border-t lg:border-t-0 lg:border-l border-border/30 max-h-[480px] lg:max-h-[720px] overflow-y-auto">
               <ul role="tablist">
                 {videos.map((v) => {
                   const isActive = v.id === active.id;
