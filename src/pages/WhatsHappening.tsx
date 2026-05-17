@@ -91,6 +91,7 @@ const WhatsHappening = () => {
         {eventJsonLd.length > 0 && (
           <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
         )}
+        <script type="application/ld+json">{JSON.stringify(afterglowJsonLd)}</script>
       </Helmet>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
@@ -103,13 +104,13 @@ const WhatsHappening = () => {
               className="w-auto h-[80px] md:h-[120px] lg:h-[150px] mx-auto"
             />
           </h1>
-          {!loading && events.length > 0 && (
-            <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              Scroll to explore
-            </p>
-          )}
+          <p className="mt-6 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+            Scroll to explore
+          </p>
         </section>
 
+        {/* Featured recurring Wednesday gathering */}
+        <AfterglowRSVP />
         {loading ? (
           <section className="lg:snap-start min-h-[60vh] lg:min-h-screen flex items-center justify-center">
             <p className="text-center text-muted-foreground">Loading events...</p>
