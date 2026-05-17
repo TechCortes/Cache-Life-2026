@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { z } from "zod";
+import { PRIVACY_POLICY_VERSION } from "@/lib/consent";
 
 const rsvpSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
