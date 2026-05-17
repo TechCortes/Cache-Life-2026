@@ -92,6 +92,7 @@ const Admin = () => {
   const [signups, setSignups] = useState<Signup[]>([]);
   const [events, setEvents] = useState<PoshEvent[]>([]);
   const [search, setSearch] = useState("");
+  const [sourceFilter, setSourceFilter] = useState<"all" | "afterglow" | "general">("all");
   const [loading, setLoading] = useState(false);
   const [eventsLoading, setEventsLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
