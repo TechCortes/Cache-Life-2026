@@ -100,6 +100,8 @@ const SignupForm = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <Input
           type="text"
+          name="name"
+          aria-label="Your name"
           placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -109,6 +111,8 @@ const SignupForm = () => {
         />
         <Input
           type="email"
+          name="email"
+          aria-label="Your email address"
           placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -118,6 +122,8 @@ const SignupForm = () => {
         />
         <Input
           type="tel"
+          name="phone"
+          aria-label="Your phone number"
           placeholder="Your phone number"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
@@ -127,7 +133,7 @@ const SignupForm = () => {
         />
         {events.length > 0 && (
           <Select value={selectedEventId} onValueChange={setSelectedEventId}>
-            <SelectTrigger className="bg-secondary/50 border-border/50 text-foreground">
+            <SelectTrigger aria-label="Select an event" className="bg-secondary/50 border-border/50 text-foreground">
               <SelectValue placeholder="Select an event (optional)" />
             </SelectTrigger>
             <SelectContent>

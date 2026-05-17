@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
@@ -46,8 +47,33 @@ const WhatsHappening = () => {
     fetchEvents();
   }, []);
 
+  const eventJsonLd = events
+    .filter((e) => e.event_date)
+    .map((e) => ({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: e.title,
+      startDate: e.event_date,
+      url: e.posh_url,
+      ...(e.location ? { location: { "@type": "Place", name: e.location } } : {}),
+      ...(e.image_url ? { image: e.image_url } : {}),
+    }));
+
   return (
     <Layout>
+      <Helmet>
+        <title>What's Happening — Caché Life Upcoming Events</title>
+        <meta name="description" content="Upcoming Caché Life events, residencies, and cultural experiences across NYC, Miami, and the Hamptons." />
+        <link rel="canonical" href="https://cachelifeny.com/whats-happening" />
+        <meta property="og:title" content="What's Happening — Caché Life Upcoming Events" />
+        <meta property="og:description" content="Upcoming Caché Life events, residencies, and cultural experiences across NYC, Miami, and the Hamptons." />
+        <meta property="og:url" content="https://cachelifeny.com/whats-happening" />
+        <meta property="og:image" content="https://cachelifeny.com/og-image.png" />
+        <meta property="og:type" content="website" />
+        {eventJsonLd.length > 0 && (
+          <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
+        )}
+      </Helmet>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
         <section className="lg:snap-start min-h-0 lg:min-h-0 flex-col px-6 pt-6 pb-0 lg:pt-8 lg:pb-0 flex items-center justify-center">
@@ -55,7 +81,7 @@ const WhatsHappening = () => {
           <h1>
             <img
               src={whatsHappeningTitle}
-              alt="What's Happening"
+              alt="Caché Life Upcoming Events"
               className="w-auto h-[80px] md:h-[120px] lg:h-[150px] mx-auto"
             />
           </h1>
