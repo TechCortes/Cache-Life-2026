@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import whatsHappeningTitle from "@/assets/whats-happening-title.png";
-import AfterglowRSVP, { getNextWednesday } from "@/components/AfterglowRSVP";
+
 
 interface PoshEvent {
   id: string;
@@ -60,23 +60,6 @@ const WhatsHappening = () => {
       ...(e.image_url ? { image: e.image_url } : {}),
     }));
 
-  const afterglowJsonLd = (() => {
-    const next = getNextWednesday();
-    return {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: "Afterglow at Nubeluz",
-      startDate: next.toISOString(),
-      eventSchedule: {
-        "@type": "Schedule",
-        repeatFrequency: "P1W",
-        byDay: "https://schema.org/Wednesday",
-      },
-      location: { "@type": "Place", name: "Nubeluz" },
-      url: "https://cachelifeny.com/whats-happening",
-    };
-  })();
-
   return (
     <Layout>
       <Helmet>
@@ -91,7 +74,6 @@ const WhatsHappening = () => {
         {eventJsonLd.length > 0 && (
           <script type="application/ld+json">{JSON.stringify(eventJsonLd)}</script>
         )}
-        <script type="application/ld+json">{JSON.stringify(afterglowJsonLd)}</script>
       </Helmet>
       <div className="lg:h-screen lg:overflow-y-auto snap-none lg:snap-y lg:snap-mandatory scroll-smooth">
         {/* Compact hero */}
@@ -109,8 +91,6 @@ const WhatsHappening = () => {
           </p>
         </section>
 
-        {/* Featured recurring Wednesday gathering */}
-        <AfterglowRSVP />
         {loading ? (
           <section className="lg:snap-start min-h-[60vh] lg:min-h-screen flex items-center justify-center">
             <p className="text-center text-muted-foreground">Loading events...</p>
