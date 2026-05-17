@@ -94,35 +94,35 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
 );
 
 const ComingUp = ({ nextDate }: { nextDate: Date }) => (
-  <section className="px-6 md:px-12 py-24 md:py-32">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32">
     <div className="max-w-5xl mx-auto">
       <SectionEyebrow>Coming Up</SectionEyebrow>
-      <h2 className="font-serif text-foreground text-4xl md:text-6xl leading-[1.05]">
+      <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-6xl leading-[1.05]">
         {fmtDate(nextDate)}
       </h2>
 
-      <div className="mt-12 grid md:grid-cols-3 gap-10 md:gap-14 text-foreground">
+      <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 md:gap-14 text-foreground">
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Music
           </p>
-          <p className="font-serif text-2xl md:text-3xl">DJ Amanduh</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">DJ Amanduh</p>
         </div>
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Live Trumpet
           </p>
-          <p className="font-serif text-2xl md:text-3xl">Dave Levy</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">Dave Levy</p>
         </div>
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Percussion
           </p>
-          <p className="font-serif text-2xl md:text-3xl">Jimmy Lopez</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">Jimmy Lopez</p>
         </div>
       </div>
 
-      <p className="mt-14 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-12 sm:mt-14 max-w-2xl text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         An elevated evening of DJ-led music and live instrumentation —
         designed for dinner, cocktails, and a sophisticated midweek
         nightlife atmosphere.
