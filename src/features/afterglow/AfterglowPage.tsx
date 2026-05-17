@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import StarryBackground from "@/components/StarryBackground";
-import AfterglowRSVP from "@/components/AfterglowRSVP";
+import AfterglowContent from "./AfterglowContent";
 import { Button } from "@/components/ui/button";
 
 const AfterglowPage = ({ onSignOut }: { onSignOut: () => void }) => {
@@ -10,7 +10,7 @@ const AfterglowPage = ({ onSignOut }: { onSignOut: () => void }) => {
     meta.content = "noindex,nofollow";
     document.head.appendChild(meta);
     const prevTitle = document.title;
-    document.title = "Afterglow";
+    document.title = "Afterglow at Nubeluz · Private";
     return () => {
       document.head.removeChild(meta);
       document.title = prevTitle;
@@ -21,7 +21,7 @@ const AfterglowPage = ({ onSignOut }: { onSignOut: () => void }) => {
     <div className="min-h-screen bg-background relative">
       <StarryBackground />
       <main className="relative z-10">
-        <AfterglowRSVP />
+        <AfterglowContent />
       </main>
       <div className="fixed bottom-4 right-4 z-20">
         <Button
@@ -38,3 +38,4 @@ const AfterglowPage = ({ onSignOut }: { onSignOut: () => void }) => {
 };
 
 export default AfterglowPage;
+
