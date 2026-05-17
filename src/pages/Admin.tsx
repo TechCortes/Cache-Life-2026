@@ -56,6 +56,8 @@ interface Signup {
   created_at: string;
   posh_event_id: string | null;
   posh_url: string | null;
+  rsvp_for_date: string | null;
+  source: string | null;
 }
 
 interface PoshEvent {
