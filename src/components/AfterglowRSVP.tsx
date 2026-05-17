@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { z } from "zod";
 import { PRIVACY_POLICY_VERSION } from "@/lib/consent";
+import afterglowImage from "@/assets/afterglow-wednesday.jpg";
 
 const rsvpSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -98,8 +99,18 @@ const AfterglowRSVP = () => {
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Left — editorial type lockup */}
         <div className="flex flex-col items-start">
+          <div className="w-full mb-8 overflow-hidden rounded-sm border border-border/40">
+            <img
+              src={afterglowImage}
+              alt="Women enjoying a sunny summer afternoon on a Manhattan rooftop"
+              width={1080}
+              height={1920}
+              loading="lazy"
+              className="w-full h-[42vh] md:h-[48vh] object-cover grayscale-0"
+            />
+          </div>
           <span className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-6 border border-border/60 px-3 py-1 rounded-sm">
-            Weekly · Every Wednesday
+            Weekly · Every Wednesday · Ladies Afternoon
           </span>
           <h2 className="font-serif text-foreground leading-[0.95] text-6xl md:text-7xl lg:text-8xl">
             Afterglow
