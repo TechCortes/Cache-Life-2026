@@ -46,30 +46,30 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
     />
     <div
       aria-hidden
-      className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background"
+      className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background"
     />
-    <div className="relative z-10 w-full px-6 md:px-12 pb-16 md:pb-24">
+    <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 pb-14 sm:pb-20 md:pb-24 pt-28">
       <div className="max-w-5xl mx-auto">
-        <span className="text-[10px] tracking-[0.5em] uppercase text-foreground/80 mb-6 block">
+        <span className="block text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.5em] uppercase text-foreground/80 mb-5 sm:mb-6">
           A weekly evening at Nubeluz
         </span>
-        <h1 className="font-serif leading-[0.9] text-foreground text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem]">
+        <h1 className="font-serif leading-[0.88] text-foreground text-[3.25rem] xs:text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] break-words">
           Afterglow
         </h1>
-        <p className="font-serif italic text-foreground/85 text-2xl md:text-4xl mt-3">
+        <p className="font-serif italic text-foreground/85 text-xl sm:text-2xl md:text-4xl mt-3">
           at Nubeluz
         </p>
-        <p className="mt-8 text-xs md:text-sm tracking-[0.35em] uppercase text-foreground/80">
+        <p className="mt-7 sm:mt-8 text-[11px] sm:text-sm tracking-[0.3em] sm:tracking-[0.35em] uppercase text-foreground/80">
           Wednesdays · 7PM – 11PM
         </p>
-        <p className="mt-2 text-xs md:text-sm tracking-[0.25em] uppercase text-muted-foreground">
+        <p className="mt-2 text-[10px] sm:text-sm tracking-[0.22em] sm:tracking-[0.25em] uppercase text-muted-foreground">
           The Ritz-Carlton New York, NoMad
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <div className="mt-9 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
           <Button
             asChild
-            className="tracking-[0.3em] text-[11px] uppercase h-12 px-7 rounded-none"
+            className="tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-6 sm:px-7 rounded-none w-full sm:w-auto"
           >
             <a href={OPENTABLE_URL} target="_blank" rel="noopener noreferrer">
               Reserve on OpenTable
@@ -79,13 +79,13 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
           <Button
             asChild
             variant="outline"
-            className="tracking-[0.3em] text-[11px] uppercase h-12 px-7 rounded-none bg-transparent border-foreground/50 hover:bg-foreground hover:text-background"
+            className="tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-6 sm:px-7 rounded-none bg-transparent border-foreground/50 hover:bg-foreground hover:text-background w-full sm:w-auto"
           >
-            <a href="#guest-list">Request Standing Guest List</a>
+            <a href="#guest-list">Request Guest List</a>
           </Button>
         </div>
 
-        <p className="mt-10 text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+        <p className="mt-10 text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
           Next · {fmtDate(nextDate)}
         </p>
       </div>
