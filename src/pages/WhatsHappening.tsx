@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import whatsHappeningTitle from "@/assets/whats-happening-title.png";
+import AfterglowRSVP, { getNextWednesday } from "@/components/AfterglowRSVP";
 
 interface PoshEvent {
   id: string;
