@@ -306,6 +306,7 @@ const AfterglowContent = () => {
       <Reservations />
       <GuestList rsvpDate={nextDate} dateLabel={dateLabel} />
       <About />
+      <Venue />
       <footer className="px-6 md:px-12 py-10 border-t border-border/30 text-center">
         <p className="text-[10px] tracking-[0.5em] uppercase text-muted-foreground">
           Afterglow · Nubeluz · Private
