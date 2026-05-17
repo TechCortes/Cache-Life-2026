@@ -1,4 +1,5 @@
 import { Instagram, Music } from "lucide-react";
+import { Link } from "react-router-dom";
 import SignupForm from "@/components/SignupForm";
 import instagramGrid from "@/assets/instagram-grid.jpg";
 
@@ -60,6 +61,12 @@ const Footer = () => {
           © {new Date().getFullYear()} Caché Life NY. All rights reserved.
         </p>
         <div className="flex items-center gap-5">
+          <Link
+            to="/privacy"
+            className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Privacy
+          </Link>
           <a
             href="https://www.instagram.com/cachelife/"
             target="_blank"
