@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { useMemo, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Play } from "lucide-react";
 import mediaTitle from "@/assets/media-title.png";
 
@@ -79,12 +80,22 @@ const Media = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Media — Caché Life Event Recaps & Films</title>
+        <meta name="description" content="Watch Caché Life event recaps, signature films, and visual stories from residencies, NYFW activations, and cultural takeovers." />
+        <link rel="canonical" href="https://cachelifeny.com/media" />
+        <meta property="og:title" content="Caché Life Media — Event Recaps & Films" />
+        <meta property="og:description" content="Watch Caché Life event recaps, signature films, and visual stories from residencies, NYFW activations, and cultural takeovers." />
+        <meta property="og:url" content="https://cachelifeny.com/media" />
+        <meta property="og:image" content="https://cachelifeny.com/og-image.png" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero */}
       <section className="min-h-[20vh] flex flex-col items-center justify-center px-6 text-center pt-12">
         <h1>
           <img
             src={mediaTitle}
-            alt="Media"
+            alt="Caché Life Media — Event Recaps"
             className="w-auto h-[110px] md:h-[160px] lg:h-[190px] mx-auto"
           />
         </h1>

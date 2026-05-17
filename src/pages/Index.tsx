@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import discoBallImg from "@/assets/disco-ball.gif";
 import eventsCollage from "@/assets/events-collage.png";
 import whatWeDoTitle from "@/assets/what-we-do.png";
@@ -138,13 +139,26 @@ const DiscoBall = () => (
 const Index = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>CACHÉ LIFE — Creative Agency for Culture & Entertainment</title>
+        <meta name="description" content="CACHÉ LIFE is a creative marketing agency specializing in arts and entertainment for luxury hospitality, boutique hotels, and premium brands in NYC." />
+        <link rel="canonical" href="https://cachelifeny.com/" />
+        <meta property="og:title" content="CACHÉ LIFE — Creative Agency for Culture & Entertainment" />
+        <meta property="og:description" content="CACHÉ LIFE is a creative marketing agency specializing in arts and entertainment for luxury hospitality, boutique hotels, and premium brands in NYC." />
+        <meta property="og:url" content="https://cachelifeny.com/" />
+        <meta property="og:image" content="https://cachelifeny.com/og-image.png" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero */}
       <section className="min-h-[25vh] flex flex-col items-center justify-center px-6 text-center">
         <DiscoBall />
         <h1 className="mb-4">
           <img
             src={whatWeDoTitle}
-            alt="What We Do"
+            alt="Caché Life — Arts & Entertainment Creative Marketing Agency"
+            width={696}
+            height={174}
+            fetchPriority="high"
             className="w-auto h-[100px] md:h-[150px] lg:h-[174px] mx-auto"
           />
         </h1>

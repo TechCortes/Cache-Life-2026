@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import discoBallImg from "@/assets/disco-ball.gif";
 import pressTitle from "@/assets/press-title.png";
 
@@ -99,7 +100,7 @@ const features: FeatureItem[] = [
     href: "https://www.forbes.com/sites/lisakocay/2023/05/11/inside-cach-life-a-luxurious-brand-and-event-series-taking-over-boutique-new-york-city-hotels/?sh=696b22219b8f",
     bg: forbesBg,
     logo: forbesLogo,
-    logoAlt: "Forbes",
+    logoAlt: "Forbes magazine logo",
   },
   {
     title: "Caché in Brooklyn Magazine",
@@ -170,13 +171,23 @@ const FeatureBanner = ({ item }: { item: FeatureItem }) => (
 
 const Press = () => (
   <Layout>
+    <Helmet>
+      <title>Press — CACHÉ LIFE</title>
+      <meta name="description" content="Press coverage and media features highlighting Caché Life's creative residencies, events, and partnerships across NYC and beyond." />
+      <link rel="canonical" href="https://cachelifeny.com/press" />
+      <meta property="og:title" content="Press Highlights — CACHÉ LIFE" />
+      <meta property="og:description" content="Press coverage and media features highlighting Caché Life's creative residencies, events, and partnerships across NYC and beyond." />
+      <meta property="og:url" content="https://cachelifeny.com/press" />
+      <meta property="og:image" content="https://cachelifeny.com/og-image.png" />
+      <meta property="og:type" content="website" />
+    </Helmet>
     {/* Hero */}
     <section className="min-h-[40vh] flex flex-col items-center justify-center px-6 text-center pt-8 pb-16">
       <DiscoBall />
       <h1>
         <img
           src={pressTitle}
-          alt="Press"
+          alt="Caché Life Press & Media Coverage"
           className="w-auto h-[110px] md:h-[170px] lg:h-[210px] mx-auto"
         />
       </h1>
