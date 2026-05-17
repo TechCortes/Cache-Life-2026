@@ -1,8 +1,14 @@
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /afterglow
+Disallow: /Afterglow
 
 User-agent: Bingbot
 Allow: /
+Disallow: /admin
+Disallow: /afterglow
+Disallow: /Afterglow
 
 User-agent: Twitterbot
 Allow: /
@@ -13,5 +19,7 @@ Allow: /
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /afterglow
+Disallow: /Afterglow
 
 Sitemap: https://cachelifeny.com/sitemap.xml

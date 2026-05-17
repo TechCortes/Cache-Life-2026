@@ -9,6 +9,7 @@ import WhatsHappening from "./pages/WhatsHappening.tsx";
 import Press from "./pages/Press.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import Admin from "./pages/Admin.tsx";
+import Afterglow from "./pages/Afterglow.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,8 @@ const App = () => (
           <Route path="/press" element={<Press />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/afterglow" element={<Afterglow />} />
+          <Route path="/Afterglow" element={<Afterglow />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
