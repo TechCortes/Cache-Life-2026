@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { z } from "zod";
+import { PRIVACY_POLICY_VERSION } from "@/lib/consent";
 
 const rsvpSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -47,12 +50,17 @@ const AfterglowRSVP = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = rsvpSchema.safeParse({ name, email, phone });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
+      return;
+    }
+    if (!consent) {
+      toast.error("Please accept the Privacy Policy to continue.");
       return;
     }
 
@@ -63,18 +71,26 @@ const AfterglowRSVP = () => {
       phone: parsed.data.phone,
       rsvp_for_date: nextWed.toISOString(),
       source: "afterglow",
+      consent_version: PRIVACY_POLICY_VERSION,
+      consent_at: new Date().toISOString(),
     });
     setLoading(false);
 
-    if (error) {
+    const isDuplicate = error?.code === "23505";
+    if (error && !isDuplicate) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
 
-    toast.success(`You're on the list for ${formatDateLine(nextWed)}.`);
+    toast.success(
+      isDuplicate
+        ? `You're already on the list for ${formatDateLine(nextWed)}.`
+        : `You're on the list for ${formatDateLine(nextWed)}.`
+    );
     setName("");
     setEmail("");
     setPhone("");
+    setConsent(false);
   };
 
   return (
@@ -144,9 +160,27 @@ const AfterglowRSVP = () => {
               required
               maxLength={20}
             />
+            <label className="flex items-start gap-2 mt-1 cursor-pointer">
+              <Checkbox
+                checked={consent}
+                onCheckedChange={(v) => setConsent(v === true)}
+                aria-label="Accept Privacy Policy"
+                className="mt-[2px]"
+              />
+              <span className="text-[10px] tracking-wider text-muted-foreground leading-snug">
+                I agree to the{" "}
+                <Link
+                  to="/privacy"
+                  className="text-foreground underline underline-offset-2 hover:opacity-80"
+                >
+                  Privacy Policy
+                </Link>{" "}
+                and to receive event updates.
+              </span>
+            </label>
             <Button
               type="submit"
-              disabled={loading}
+              disabled={loading || !consent}
               className="tracking-[0.25em] text-xs uppercase w-full mt-2"
             >
               {loading ? "Submitting..." : "RSVP"}

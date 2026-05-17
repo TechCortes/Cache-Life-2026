@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Media from "./pages/Media.tsx";
 import WhatsHappening from "./pages/WhatsHappening.tsx";
 import Press from "./pages/Press.tsx";
+import Privacy from "./pages/Privacy.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/media" element={<Media />} />
           <Route path="/whats-happening" element={<WhatsHappening />} />
           <Route path="/press" element={<Press />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

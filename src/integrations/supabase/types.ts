@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       event_signups: {
         Row: {
+          consent_at: string | null
+          consent_version: string | null
           created_at: string
           email: string
           id: string
@@ -27,6 +29,8 @@ export type Database = {
           source: string | null
         }
         Insert: {
+          consent_at?: string | null
+          consent_version?: string | null
           created_at?: string
           email: string
           id?: string
@@ -38,6 +42,8 @@ export type Database = {
           source?: string | null
         }
         Update: {
+          consent_at?: string | null
+          consent_version?: string | null
           created_at?: string
           email?: string
           id?: string
