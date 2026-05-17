@@ -408,7 +408,7 @@ const Admin = () => {
               </div>
             </div>
 
-            <div className="relative mb-6">
+            <div className="relative mb-4">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search by name, email, or phone..."
@@ -416,6 +416,27 @@ const Admin = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
               />
+            </div>
+
+            <div className="flex gap-2 mb-6">
+              {([
+                { id: "all", label: "All" },
+                { id: "afterglow", label: "Afterglow" },
+                { id: "general", label: "General" },
+              ] as const).map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => setSourceFilter(f.id)}
+                  className={`text-[10px] tracking-[0.25em] uppercase px-3 py-1 rounded-sm border transition-colors ${
+                    sourceFilter === f.id
+                      ? "border-foreground text-foreground"
+                      : "border-border/40 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
             </div>
 
             {loading ? (
@@ -432,22 +453,32 @@ const Admin = () => {
                       <TableHead className="text-foreground">Name</TableHead>
                       <TableHead className="text-foreground">Email</TableHead>
                       <TableHead className="text-foreground">Phone</TableHead>
-                      <TableHead className="text-foreground">Event</TableHead>
-                      <TableHead className="text-foreground">Date</TableHead>
+                      <TableHead className="text-foreground">Source</TableHead>
+                      <TableHead className="text-foreground">Event / RSVP For</TableHead>
+                      <TableHead className="text-foreground">Signed Up</TableHead>
                       <TableHead className="text-foreground w-12"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filtered.map((s) => {
                       const ev = events.find((e) => e.id === s.posh_event_id);
+                      const isAfterglow = s.source === "afterglow";
+                      const eventLabel = isAfterglow
+                        ? `Afterglow — ${s.rsvp_for_date ? new Date(s.rsvp_for_date).toLocaleDateString() : "—"}`
+                        : ev?.title ?? (s.posh_url ? "—" : "General");
                       return (
                         <TableRow key={s.id} className="border-border/30">
                           <TableCell className="text-foreground">{s.name}</TableCell>
                           <TableCell className="text-foreground">{s.email}</TableCell>
                           <TableCell className="text-foreground">{s.phone}</TableCell>
                           <TableCell className="text-muted-foreground text-sm">
-                            {ev?.title ?? (s.posh_url ? "—" : "General")}
+                            <span className={`text-[10px] tracking-[0.2em] uppercase border px-2 py-0.5 rounded-sm ${
+                              isAfterglow ? "border-foreground text-foreground" : "border-border/50"
+                            }`}>
+                              {s.source ?? "general"}
+                            </span>
                           </TableCell>
+                          <TableCell className="text-muted-foreground text-sm">{eventLabel}</TableCell>
                           <TableCell className="text-muted-foreground text-sm">
                             {new Date(s.created_at).toLocaleDateString()}
                           </TableCell>
