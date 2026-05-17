@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import afterglowPoster from "@/assets/afterglow-wednesday.jpg";
 import heroVideo from "@/assets/cache-home.mp4";
+import nubeluzVenue from "@/assets/nubeluz-venue.webp";
 import GuestListForm from "./GuestListForm";
 import { getNextWednesday } from "@/components/AfterglowRSVP";
 
