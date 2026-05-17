@@ -23,6 +23,8 @@ export type Database = {
           phone: string
           posh_event_id: string | null
           posh_url: string | null
+          rsvp_for_date: string | null
+          source: string | null
         }
         Insert: {
           created_at?: string
@@ -32,6 +34,8 @@ export type Database = {
           phone: string
           posh_event_id?: string | null
           posh_url?: string | null
+          rsvp_for_date?: string | null
+          source?: string | null
         }
         Update: {
           created_at?: string
@@ -41,6 +45,8 @@ export type Database = {
           phone?: string
           posh_event_id?: string | null
           posh_url?: string | null
+          rsvp_for_date?: string | null
+          source?: string | null
         }
         Relationships: [
           {
