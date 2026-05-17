@@ -50,12 +50,17 @@ const AfterglowRSVP = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = rsvpSchema.safeParse({ name, email, phone });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
+      return;
+    }
+    if (!consent) {
+      toast.error("Please accept the Privacy Policy to continue.");
       return;
     }
 
@@ -66,18 +71,26 @@ const AfterglowRSVP = () => {
       phone: parsed.data.phone,
       rsvp_for_date: nextWed.toISOString(),
       source: "afterglow",
+      consent_version: PRIVACY_POLICY_VERSION,
+      consent_at: new Date().toISOString(),
     });
     setLoading(false);
 
-    if (error) {
+    const isDuplicate = error?.code === "23505";
+    if (error && !isDuplicate) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
 
-    toast.success(`You're on the list for ${formatDateLine(nextWed)}.`);
+    toast.success(
+      isDuplicate
+        ? `You're already on the list for ${formatDateLine(nextWed)}.`
+        : `You're on the list for ${formatDateLine(nextWed)}.`
+    );
     setName("");
     setEmail("");
     setPhone("");
+    setConsent(false);
   };
 
   return (
