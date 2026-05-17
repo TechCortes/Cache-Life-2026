@@ -196,14 +196,16 @@ const Admin = () => {
   };
 
   const handleExport = () => {
-    const headers = ["Name", "Email", "Phone", "Event", "Posh URL", "Signed Up"];
+    const headers = ["Name", "Email", "Phone", "Source", "Event", "RSVP For", "Posh URL", "Signed Up"];
     const rows = filtered.map((s) => {
       const ev = events.find((e) => e.id === s.posh_event_id);
       return [
         s.name,
         s.email,
         s.phone,
+        s.source ?? "general",
         ev?.title ?? "",
+        s.rsvp_for_date ? new Date(s.rsvp_for_date).toLocaleDateString() : "",
         s.posh_url ?? "",
         new Date(s.created_at).toLocaleDateString(),
       ];
