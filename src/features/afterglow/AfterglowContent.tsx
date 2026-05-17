@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import afterglowPoster from "@/assets/afterglow-wednesday.jpg";
 import heroVideo from "@/assets/cache-home.mp4";
+import nubeluzVenue from "@/assets/nubeluz-venue.webp";
 import GuestListForm from "./GuestListForm";
 import { getNextWednesday } from "@/components/AfterglowRSVP";
 
@@ -257,6 +258,43 @@ const About = () => (
   </section>
 );
 
+const Venue = () => (
+  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-14 md:mb-20">
+        <SectionEyebrow>The Venue</SectionEyebrow>
+        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+          Nubeluz, <em className="italic">above the city</em>.
+        </h2>
+      </div>
+      <figure className="relative group">
+        <div
+          aria-hidden
+          className="absolute -inset-px bg-gradient-to-b from-foreground/10 via-transparent to-foreground/10 pointer-events-none"
+        />
+        <div className="overflow-hidden">
+          <img
+            src={nubeluzVenue}
+            alt="Nubeluz lounge at The Ritz-Carlton New York, NoMad — golden pendant lights, velvet seating, and skyline views"
+            width={1920}
+            height={1280}
+            loading="lazy"
+            className="w-full h-[60vh] md:h-[80vh] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.02]"
+          />
+        </div>
+        <figcaption className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+          <p className="font-serif italic text-foreground/85 text-lg md:text-xl">
+            Nubeluz by José Andrés
+          </p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+            The Ritz-Carlton New York, NoMad · 50th Floor
+          </p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+);
+
 const AfterglowContent = () => {
   const nextDate = useMemo(() => getNextWednesday(), []);
   const dateLabel = fmtDate(nextDate);
@@ -268,6 +306,7 @@ const AfterglowContent = () => {
       <Reservations />
       <GuestList rsvpDate={nextDate} dateLabel={dateLabel} />
       <About />
+      <Venue />
       <footer className="px-6 md:px-12 py-10 border-t border-border/30 text-center">
         <p className="text-[10px] tracking-[0.5em] uppercase text-muted-foreground">
           Afterglow · Nubeluz · Private
