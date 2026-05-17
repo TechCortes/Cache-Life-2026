@@ -46,30 +46,30 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
     />
     <div
       aria-hidden
-      className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background"
+      className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background"
     />
-    <div className="relative z-10 w-full px-6 md:px-12 pb-16 md:pb-24">
+    <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 pb-14 sm:pb-20 md:pb-24 pt-28">
       <div className="max-w-5xl mx-auto">
-        <span className="text-[10px] tracking-[0.5em] uppercase text-foreground/80 mb-6 block">
+        <span className="block text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.5em] uppercase text-foreground/80 mb-5 sm:mb-6">
           A weekly evening at Nubeluz
         </span>
-        <h1 className="font-serif leading-[0.9] text-foreground text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem]">
+        <h1 className="font-serif leading-[0.88] text-foreground text-[3.25rem] xs:text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] break-words">
           Afterglow
         </h1>
-        <p className="font-serif italic text-foreground/85 text-2xl md:text-4xl mt-3">
+        <p className="font-serif italic text-foreground/85 text-xl sm:text-2xl md:text-4xl mt-3">
           at Nubeluz
         </p>
-        <p className="mt-8 text-xs md:text-sm tracking-[0.35em] uppercase text-foreground/80">
+        <p className="mt-7 sm:mt-8 text-[11px] sm:text-sm tracking-[0.3em] sm:tracking-[0.35em] uppercase text-foreground/80">
           Wednesdays · 7PM – 11PM
         </p>
-        <p className="mt-2 text-xs md:text-sm tracking-[0.25em] uppercase text-muted-foreground">
+        <p className="mt-2 text-[10px] sm:text-sm tracking-[0.22em] sm:tracking-[0.25em] uppercase text-muted-foreground">
           The Ritz-Carlton New York, NoMad
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <div className="mt-9 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
           <Button
             asChild
-            className="tracking-[0.3em] text-[11px] uppercase h-12 px-7 rounded-none"
+            className="tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-6 sm:px-7 rounded-none w-full sm:w-auto"
           >
             <a href={OPENTABLE_URL} target="_blank" rel="noopener noreferrer">
               Reserve on OpenTable
@@ -79,13 +79,13 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
           <Button
             asChild
             variant="outline"
-            className="tracking-[0.3em] text-[11px] uppercase h-12 px-7 rounded-none bg-transparent border-foreground/50 hover:bg-foreground hover:text-background"
+            className="tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-6 sm:px-7 rounded-none bg-transparent border-foreground/50 hover:bg-foreground hover:text-background w-full sm:w-auto"
           >
-            <a href="#guest-list">Request Standing Guest List</a>
+            <a href="#guest-list">Request Guest List</a>
           </Button>
         </div>
 
-        <p className="mt-10 text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+        <p className="mt-10 text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
           Next · {fmtDate(nextDate)}
         </p>
       </div>
@@ -94,35 +94,35 @@ const Hero = ({ nextDate }: { nextDate: Date }) => (
 );
 
 const ComingUp = ({ nextDate }: { nextDate: Date }) => (
-  <section className="px-6 md:px-12 py-24 md:py-32">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32">
     <div className="max-w-5xl mx-auto">
       <SectionEyebrow>Coming Up</SectionEyebrow>
-      <h2 className="font-serif text-foreground text-4xl md:text-6xl leading-[1.05]">
+      <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-6xl leading-[1.05]">
         {fmtDate(nextDate)}
       </h2>
 
-      <div className="mt-12 grid md:grid-cols-3 gap-10 md:gap-14 text-foreground">
+      <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 md:gap-14 text-foreground">
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Music
           </p>
-          <p className="font-serif text-2xl md:text-3xl">DJ Amanduh</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">DJ Amanduh</p>
         </div>
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Live Trumpet
           </p>
-          <p className="font-serif text-2xl md:text-3xl">Dave Levy</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">Dave Levy</p>
         </div>
         <div>
           <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
             Percussion
           </p>
-          <p className="font-serif text-2xl md:text-3xl">Jimmy Lopez</p>
+          <p className="font-serif text-xl sm:text-2xl md:text-3xl">Jimmy Lopez</p>
         </div>
       </div>
 
-      <p className="mt-14 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-12 sm:mt-14 max-w-2xl text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         An elevated evening of DJ-led music and live instrumentation —
         designed for dinner, cocktails, and a sophisticated midweek
         nightlife atmosphere.
@@ -132,29 +132,29 @@ const ComingUp = ({ nextDate }: { nextDate: Date }) => (
 );
 
 const Programming = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
-    <div className="max-w-5xl mx-auto grid md:grid-cols-12 gap-10">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
+    <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
       <div className="md:col-span-5">
         <SectionEyebrow>Monthly Programming</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           A rotating
           <br />
           <em className="font-serif italic">weekly</em> lineup.
         </h2>
       </div>
       <div className="md:col-span-7 md:pt-2">
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           A rotating weekly lineup of DJs, live musicians, and special
           guests — curated to create one of New York City's leading
           weekday luxury hospitality experiences.
         </p>
-        <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           Each Wednesday features a unique music direction with live
           elements including trumpet, percussion, saxophone, guitar, and
           other performance moments.
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="mt-8 sm:mt-10 flex flex-wrap gap-2">
           {[
             "DJ Sets",
             "Trumpet",
@@ -165,7 +165,7 @@ const Programming = () => (
           ].map((tag) => (
             <span
               key={tag}
-              className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground border border-border/50 px-3 py-1.5"
+              className="text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-muted-foreground border border-border/50 px-2.5 sm:px-3 py-1 sm:py-1.5"
             >
               {tag}
             </span>
@@ -177,19 +177,19 @@ const Programming = () => (
 );
 
 const Reservations = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-3xl mx-auto text-center">
       <SectionEyebrow>Reservations</SectionEyebrow>
-      <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+      <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
         Dinner, cocktails, <em className="italic">and tables</em>.
       </h2>
-      <p className="mt-8 text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-7 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         For dinner, cocktails, and table reservations, please book
         directly through OpenTable.
       </p>
       <Button
         asChild
-        className="mt-10 tracking-[0.3em] text-[11px] uppercase h-12 px-8 rounded-none"
+        className="mt-9 sm:mt-10 tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-7 sm:px-8 rounded-none w-full sm:w-auto max-w-xs"
       >
         <a href={OPENTABLE_URL} target="_blank" rel="noopener noreferrer">
           Reserve on OpenTable
@@ -209,21 +209,21 @@ const GuestList = ({
 }) => (
   <section
     id="guest-list"
-    className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30 scroll-mt-24"
+    className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30 scroll-mt-24"
   >
-    <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 md:gap-20 items-start">
+    <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
       <div>
         <SectionEyebrow>Standing Guest List</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           For lounge access &amp; <em className="italic">standing</em>{" "}
           arrivals.
         </h2>
-        <p className="mt-8 text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="mt-7 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           For lounge access and standing guest list consideration, please
           submit your request below. All requests are subject to approval
           and capacity.
         </p>
-        <p className="mt-8 text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+        <p className="mt-7 sm:mt-8 text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
           Requesting for · {dateLabel}
         </p>
       </div>
@@ -236,20 +236,20 @@ const GuestList = ({
 );
 
 const About = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-3xl mx-auto">
       <SectionEyebrow>About Afterglow</SectionEyebrow>
-      <p className="font-serif text-foreground text-2xl md:text-3xl leading-[1.35]">
+      <p className="font-serif text-foreground text-xl sm:text-2xl md:text-3xl leading-[1.35]">
         Afterglow is a weekly Wednesday evening concept created to elevate
         the midweek hospitality experience at Nubeluz.
       </p>
       <Divider />
-      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         The program combines the elegance of The Ritz-Carlton New York,
         NoMad with a curated music identity, live performance, and a
         sophisticated downtown-meets-uptown energy.
       </p>
-      <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         Designed for guests seeking more than a dinner reservation,
         Afterglow offers a weekly cultural moment where music, cocktails,
         ambience, and skyline views come together.
@@ -259,18 +259,18 @@ const About = () => (
 );
 
 const Venue = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-14 md:mb-20">
+      <div className="text-center mb-12 sm:mb-14 md:mb-20">
         <SectionEyebrow>The Venue</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           Nubeluz, <em className="italic">above the city</em>.
         </h2>
       </div>
       <figure className="relative group">
         <div
           aria-hidden
-          className="absolute -inset-px bg-gradient-to-b from-foreground/10 via-transparent to-foreground/10 pointer-events-none"
+          className="absolute -inset-px bg-gradient-to-b from-foreground/10 via-transparent to-foreground/10 pointer-events-none z-10"
         />
         <div className="overflow-hidden">
           <img
@@ -279,14 +279,14 @@ const Venue = () => (
             width={1920}
             height={1280}
             loading="lazy"
-            className="w-full h-[60vh] md:h-[80vh] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.02]"
+            className="w-full h-[55vh] sm:h-[65vh] md:h-[72vh] lg:h-[78vh] max-h-[820px] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.02]"
           />
         </div>
-        <figcaption className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-          <p className="font-serif italic text-foreground/85 text-lg md:text-xl">
+        <figcaption className="mt-5 sm:mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-2 sm:gap-3">
+          <p className="font-serif italic text-foreground/85 text-base sm:text-lg md:text-xl">
             Nubeluz by José Andrés
           </p>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+          <p className="text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
             The Ritz-Carlton New York, NoMad · 50th Floor
           </p>
         </figcaption>
@@ -308,7 +308,7 @@ const AfterglowContent = () => {
       <About />
       <Venue />
       <footer className="px-6 md:px-12 py-10 border-t border-border/30 text-center">
-        <p className="text-[10px] tracking-[0.5em] uppercase text-muted-foreground">
+        <p className="text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.5em] uppercase text-muted-foreground">
           Afterglow · Nubeluz · Private
         </p>
       </footer>

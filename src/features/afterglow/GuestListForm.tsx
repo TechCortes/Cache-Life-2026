@@ -76,47 +76,50 @@ const GuestListForm = ({ rsvpDate, dateLabel }: Props) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <Input
-        type="text"
-        aria-label="Full name"
-        placeholder="Full name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className={fieldClass}
-        required
-        maxLength={100}
-      />
-      <Input
-        type="email"
-        aria-label="Email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className={fieldClass}
-        required
-        maxLength={255}
-      />
-      <Input
-        type="tel"
-        aria-label="Phone"
-        placeholder="Phone"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        className={fieldClass}
-        required
-        maxLength={20}
-      />
-      <Input
-        type="number"
-        min={1}
-        max={20}
-        aria-label="Party size"
-        placeholder="Party size"
-        value={partySize}
-        onChange={(e) => setPartySize(e.target.value)}
-        className={fieldClass}
-        required
-      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <Input
+          type="text"
+          aria-label="Full name"
+          placeholder="Full name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={fieldClass}
+          required
+          maxLength={100}
+        />
+        <Input
+          type="email"
+          aria-label="Email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={fieldClass}
+          required
+          maxLength={255}
+        />
+        <Input
+          type="tel"
+          aria-label="Phone"
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className={fieldClass}
+          required
+          maxLength={20}
+        />
+        <Input
+          type="number"
+          min={1}
+          max={20}
+          aria-label="Party size"
+          placeholder="Party size"
+          value={partySize}
+          onChange={(e) => setPartySize(e.target.value)}
+          className={fieldClass}
+          required
+          inputMode="numeric"
+        />
+      </div>
       <Input
         type="text"
         aria-label="Notes (optional)"
