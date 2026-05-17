@@ -36,6 +36,7 @@ const SignupForm = () => {
   const [selectedEventId, setSelectedEventId] = useState<string>("general");
   const [events, setEvents] = useState<PoshEventOption[]>([]);
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -59,6 +60,11 @@ const SignupForm = () => {
       return;
     }
 
+    if (!consent) {
+      toast.error("Please accept the Privacy Policy to continue.");
+      return;
+    }
+
     setLoading(true);
 
     const selectedEvent =
@@ -72,27 +78,41 @@ const SignupForm = () => {
       phone: parsed.data.phone,
       posh_event_id: selectedEvent?.id ?? null,
       posh_url: selectedEvent?.posh_url ?? null,
+      source: selectedEvent ? null : "general",
+      consent_version: PRIVACY_POLICY_VERSION,
+      consent_at: new Date().toISOString(),
     });
 
     setLoading(false);
 
-    if (error) {
+    // Silently treat duplicate-email as success (already on the list)
+    const isDuplicate = error?.code === "23505";
+    if (error && !isDuplicate) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
 
     if (selectedEvent?.posh_url) {
       const providerName = selectedEvent.provider === "partiful" ? "Partiful" : "Posh";
-      toast.success(`You're on the list — opening ${providerName}...`);
+      toast.success(
+        isDuplicate
+          ? `You're already on the list — opening ${providerName}...`
+          : `You're on the list — opening ${providerName}...`
+      );
       window.open(selectedEvent.posh_url, "_blank", "noopener,noreferrer");
     } else {
-      toast.success("You're on the list! We'll be in touch.");
+      toast.success(
+        isDuplicate
+          ? "You're already on the list."
+          : "You're on the list! We'll be in touch."
+      );
     }
 
     setName("");
     setEmail("");
     setPhone("");
     setSelectedEventId("general");
+    setConsent(false);
   };
 
   return (
