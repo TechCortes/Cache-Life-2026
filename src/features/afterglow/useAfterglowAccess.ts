@@ -14,9 +14,14 @@ export const useAfterglowAccess = () => {
   const login = useCallback(async (password: string) => {
     const { data, error } = await supabase.functions.invoke(
       "verify-afterglow-access",
-      { body: { password } },
+      { body: { password: password.trim() } },
     );
-    if (error || !data?.token || !data?.exp) {
+    if (error) {
+      console.error("Afterglow access verification failed", error);
+      throw new Error("Access verification is temporarily unavailable");
+    }
+
+    if (!data?.ok || !data?.token || !data?.exp) {
       throw new Error("Invalid password");
     }
     writeToken({ token: data.token as string, exp: data.exp as number });

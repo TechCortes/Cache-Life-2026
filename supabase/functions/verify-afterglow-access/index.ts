@@ -68,8 +68,8 @@ Deno.serve(async (req) => {
   const submitted = typeof body.password === "string" ? body.password.trim() : "";
   const expected = password.trim();
   if (!submitted || submitted.length > 200 || !safeEqual(submitted, expected)) {
-    return new Response(JSON.stringify({ error: "Invalid password" }), {
-      status: 401,
+    return new Response(JSON.stringify({ ok: false, error: "Invalid password" }), {
+      status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
   const signature = await sign(payload, secret);
   const token = `${payload}.${signature}`;
 
-  return new Response(JSON.stringify({ token, exp }), {
+  return new Response(JSON.stringify({ ok: true, token, exp }), {
     status: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
