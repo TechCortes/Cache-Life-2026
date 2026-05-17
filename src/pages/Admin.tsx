@@ -294,12 +294,16 @@ const Admin = () => {
     }
   };
 
-  const filtered = signups.filter(
-    (s) =>
+  const filtered = signups.filter((s) => {
+    const matchesSearch =
       s.name.toLowerCase().includes(search.toLowerCase()) ||
       s.email.toLowerCase().includes(search.toLowerCase()) ||
-      s.phone.includes(search)
-  );
+      s.phone.includes(search);
+    if (!matchesSearch) return false;
+    if (sourceFilter === "afterglow") return s.source === "afterglow";
+    if (sourceFilter === "general") return s.source !== "afterglow";
+    return true;
+  });
 
   if (authLoading) {
     return (
