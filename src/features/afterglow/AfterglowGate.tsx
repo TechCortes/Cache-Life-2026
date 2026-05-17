@@ -22,8 +22,9 @@ const AfterglowGate = () => {
     setLoading(true);
     try {
       await login(password);
-    } catch {
-      toast.error("Incorrect password.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Incorrect password";
+      toast.error(message === "Invalid password" ? "Incorrect password." : message);
       setPassword("");
     } finally {
       setLoading(false);
