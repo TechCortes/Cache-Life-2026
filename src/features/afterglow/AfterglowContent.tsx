@@ -236,20 +236,20 @@ const GuestList = ({
 );
 
 const About = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-3xl mx-auto">
       <SectionEyebrow>About Afterglow</SectionEyebrow>
-      <p className="font-serif text-foreground text-2xl md:text-3xl leading-[1.35]">
+      <p className="font-serif text-foreground text-xl sm:text-2xl md:text-3xl leading-[1.35]">
         Afterglow is a weekly Wednesday evening concept created to elevate
         the midweek hospitality experience at Nubeluz.
       </p>
       <Divider />
-      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         The program combines the elegance of The Ritz-Carlton New York,
         NoMad with a curated music identity, live performance, and a
         sophisticated downtown-meets-uptown energy.
       </p>
-      <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         Designed for guests seeking more than a dinner reservation,
         Afterglow offers a weekly cultural moment where music, cocktails,
         ambience, and skyline views come together.
@@ -259,18 +259,18 @@ const About = () => (
 );
 
 const Venue = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-14 md:mb-20">
+      <div className="text-center mb-12 sm:mb-14 md:mb-20">
         <SectionEyebrow>The Venue</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           Nubeluz, <em className="italic">above the city</em>.
         </h2>
       </div>
       <figure className="relative group">
         <div
           aria-hidden
-          className="absolute -inset-px bg-gradient-to-b from-foreground/10 via-transparent to-foreground/10 pointer-events-none"
+          className="absolute -inset-px bg-gradient-to-b from-foreground/10 via-transparent to-foreground/10 pointer-events-none z-10"
         />
         <div className="overflow-hidden">
           <img
@@ -279,14 +279,14 @@ const Venue = () => (
             width={1920}
             height={1280}
             loading="lazy"
-            className="w-full h-[60vh] md:h-[80vh] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.02]"
+            className="w-full h-[55vh] sm:h-[65vh] md:h-[72vh] lg:h-[78vh] max-h-[820px] object-cover transition-transform duration-[2400ms] ease-out group-hover:scale-[1.02]"
           />
         </div>
-        <figcaption className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-          <p className="font-serif italic text-foreground/85 text-lg md:text-xl">
+        <figcaption className="mt-5 sm:mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-2 sm:gap-3">
+          <p className="font-serif italic text-foreground/85 text-base sm:text-lg md:text-xl">
             Nubeluz by José Andrés
           </p>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+          <p className="text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
             The Ritz-Carlton New York, NoMad · 50th Floor
           </p>
         </figcaption>
@@ -308,7 +308,7 @@ const AfterglowContent = () => {
       <About />
       <Venue />
       <footer className="px-6 md:px-12 py-10 border-t border-border/30 text-center">
-        <p className="text-[10px] tracking-[0.5em] uppercase text-muted-foreground">
+        <p className="text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.5em] uppercase text-muted-foreground">
           Afterglow · Nubeluz · Private
         </p>
       </footer>
