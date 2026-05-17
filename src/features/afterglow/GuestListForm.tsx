@@ -38,20 +38,16 @@ const GuestListForm = ({ rsvpDate, dateLabel }: Props) => {
       return;
     }
     setLoading(true);
-    const message = [
-      `Party of ${parsed.data.partySize}`,
-      notes.trim() ? `Notes: ${notes.trim().slice(0, 500)}` : null,
-    ]
-      .filter(Boolean)
-      .join(" · ");
+    const sourceTag = `afterglow-guestlist · party ${parsed.data.partySize}${
+      notes.trim() ? ` · ${notes.trim().slice(0, 160)}` : ""
+    }`;
 
     const { error } = await supabase.from("event_signups").insert({
       name: parsed.data.name,
       email: parsed.data.email,
       phone: parsed.data.phone,
       rsvp_for_date: rsvpDate.toISOString(),
-      source: "afterglow-guestlist",
-      message,
+      source: sourceTag.slice(0, 255),
       consent_version: PRIVACY_POLICY_VERSION,
       consent_at: new Date().toISOString(),
     });
