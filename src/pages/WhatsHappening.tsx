@@ -60,6 +60,23 @@ const WhatsHappening = () => {
       ...(e.image_url ? { image: e.image_url } : {}),
     }));
 
+  const afterglowJsonLd = (() => {
+    const next = getNextWednesday();
+    return {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: "Afterglow at Nubeluz",
+      startDate: next.toISOString(),
+      eventSchedule: {
+        "@type": "Schedule",
+        repeatFrequency: "P1W",
+        byDay: "https://schema.org/Wednesday",
+      },
+      location: { "@type": "Place", name: "Nubeluz" },
+      url: "https://cachelifeny.com/whats-happening",
+    };
+  })();
+
   return (
     <Layout>
       <Helmet>
