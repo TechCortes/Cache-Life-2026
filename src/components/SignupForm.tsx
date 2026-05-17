@@ -177,9 +177,27 @@ const SignupForm = () => {
             </SelectContent>
           </Select>
         )}
+        <label className="flex items-start gap-2 mt-1 cursor-pointer">
+          <Checkbox
+            checked={consent}
+            onCheckedChange={(v) => setConsent(v === true)}
+            aria-label="Accept Privacy Policy"
+            className="mt-[2px]"
+          />
+          <span className="text-[10px] tracking-wider text-muted-foreground leading-snug">
+            I agree to the{" "}
+            <Link
+              to="/privacy"
+              className="text-foreground underline underline-offset-2 hover:opacity-80"
+            >
+              Privacy Policy
+            </Link>{" "}
+            and to receive event updates.
+          </span>
+        </label>
         <Button
           type="submit"
-          disabled={loading}
+          disabled={loading || !consent}
           className="tracking-widest text-xs uppercase w-full"
         >
           {loading
