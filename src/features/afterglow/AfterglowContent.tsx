@@ -132,29 +132,29 @@ const ComingUp = ({ nextDate }: { nextDate: Date }) => (
 );
 
 const Programming = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
-    <div className="max-w-5xl mx-auto grid md:grid-cols-12 gap-10">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
+    <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
       <div className="md:col-span-5">
         <SectionEyebrow>Monthly Programming</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           A rotating
           <br />
           <em className="font-serif italic">weekly</em> lineup.
         </h2>
       </div>
       <div className="md:col-span-7 md:pt-2">
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           A rotating weekly lineup of DJs, live musicians, and special
           guests — curated to create one of New York City's leading
           weekday luxury hospitality experiences.
         </p>
-        <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           Each Wednesday features a unique music direction with live
           elements including trumpet, percussion, saxophone, guitar, and
           other performance moments.
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="mt-8 sm:mt-10 flex flex-wrap gap-2">
           {[
             "DJ Sets",
             "Trumpet",
@@ -165,7 +165,7 @@ const Programming = () => (
           ].map((tag) => (
             <span
               key={tag}
-              className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground border border-border/50 px-3 py-1.5"
+              className="text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-muted-foreground border border-border/50 px-2.5 sm:px-3 py-1 sm:py-1.5"
             >
               {tag}
             </span>
@@ -177,19 +177,19 @@ const Programming = () => (
 );
 
 const Reservations = () => (
-  <section className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30">
+  <section className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30">
     <div className="max-w-3xl mx-auto text-center">
       <SectionEyebrow>Reservations</SectionEyebrow>
-      <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+      <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
         Dinner, cocktails, <em className="italic">and tables</em>.
       </h2>
-      <p className="mt-8 text-base md:text-lg text-muted-foreground leading-relaxed">
+      <p className="mt-7 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
         For dinner, cocktails, and table reservations, please book
         directly through OpenTable.
       </p>
       <Button
         asChild
-        className="mt-10 tracking-[0.3em] text-[11px] uppercase h-12 px-8 rounded-none"
+        className="mt-9 sm:mt-10 tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] uppercase h-12 px-7 sm:px-8 rounded-none w-full sm:w-auto max-w-xs"
       >
         <a href={OPENTABLE_URL} target="_blank" rel="noopener noreferrer">
           Reserve on OpenTable
@@ -209,21 +209,21 @@ const GuestList = ({
 }) => (
   <section
     id="guest-list"
-    className="px-6 md:px-12 py-24 md:py-32 border-t border-border/30 scroll-mt-24"
+    className="px-6 sm:px-8 md:px-12 py-20 sm:py-24 md:py-32 border-t border-border/30 scroll-mt-24"
   >
-    <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 md:gap-20 items-start">
+    <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
       <div>
         <SectionEyebrow>Standing Guest List</SectionEyebrow>
-        <h2 className="font-serif text-foreground text-4xl md:text-5xl leading-[1.05]">
+        <h2 className="font-serif text-foreground text-3xl sm:text-4xl md:text-5xl leading-[1.05]">
           For lounge access &amp; <em className="italic">standing</em>{" "}
           arrivals.
         </h2>
-        <p className="mt-8 text-base md:text-lg text-muted-foreground leading-relaxed">
+        <p className="mt-7 sm:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
           For lounge access and standing guest list consideration, please
           submit your request below. All requests are subject to approval
           and capacity.
         </p>
-        <p className="mt-8 text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+        <p className="mt-7 sm:mt-8 text-[9px] sm:text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase text-muted-foreground">
           Requesting for · {dateLabel}
         </p>
       </div>
