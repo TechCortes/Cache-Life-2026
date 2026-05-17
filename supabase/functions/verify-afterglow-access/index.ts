@@ -65,8 +65,9 @@ Deno.serve(async (req) => {
     });
   }
 
-  const submitted = typeof body.password === "string" ? body.password : "";
-  if (!submitted || submitted.length > 200 || !safeEqual(submitted, password)) {
+  const submitted = typeof body.password === "string" ? body.password.trim() : "";
+  const expected = password.trim();
+  if (!submitted || submitted.length > 200 || !safeEqual(submitted, expected)) {
     return new Response(JSON.stringify({ error: "Invalid password" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
