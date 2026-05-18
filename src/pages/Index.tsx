@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SignupForm from "@/components/SignupForm";
 import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import discoBallImg from "@/assets/disco-ball.gif";
