@@ -1,220 +1,157 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import { z } from "zod";
 import { PRIVACY_POLICY_VERSION } from "@/lib/consent";
 
-interface PoshEventOption {
-  id: string;
-  title: string;
-  posh_url: string;
-  event_date: string | null;
-  provider: "posh" | "partiful";
-}
-
-const signupSchema = z.object({
+const newsletterSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
-  phone: z.string().trim().min(5, "Phone is required").max(20),
+  email: z.string().trim().email("Please enter a valid email").max(255),
 });
 
 const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [selectedEventId, setSelectedEventId] = useState<string>("general");
-  const [events, setEvents] = useState<PoshEventOption[]>([]);
   const [loading, setLoading] = useState(false);
   const [consent, setConsent] = useState(false);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const { data } = await supabase
-        .from("posh_events")
-        .select("id, title, posh_url, event_date, provider")
-        .eq("is_active", true)
-        .order("sort_order", { ascending: true })
-        .order("event_date", { ascending: true });
-      if (data) setEvents(data as PoshEventOption[]);
-    };
-    fetchEvents();
-  }, []);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const parsed = signupSchema.safeParse({ name, email, phone });
+    const parsed = newsletterSchema.safeParse({ name, email });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
       return;
     }
-
     if (!consent) {
       toast.error("Please accept the Privacy Policy to continue.");
       return;
     }
 
     setLoading(true);
-
-    const selectedEvent =
-      selectedEventId !== "general"
-        ? events.find((ev) => ev.id === selectedEventId)
-        : null;
-
     const { error } = await supabase.from("event_signups").insert({
       name: parsed.data.name,
       email: parsed.data.email,
-      phone: parsed.data.phone,
-      posh_event_id: selectedEvent?.id ?? null,
-      posh_url: selectedEvent?.posh_url ?? null,
-      source: selectedEvent ? null : "general",
+      phone: null,
+      source: "newsletter",
       consent_version: PRIVACY_POLICY_VERSION,
       consent_at: new Date().toISOString(),
     });
-
     setLoading(false);
 
-    // Silently treat duplicate-email as success (already on the list)
     const isDuplicate = error?.code === "23505";
     if (error && !isDuplicate) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
 
-    if (selectedEvent?.posh_url) {
-      const providerName = selectedEvent.provider === "partiful" ? "Partiful" : "Posh";
-      toast.success(
-        isDuplicate
-          ? `You're already on the list — opening ${providerName}...`
-          : `You're on the list — opening ${providerName}...`
-      );
-      window.open(selectedEvent.posh_url, "_blank", "noopener,noreferrer");
-    } else {
-      toast.success(
-        isDuplicate
-          ? "You're already on the list."
-          : "You're on the list! We'll be in touch."
-      );
-    }
-
+    toast.success(
+      isDuplicate ? "You're already subscribed." : "Welcome to the list."
+    );
+    setSubmitted(true);
     setName("");
     setEmail("");
-    setPhone("");
-    setSelectedEventId("general");
     setConsent(false);
   };
 
+  if (submitted) {
+    return (
+      <div className="w-full max-w-xl mx-auto text-center py-8">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
+          Subscribed
+        </p>
+        <p className="font-serif text-2xl md:text-3xl text-foreground leading-snug">
+          You're on the list.
+        </p>
+        <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+          Look out for our next dispatch — curated events, residencies, and cultural moments.
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          className="mt-8 text-[10px] tracking-[0.4em] uppercase text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
+        >
+          Subscribe another
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full max-w-md mx-auto">
-      <p className="text-center text-xs tracking-[0.2em] uppercase text-muted-foreground mb-4">
-        Get on the List
-      </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <Input
-          type="text"
-          name="name"
-          aria-label="Your name"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
-          required
-          maxLength={100}
-        />
-        <Input
-          type="email"
-          name="email"
-          aria-label="Your email address"
-          placeholder="Your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
-          required
-          maxLength={255}
-        />
-        <Input
-          type="tel"
-          name="phone"
-          aria-label="Your phone number"
-          placeholder="Your phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="bg-secondary/50 border-border/50 text-foreground placeholder:text-muted-foreground"
-          required
-          maxLength={20}
-        />
-        {events.length > 0 && (
-          <Select value={selectedEventId} onValueChange={setSelectedEventId}>
-            <SelectTrigger aria-label="Select an event" className="bg-secondary/50 border-border/50 text-foreground">
-              <SelectValue placeholder="Select an event (optional)" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="general">General — just join the list</SelectItem>
-              {events.map((ev) => (
-                <SelectItem key={ev.id} value={ev.id}>
-                  {ev.title}
-                  {ev.event_date
-                    ? ` — ${new Date(ev.event_date).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}`
-                    : ""}
-                  {` · ${ev.provider === "partiful" ? "Partiful" : "Posh"}`}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-        <label className="flex items-start gap-2 mt-1 cursor-pointer">
-          <Checkbox
-            checked={consent}
-            onCheckedChange={(v) => setConsent(v === true)}
-            aria-label="Accept Privacy Policy"
-            className="mt-[2px]"
+    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-end">
+        <div className="flex-1 sm:border-b sm:border-border/40 sm:focus-within:border-foreground/70 transition-colors">
+          <label
+            htmlFor="nl-name"
+            className="block text-[10px] tracking-[0.35em] uppercase text-muted-foreground mb-2 sm:mb-1"
+          >
+            Name
+          </label>
+          <Input
+            id="nl-name"
+            type="text"
+            name="name"
+            autoComplete="name"
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            maxLength={100}
+            className="bg-transparent border border-border/40 sm:border-0 rounded-md sm:rounded-none px-3 sm:px-0 h-11 sm:h-9 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/60 focus-visible:ring-0 focus-visible:ring-offset-0"
           />
-          <span className="text-[10px] tracking-wider text-muted-foreground leading-snug">
-            I agree to the{" "}
-            <Link
-              to="/privacy"
-              className="text-foreground underline underline-offset-2 hover:opacity-80"
-            >
-              Privacy Policy
-            </Link>{" "}
-            and to receive event updates.
-          </span>
-        </label>
+        </div>
+        <div className="flex-1 sm:ml-6 sm:border-b sm:border-border/40 sm:focus-within:border-foreground/70 transition-colors">
+          <label
+            htmlFor="nl-email"
+            className="block text-[10px] tracking-[0.35em] uppercase text-muted-foreground mb-2 sm:mb-1"
+          >
+            Email
+          </label>
+          <Input
+            id="nl-email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="you@domain.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            maxLength={255}
+            className="bg-transparent border border-border/40 sm:border-0 rounded-md sm:rounded-none px-3 sm:px-0 h-11 sm:h-9 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/60 focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
+        </div>
         <Button
           type="submit"
-          disabled={loading || !consent}
-          className="tracking-widest text-xs uppercase w-full"
+          disabled={loading}
+          className="sm:ml-6 tracking-[0.3em] text-[10px] uppercase h-11 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 transition-colors"
         >
-          {loading
-            ? "Submitting..."
-            : selectedEventId !== "general"
-            ? (events.find((e) => e.id === selectedEventId)?.provider === "partiful"
-                ? "Register on Partiful"
-                : "Register on Posh")
-            : "Join"}
+          {loading ? "Joining..." : "Subscribe"}
         </Button>
-        {selectedEventId !== "general" && (
-          <p className="text-[10px] text-center text-muted-foreground tracking-wider">
-            You'll be redirected to {events.find((e) => e.id === selectedEventId)?.provider === "partiful" ? "Partiful" : "Posh.vip"} to complete checkout
-          </p>
-        )}
-      </form>
-    </div>
+      </div>
+
+      <label className="flex items-start gap-3 mt-6 cursor-pointer max-w-md mx-auto sm:mx-0">
+        <Checkbox
+          checked={consent}
+          onCheckedChange={(v) => setConsent(v === true)}
+          aria-label="Accept Privacy Policy"
+          className="mt-[2px]"
+        />
+        <span className="text-[10px] tracking-[0.15em] text-muted-foreground leading-relaxed">
+          I agree to receive the Caché Life newsletter and accept the{" "}
+          <Link
+            to="/privacy"
+            className="text-foreground underline underline-offset-2 hover:opacity-80"
+          >
+            Privacy Policy
+          </Link>
+          .
+        </span>
+      </label>
+    </form>
   );
 };
 
