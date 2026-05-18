@@ -1,0 +1,1 @@
+ALTER TABLE public.event_signups ALTER COLUMN phone DROP NOT NULL;
