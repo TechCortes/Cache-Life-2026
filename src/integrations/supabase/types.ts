@@ -22,7 +22,7 @@ export type Database = {
           email: string
           id: string
           name: string
-          phone: string
+          phone: string | null
           posh_event_id: string | null
           posh_url: string | null
           rsvp_for_date: string | null
@@ -35,7 +35,7 @@ export type Database = {
           email: string
           id?: string
           name: string
-          phone: string
+          phone?: string | null
           posh_event_id?: string | null
           posh_url?: string | null
           rsvp_for_date?: string | null
@@ -48,7 +48,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string
-          phone?: string
+          phone?: string | null
           posh_event_id?: string | null
           posh_url?: string | null
           rsvp_for_date?: string | null

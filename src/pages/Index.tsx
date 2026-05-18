@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SignupForm from "@/components/SignupForm";
 import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import discoBallImg from "@/assets/disco-ball.gif";
@@ -284,6 +285,43 @@ const Index = () => {
               allowFullScreen
               className="w-full h-full"
             />
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* Newsletter */}
+      <FadeIn>
+        <section
+          aria-labelledby="newsletter-heading"
+          className="relative max-w-[1600px] mx-auto px-6 md:px-12 py-28 md:py-40"
+        >
+          {/* Decorative hairlines */}
+          <div className="pointer-events-none absolute inset-x-6 md:inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-border/60 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-6 md:inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-border/60 to-transparent" />
+
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-muted-foreground mb-8">
+              · Dispatch ·
+            </p>
+
+            <h2
+              id="newsletter-heading"
+              className="font-serif font-light text-foreground leading-[0.95] tracking-tight text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            >
+              Join the
+              <span className="block italic text-foreground/90 mt-1 md:mt-2">
+                inner circle.
+              </span>
+            </h2>
+
+            <p className="mt-8 md:mt-10 text-sm md:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto">
+              A quiet, curated letter from Caché Life — invitations, residencies,
+              and cultural moments from New York after dark. Sent sparingly.
+            </p>
+
+            <div className="mt-12 md:mt-16">
+              <SignupForm />
+            </div>
           </div>
         </section>
       </FadeIn>
